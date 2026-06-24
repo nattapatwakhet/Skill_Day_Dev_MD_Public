@@ -18,6 +18,21 @@
 - ใช้ `\Config\Services::...`, filters สำหรับ auth/CORS
 - env/config แยกใน `.env`
 
+## ⚠️ Route ordering — child ก่อน parent เสมอ
+
+ถ้าลงทะเบียน route แบบ loop ที่ใส่ catch-all `api/{uri}/(:segment)` ให้ทุก resource
+**CI4 ใช้ route แรกที่ match ชนะ** → parent ที่มาก่อน child จะ **กลืน** route ของ child
+
+ตัวอย่าง: ถ้า `'users'` อยู่ก่อน `'users/roles'` ในลิสต์ → `api/users/(:segment)`
+ถูกลงทะเบียนก่อน → `GET api/users/roles` วิ่งเข้า controller ของ `users` แล้วเอา `"roles"`
+ไปเป็น primary key → `WHERE id='roles'` บนตารางผิด → คืน 0 แถว
+(อาการหลอก: `data: []` แต่ count = จำนวนแถวของตาราง parent / ทุก dropdown ที่ดึงจาก endpoint ลูกหาย)
+
+**กฎ:** เรียง **child (path ลึกกว่า) ไว้ก่อน parent เสมอ** แล้วค่อยปิดท้ายด้วย parent
+
+> วินิจฉัยเร็ว: endpoint ลูกคืน `data: []` แต่ count = จำนวนแถวของตาราง parent
+> → เกือบแน่ว่าโดน route ของ parent กลืน ไปดูลำดับใน `Routes.php` ก่อนแก้ model/data
+
 ## เป็นงาน API ไหม?
 
 ถ้าทำ API → ดู [`api_skill.md`](./api_skill.md) (CI4 มี `ResourceController` / `respond()` ช่วยทำ REST)

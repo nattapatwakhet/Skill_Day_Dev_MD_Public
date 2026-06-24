@@ -106,11 +106,11 @@ If you install the skill pack somewhere else, update the paths in `AGENTS.md` an
 แล้วเดินตาม skill/day_dev_public/work_flow_skill.md
 ```
 
-ครั้งแรกหลังติดตั้ง ควรปรับไฟล์เหล่านี้ก่อน:
-
-- `project_structure_skill.md` — ใส่โครงสร้างจริงของโปรเจกต์
-- `docker_skill.md` — ใส่ service/container จริง ถ้ามี
-- ไฟล์ภาษา/framework ที่ใช้จริง เช่น `flutter_skill.md`, `react_type_skill.md`, `php_skill.md`
+ครั้งแรกหลังติดตั้ง **ไม่ต้องกรอกโครงสร้างเอง** — agent จะ bootstrap ให้:
+สแกน repo (top-level folders + ไฟล์ config) แล้วเขียนโครงสร้างจริงลง
+`project_structure_skill.md` / service ลง `docker_skill.md` เอง (ดูหัวข้อ "Bootstrap อัตโนมัติ"
+ใน `project_structure_skill.md`) แล้วอัปเดตต่อเนื่องเมื่อเจอของใหม่
+คุณแค่ตรวจ/แก้เพิ่มถ้าอยากปรับ
 
 ---
 
@@ -123,11 +123,11 @@ Before every task, read skill/day_dev_public/main_skill.md
 and follow skill/day_dev_public/work_flow_skill.md.
 ```
 
-After installation, customize these files first:
-
-- `project_structure_skill.md` — your real project structure
-- `docker_skill.md` — your real services/containers, if any
-- Stack-specific files such as `flutter_skill.md`, `react_type_skill.md`, or `php_skill.md`
+After installation you do **not** need to fill in the structure by hand — the agent
+bootstraps it: it scans the repo (top-level folders + config files) and writes the real
+structure into `project_structure_skill.md` (and services into `docker_skill.md`) itself,
+then keeps it updated as it discovers more. See the "Bootstrap อัตโนมัติ" section in
+`project_structure_skill.md`. You only review/tweak if you want to.
 
 ---
 
