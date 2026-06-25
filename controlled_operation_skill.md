@@ -1,12 +1,30 @@
 # Controlled Operation Skill
 
-มาจาก [`work_flow_skill.md`](./work_flow_skill.md) ขั้น [3.2] — ใช้เมื่องานต้องดู/คุมหน้าจอหรือคุมเครื่อง user
+มาจาก [`work_flow_skill.md`](./work_flow_skill.md) ขั้น [4] — ใช้เมื่องานต้องดู/คุมหน้าจอหรือคุม UI จริง
 
-"การทำงานแบบควบคุม" — กฎว่าก่อนจะลงมือทำอะไรที่แตะเครื่อง user (ดูจอ คุมจอ รันคำสั่ง แก้/ลบไฟล์ ใช้เบราว์เซอร์)
+"การทำงานแบบควบคุม" — กฎว่าก่อนจะลงมือทำอะไรที่แตะ UI ของเครื่อง user (ดูจอ คุมจอ คลิก/พิมพ์/ใช้เบราว์เซอร์)
 **ต้องเช็คสิทธิ์ก่อนเสมอ** ว่ามีสิทธิ์หรือยัง แล้วทำตามลำดับควบคุม
 
 > ไฟล์รวบรวมสิทธิ์ทั้งหมด = [`permission_skill.md`](./permission_skill.md) — จะทำอะไรเปิดดูไฟล์นั้นว่า "มีสิทธิ์ยัง"
-> งาน Docker / docker-compose โดยเฉพาะ = [`docker_skill.md`](./docker_skill.md) (ยังว่าง — ระหว่างนี้ใช้หลัก "รันคำสั่งบนเครื่อง user" ด้านล่าง)
+> งาน Docker / docker-compose / curl / log / test = [`terminal_skill.md`](./terminal_skill.md) + [`docker_skill.md`](./docker_skill.md) ก่อน ไม่ใช่เหตุผลให้คุมจอโดยอัตโนมัติ
+
+---
+
+## ใช้คุมจอเมื่อไหร่
+
+ใช้เมื่ออย่างน้อยหนึ่งข้อเป็นจริง:
+- ต้องเห็นผลลัพธ์บนจอจริง เช่น UX/UI, layout, spacing, overflow, animation, focus, modal, responsive, browser-specific behavior
+- ต้องคลิก/กรอก/เลือก/ยืนยันในแอปจริง และไม่มี API/CLI/test/browser automation ที่แทนได้ reliable
+- ต้องใช้ session ของผู้ใช้ที่อยู่ใน browser/app จริง เช่น login state, extension, cookie, tab ที่เปิดไว้
+- user ขอให้ดูหน้าจอหรือคุมจอโดยตรง
+
+ไม่ใช้คุมจอเมื่อ:
+- แค่ต้องรัน command/test/build/lint/curl/docker/log → ใช้ [`terminal_skill.md`](./terminal_skill.md)
+- แค่ต้องอ่าน output/API response/log → ใช้ terminal หรือ file output
+- แค่ต้องตรวจ source code หรือแก้ไฟล์ → ใช้ filesystem/tool ปกติ
+- มี browser automation ที่ตรวจ DOM/screenshot ได้โดยไม่ต้องคุมจอ user → ใช้ browser tool ก่อน
+
+หลักตัดสินใจ: **คุมจอคือทางเลือกเมื่อจำเป็นต้องเห็นหรือทำกับ UI จริงเท่านั้น ไม่ใช่ทางลัดสำหรับรันคำสั่ง**
 
 ---
 
@@ -41,7 +59,7 @@
 
 ---
 
-> ถ้างานคือ **รันคำสั่ง/สคริปต์บนเครื่อง user** (เช่น Terminal พิมพ์ไม่ได้ ต้องใช้สคริปต์ `.command`) →
+> ถ้างานคือ **รันคำสั่ง/สคริปต์บนเครื่อง user** (เช่น Docker/localhost/log/test หรือ Terminal พิมพ์ไม่ได้ ต้องใช้สคริปต์ `.command`) →
 > นั่นเป็นอีกขั้นแยกใน flow ดู [`work_flow_skill.md`](./work_flow_skill.md) ขั้น [5] → [`terminal_skill.md`](./terminal_skill.md)
 
 ---

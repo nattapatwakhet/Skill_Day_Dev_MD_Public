@@ -144,22 +144,23 @@ type annotation, import philosophy
 
 **เช็คก่อนเสมอว่างานนี้จำเป็นต้องดูจอหรือคุมจอจริงไหม**
 
-- **ไม่ต้อง** (เช่น แก้ไฟล์ในโฟลเดอร์, เขียน code, รัน bash ใน sandbox) → **ข้ามขั้นนี้**
-- **ต้อง** (ดูจอ / คลิก / พิมพ์ / คุมแอป / ใช้เบราว์เซอร์) →
+- **ไม่ต้อง** ถ้าทำได้ด้วยอ่าน/แก้ไฟล์, รันคำสั่ง, curl/API, test output, log, screenshot จาก tool, หรือ browser automation → **ข้ามขั้นนี้**
+- **ต้อง** เฉพาะเมื่อผลลัพธ์ต้องพึ่งการมองเห็น/ใช้งาน UI จริง หรือไม่มีวิธีอื่นที่ reliable เช่น UX/UI layout, spacing, overflow, interaction, browser-specific behavior, คลิก/เลือก/ยืนยันในแอปจริง, state เฉพาะ session/browser/app, หรือ user ขอให้ดูจอโดยตรง →
   เปิด [`controlled_operation_skill.md`](./controlled_operation_skill.md) แล้วทำตามลำดับการคุมจอ
 
 ---
 
-## [5] งานนี้ต้อง "รันคำสั่ง/สคริปต์บนเครื่อง user" ไหม? → `terminal_skill.md`
+## [5] งานนี้ควรใช้ "terminal/command-line" ไหม? → `terminal_skill.md`
 
-**เช็คว่างานนี้ต้องรันคำสั่งจริงบนเครื่อง user ไหม** (ไม่ใช่รันใน sandbox)
+**เช็คว่างานนี้ใช้ command-line แล้วเหมาะ/เร็ว/แม่นกว่าไหม และคำสั่งนั้นต้องแตะเครื่อง user หรือ service จริงไหม**
 
-- **ไม่ต้อง** → **ข้ามขั้นนี้**
-- **ต้อง** (เขียนสคริปต์แล้วต้องรัน / ดู log / แตะ docker / localhost ของ user) →
-  เปิด [`terminal_skill.md`](./terminal_skill.md) — วิธีรันผ่านสคริปต์ `.command` + ดับเบิลคลิก Finder แล้วอ่าน output กลับ
+- **ไม่ต้อง** ถ้าตอบ/แก้ได้จาก context หรือเครื่องมืออ่านไฟล์โดยตรงอยู่แล้ว → **ข้ามขั้นนี้**
+- **ใช้ได้/ควรใช้** เมื่องานเหมาะกับ command-line เช่น ค้นหาไฟล์/ข้อความ (`rg`, `find`, `ls`), อ่านช่วงไฟล์ (`sed`), ดู diff, build/test/lint/curl/log/db/docker, หรือรันสคริปต์ช่วยงาน
+  - ถ้าคำสั่งรันใน sandbox ได้ → ใช้ terminal/exec ปกติ
+  - ถ้าต้องแตะ Docker/localhost/service/DB ของเครื่อง user → เปิด [`terminal_skill.md`](./terminal_skill.md) แล้วใช้วิธีที่ runtime รองรับ เช่น escalation, `.command`, หรือให้ user รันเอง
 
-> ขั้นนี้แยกจาก [4]: คุมจอ = ดู/คลิกแอปทั่วไป, รัน terminal = รันคำสั่งบนเครื่อง user โดยเฉพาะ
-> (งานเดียวอาจเข้าทั้ง [4] และ [5] ได้ เพราะการดับเบิลคลิกสคริปต์ก็ต้องเปิด Finder)
+> ขั้นนี้แยกจาก [4]: terminal/docker = ใช้เมื่องานเหมาะกับ command-line หรือ service/container; คุมจอ = ใช้เมื่อต้องเห็นหรือควบคุม UI จริง
+> ห้ามคุมจอเพียงเพราะต้องรัน Docker ถ้ารันด้วย terminal/วิธี command-line ได้
 
 ---
 

@@ -1,10 +1,28 @@
 # Docker Skill — ทะเบียนแอป/บริการเว็บที่รันบน docker
 
-มาจาก [`code_skill.md`](./code_skill.md) / [`react_type_skill.md`](./react_type_skill.md) — ใช้กับ **งานเว็บ** ที่รันบน docker
-(ทั้ง frontend, backend, database, worker, realtime service) — ไม่เกี่ยวกับ mobile app ที่รันบนอุปกรณ์/emulator โดยตรง
+มาจาก [`code_skill.md`](./code_skill.md) / [`terminal_skill.md`](./terminal_skill.md) — ใช้เมื่องานเกี่ยวกับ **service ที่รันบน Docker**
+หรือคำสั่งต้องแตะ container/localhost/DB ของชุด Docker
 
 > ไฟล์นี้เป็น template public ให้เติม service จริงของ workspace คุณเอง
 > การรันคำสั่ง docker จริงบนเครื่อง user ให้ทำตาม [`terminal_skill.md`](./terminal_skill.md)
+
+---
+
+## ใช้ docker_skill เมื่อไหร่
+
+ใช้เมื่อ:
+- ต้องรู้ว่า service/container ชื่ออะไร พอร์ตอะไร workdir ใน container คืออะไร
+- ต้องรัน/เช็ก Docker command เช่น `docker ps`, `docker exec`, `docker logs`, `docker compose up`
+- ต้องยิง `localhost` ของ service ที่รันใน Docker หรือ query DB container
+- ต้องตรวจ backend/frontend ในสภาพแวดล้อมจริงของ Docker
+- งานจริงต้องพึ่ง container/service ไม่ว่าจะเป็นค้นหา log, ตรวจไฟล์ใน container, debug endpoint, หรือ verify behavior
+
+ไม่ใช้เมื่อ:
+- โปรเจคไม่ได้รันบน Docker หรือเป็น mobile/local script
+- แค่แก้โค้ดและตรวจด้วย tool ใน sandbox ได้
+- ต้องดู UI/UX บนจอจริง → ใช้ [`controlled_operation_skill.md`](./controlled_operation_skill.md)
+
+ลำดับทำงาน: อ่าน docker_skill เพื่อรู้ service/context → ใช้ terminal_skill เพื่อรันคำสั่งที่เหมาะกับงาน → ใช้ controlled operation เฉพาะเมื่อต้องเห็น/คลิก UI จริง
 
 ---
 
@@ -50,8 +68,9 @@ docker compose ps
 ```
 
 ถ้าต้องรันบนเครื่อง user จริงและ sandbox เข้าไม่ได้:
+- ใช้วิธี command-line ที่ runtime รองรับพร้อมขอสิทธิ์ตาม policy
 - ใช้ `.command` script ที่ user ตรวจได้ก่อนรัน
 - ให้ user รันคำสั่งเอง
-- หรือใช้เครื่องมือคุมจอตาม [`controlled_operation_skill.md`](./controlled_operation_skill.md)
+- ใช้เครื่องมือคุมจอตาม [`controlled_operation_skill.md`](./controlled_operation_skill.md) เฉพาะเมื่อต้องเห็น/คลิก UI จริง
 
 เจอ service ใหม่/พอร์ตเปลี่ยน → อัปเดตตารางนี้ตาม [`skill_maintenance_skill.md`](./skill_maintenance_skill.md)

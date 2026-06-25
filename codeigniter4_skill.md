@@ -37,6 +37,12 @@
 
 ถ้าทำ API → ดู [`api_skill.md`](./api_skill.md) (CI4 มี `ResourceController` / `respond()` ช่วยทำ REST)
 
+## Performance patterns
+
+- ถ้า response ต้องคืน count หลายสถานะ เช่น `status_0/status_1/status_2`, draft, approve count → อย่ายิง `COUNT(*)` แยกทีละสถานะถ้าใช้ตาราง/เงื่อนไขฐานเดียวกัน ให้ยุบเป็น query เดียวด้วย `SUM(condition)` หรือ `GROUP BY`
+- ถ้า endpoint สำหรับหน้า home/feed ไม่ใช้ metadata ของหน้า admin/list ให้แยก path ให้ไม่แบก count query ที่ไม่จำเป็น
+- endpoint ที่ต้อง limit ต่อกลุ่ม/type: เริ่มจาก helper กลางให้ contract ถูกก่อน ถ้าข้อมูลโตจริงค่อยย้ายไป SQL/window function พร้อม test เทียบผลก่อน/หลัง
+
 ## โยง
 
 - ฐานภาษา → [`php_skill.md`](./php_skill.md) · รันบน docker → [`docker_skill.md`](./docker_skill.md) · รัน/ดู log → [`terminal_skill.md`](./terminal_skill.md)

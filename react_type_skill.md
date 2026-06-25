@@ -231,6 +231,37 @@ import MainLayout from "../../src/view/layout/main_layout";
 
 ---
 
+## Notification / Popup Rules — กัน popup ซ้อนขัดกันเอง
+
+ถ้าหน้านี้มี **2 ระบบแจ้งเตือน** (เช่น dialog ผล submit + toast จาก error handler กลาง)
+ระวัง **popup ขัดกันเอง**:
+
+- หลัง **mutation สำเร็จ** (add/edit/delete) แล้วเรียก refresh ตาราง — ถ้า refresh พลาด
+  **error handler กลางจะเด้ง toast "ไม่สำเร็จ" มาซ้อนกับ dialog "สำเร็จ"**
+- กฎ: **ผลสำเร็จ/ล้มเหลวยึดจากตัว mutation เท่านั้น** — การ refresh/secondary call ที่พลาด
+  ห้ามเด้ง toast มาขัด → ให้ refresh แบบ **silent** (ส่ง flag ปิด error toast เฉพาะ call นั้น)
+
+```tsx
+const fetchlist = useCallback(async (opts?: { silent?: boolean }): Promise<void> => {
+  try { /* ... */ }
+  catch (e) { if (!opts?.silent) handleApiError(e); }
+}, [/* deps */]);
+// หลัง save สำเร็จ:
+await fetchlist({ silent: true });
+```
+
+## เปลี่ยน hook/import — แก้ให้ครบคราวเดียว (กัน "X is not defined")
+
+ตอน refactor hook/import (เช่นสลับ `useState`→`useRef`) ต้องแก้ **import + ทุกจุดที่ใช้
+ให้ครบในคราวเดียว** อย่าทิ้ง symbol เก่าค้าง:
+- **เซฟกลางคัน = พังทันที** — Vite HMR รันไฟล์ที่เพิ่งเซฟสดๆ ถ้า import เปลี่ยนแล้วแต่ยังมี
+  `useState(...)` ค้างอยู่ → runtime error `useState is not defined` แวบขึ้นจอ user
+- หลังแก้: **grep หา symbol เก่าที่ลบไปว่าค้างไหม** ก่อนถือว่าเสร็จ
+  ```bash
+  grep -n "useState\|useEffect" file.tsx   # ต้องไม่เหลือถ้าลบไปแล้ว
+  ```
+- `tsc --noEmit` จับ "Cannot find name" ได้ → รันให้ผ่านก่อนปิดงานเสมอ
+
 ## Required Checks หลังแก้ไข
 
 - Run `npm run build` หรือ `npx tsc --noEmit` ให้ผ่าน 0 errors
