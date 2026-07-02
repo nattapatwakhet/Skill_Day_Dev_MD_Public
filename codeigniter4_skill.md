@@ -37,6 +37,19 @@
 
 ถ้าทำ API → ดู [`api_skill.md`](./api_skill.md) (CI4 มี `ResourceController` / `respond()` ช่วยทำ REST)
 
+## การเรียงลำดับ list ปกติ — "แก้ไขถ้ามี ไม่งั้นเพิ่ม"
+
+ถ้า base model มีจุดเรียงเดียว (เช่น `applyDefaultOrder()`) และอยากให้ list โชว์ "ล่าสุดที่แตะ"
+ขึ้นก่อน ให้เรียงด้วย `COALESCE(NULLIF(editDate,'0000-00-00 00:00:00'), addDate) DESC`
+แล้วตามด้วย `addDate DESC` เป็น tiebreaker — แถวที่ยังไม่เคยแก้ (edit เป็น NULL/zero) fallback ไป addDate
+
+### ⚠️ ห้ามเทียบคอลัมน์ DATETIME กับ string ว่าง ''
+- `NULLIF(datetime_col, '')` พัง: MySQL STRICT mode มองว่า `''` เป็น datetime ไม่ถูกต้อง →
+  error 1525 "Incorrect DATETIME value: ''" → **ทุก query ที่ใช้จุดเรียงนี้พังหมด**
+- เป็น runtime SQL error (ไม่ใช่ syntax) — `php -l` ผ่าน แต่รันจริงบน DB ที่เปิด STRICT แล้วล้ม
+- เทียบกับ datetime literal `'0000-00-00 00:00:00'` ปลอดภัย / COALESCE จับ NULL ได้อยู่แล้ว
+- เปลี่ยน SQL ในจุดเรียงกลาง = กระทบทุก endpoint → ต้องเทสต์ว่า list ยังโหลดได้ก่อนปิดงาน
+
 ## Performance patterns
 
 - ถ้า response ต้องคืน count หลายสถานะ เช่น `status_0/status_1/status_2`, draft, approve count → อย่ายิง `COUNT(*)` แยกทีละสถานะถ้าใช้ตาราง/เงื่อนไขฐานเดียวกัน ให้ยุบเป็น query เดียวด้วย `SUM(condition)` หรือ `GROUP BY`

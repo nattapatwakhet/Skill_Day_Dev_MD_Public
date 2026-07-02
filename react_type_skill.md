@@ -262,6 +262,30 @@ await fetchlist({ silent: true });
   ```
 - `tsc --noEmit` จับ "Cannot find name" ได้ → รันให้ผ่านก่อนปิดงานเสมอ
 
+## ฟอร์มพิมพ์แล้วแลค/สะดุด (typing lag) — controlled form state ก้อนเดียว
+
+อาการ: พิมพ์ในช่อง text แล้วหน่วง/กระตุก เพราะทุกคีย์ → `setform((prev)=>({...prev,[k]:v}))`
+→ controller/hook re-render → งานหนักทุก keystroke
+
+ต้นเหตุที่พบบ่อย:
+1. **derived array/tree คำนวณ inline ใน body ทุก render** (เช่น สร้าง options/tree ขนาดใหญ่
+   จากการ map ซ้อนหลายชุดข้อมูล) → กิน CPU บน render thread ทุก keystroke = แลค
+2. **widget หนักไม่ได้ memo** (tree select / rich text editor) → re-render ทุกคีย์แม้ค่าไม่เปลี่ยน
+3. **callback เป็น inline arrow** (`onChange={(v)=>onFieldChange("x",v)}`) → ref ใหม่ทุก render
+   → ต่อให้ memo widget ก็ไม่ข้าม
+
+วิธีแก้ (เรียงตาม impact):
+1. ห่อ derived ทุกตัวด้วย `useMemo` + dep ให้แม่น — ใส่ **เฉพาะฟิลด์ของ form ที่ใช้จริง**
+   (เช่น `form.some_array_field`) ไม่ใช่ object form ทั้งก้อน เพราะ `{...prev,[k]:v}` สร้าง
+   object ใหม่แต่ field เดิม ref ไม่เปลี่ยน → พิมพ์ฟิลด์อื่นแล้ว memo ไม่ invalidate
+2. ย้าย pure helper ออกไป **module scope** → stable, ไม่ต้องอยู่ใน dep array
+3. `export default memo(Widget)` กับ widget หนัก
+4. ส่ง callback ที่ stable ด้วย `useCallback` แทน inline arrow — ต้องครบทั้ง memo +
+   callback stable + value/data stable widget หนักถึงจะข้าม re-render
+
+> หลักคิด: ลด **งานต่อ keystroke** ก่อน (useMemo ตัด CPU ที่ render) แล้วค่อยตัด
+> **reconciliation** ของ subtree หนัก (memo + stable props)
+
 ## Required Checks หลังแก้ไข
 
 - Run `npm run build` หรือ `npx tsc --noEmit` ให้ผ่าน 0 errors
