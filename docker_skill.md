@@ -55,6 +55,28 @@
 
 > ห้ามเผยแพร่ค่า secret, production host, private registry token, internal DNS หรือ credential ในไฟล์นี้
 
+## API smoke / secrets
+
+- เวลา smoke test endpoint ที่ต้องใช้ API key/token ห้าม query, print, หรือ echo secret จาก DB/log ออกมาเพื่อเอาไป curl
+- ใช้ token/header ที่ user มีให้, session/frontend runtime ที่มีอยู่แล้ว, หรือทดสอบที่ model/syntax level แทนถ้าขาด credential
+- ถ้า sandbox เข้า Docker/localhost ไม่ได้หรือ endpoint ตอบไม่ได้เพราะ environment ให้แยกสาเหตุ environment ออกจาก bug ของ code
+- การทดสอบผ่าน Docker/localhost บนเครื่อง user อาจต้องขอสิทธิ์รันคำสั่งตาม policy ก่อน
+
+## PHP extension บน Docker image — `ext-intl` (CodeIgniter 4)
+
+CI4 ต้องมี `ext-intl` สำหรับ localization + `NumberFormatter` / `IntlDateFormatter`
+base image `php:*-apache`/`fpm` ไม่มี intl มาให้ → error `Class "NumberFormatter" not found` หรือ requirements ฟ้อง
+
+- เพิ่มใน Dockerfile:
+  ```dockerfile
+  RUN apt-get update && apt-get install -y libicu-dev \
+   && docker-php-ext-configure intl \
+   && docker-php-ext-install intl
+  ```
+- เช็คหลัง build: `docker exec <backend> php -m | grep -i intl`
+- แก้ Dockerfile ต้อง **rebuild image** (`up -d --build`) ไม่ใช่แค่ restart
+- `extension=intl` ใน `php.ini` อย่างเดียวไม่พอ ถ้า `.so` ยังไม่ถูก compile/ติดตั้งใน image
+
 ---
 
 ## วิธีรัน (บนเครื่อง user — sandbox อาจเข้า docker/localhost ไม่ได้)

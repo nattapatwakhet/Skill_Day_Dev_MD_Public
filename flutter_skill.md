@@ -60,6 +60,11 @@ Future loadData() async { ... }
 - return type เป็น nullable และ error เกิด → return `null`
 - ห้ามสร้าง fake error model (`model3error`) ใช้ `null` แทน
 - เพิ่ม `return;` ท้าย `Future<void>`/`void` เมื่อไม่มีงานเหลือ
+- ถ้า `await someFuture().catchError(...)` ทำให้ fallback return type เสี่ยงไม่ตรง `Future<T>` ให้เปลี่ยนเป็น
+  `try/catch` รอบ `await` และให้ฟังก์ชันต้นทางจัดการ runtime error ตาม contract เอง
+- อย่าต่อ string วันที่ด้วย `${year}-${month}-${day}` เองถ้า parser ต้องการ `yyyy-MM-dd`; ใช้ formatter/string ที่เติมศูนย์แล้ว
+- ห้ามทำ lifecycle override เป็น `void async` (เช่น `initState`, `onReady`) — ให้ override เป็น `void` ตาม framework
+  แล้วเรียก `unawaited(loadData())` ไปยัง helper ที่ return `Future<void>` แทน
 
 ---
 
@@ -156,6 +161,8 @@ Future loadData() async { ... }
 - เพิ่ม column หลังตรวจว่ายังไม่มีก่อน
 - ห้าม build SQL insert ด้วย string concatenation
 - ใช้ `Batch.insert`, `insert`, หรือ parameter binding
+- ตาราง cache ที่ key ทางธุรกิจซ้ำได้ง่ายควร dedupe ตอนอ่าน และใช้ upsert/delete-then-insert ใน transaction ตอนเขียน
+  ไม่ปล่อย insert ซ้ำจน downstream state แสดงผลผิด
 - เมื่อเพิ่ม model field ใหม่ที่เก็บ local ต้อง update ทั้ง: model mapping, column constants, table SQL, column check/add logic, insert/update mapping
 
 ---
@@ -172,6 +179,8 @@ Future loadData() async { ... }
 ## Legacy Model/Class Name Compatibility
 
 - Run analyzer หรือ `rg` หาชื่อเดิมที่ยังอ้างอยู่
+- หลัง rename class/file/import แล้ว ให้ค้น `toString()`, log/debug string, route/debug label ที่ยังพิมพ์ชื่อ class เดิมด้วย
+- ถ้า model/state/service ถูกแยกตาม domain ให้จัด folder ตาม domain จริง และให้ class/file/import/caller ใช้ชื่อเดียวกันโดยตรง
 - ห้าม `typedef` alias → rename caller ไปใช้ class จริง:
 
 ```dart
@@ -220,6 +229,35 @@ import 'package:<appname>/component/widget/main_button_widget_component.dart';
   - services → constants, MainService, models, utilities
   - models → ห้าม import controller/service
   - views → controllers, bindings, components, constants, models
+
+---
+
+## GetX/Obx timing เพิ่มเติม
+
+- ห้าม set `.value` ของ Rx/Rxn จากใน `build()`/`Obx` โดยตรง ถ้าต้อง sync ค่าเริ่มต้นจาก route/selected page
+  ให้ guard ก่อน แล้วค่อย `WidgetsBinding.instance.addPostFrameCallback(...)`
+- callback ที่เลื่อนด้วย `addPostFrameCallback` ต้อง guard ซ้ำข้างในด้วย เพราะ build อาจถูกเรียกหลายรอบก่อน callback ทำงาน
+
+## Dio/FormData multipart
+
+- ถ้าส่งรูป/ไฟล์จาก Flutter ไป backend ให้ใช้ `FormData` และตั้ง flag multipart ของ service ให้ชัดเจน
+- ห้าม fix header `Content-Type: multipart/form-data` เอง ให้ลบ `Content-Type` เดิมเพื่อให้ Dio ใส่ boundary ให้เอง
+- ถ้า backend อ่าน `filter`/`data` เป็น JSON string ให้ส่ง `filter: jsonEncode({...})`, `data: jsonEncode({...})`
+  ไม่ส่ง bracket fields เว้นแต่ backend รองรับ array form fields ชัดเจน
+- ถ้า backend อ่าน multipart ผ่าน POST body เท่านั้น ให้ยิง `POST` ไป action ที่รองรับแทน multipart `PUT`
+- file key ต้องตรง backend และเวลา debug ให้ log `formdata.fields`/`formdata.files` ผ่าน logger ของโปรเจค
+
+## UI/platform patterns
+
+- ถ้าต้องการ widget สี่เหลี่ยมจัตุรัส responsive ให้คำนวณ `width` และ `height` จากค่าเดียวกัน
+  เช่น width helper เดียวกัน หรือ `AspectRatio(aspectRatio: 1)` ไม่ใช้ width/height helper คนละฐาน
+- Map/location flow ต้อง set loading flags แล้ว `return` ในทุกทางที่ service/permission ไม่พร้อม, async load เสร็จต้อง rebuild
+  ด้วย `if (mounted) setState(() {})`, และ cancel timer เดิมก่อนสร้างใหม่ เพื่อไม่ให้ loading overlay ทับ map ค้าง
+- เปิด deep link ไปแอปอื่นก่อนด้วย `launchUrl(..., LaunchMode.externalApplication)` ถ้าเปิดไม่ได้ให้ fallback ไป store URL ตาม platform
+- สีควรอยู่ใน constant กลางที่เดียวและจัดกลุ่มอ่านง่าย รวม alias ซ้ำ/แก้ typo และใน Flutter รุ่นใหม่ใช้ `withValues(...)`
+  แทน `withOpacity(...)` เมื่อแก้บล็อกสี
+- Android TV launcher/banner image ใช้ `banner.png` ขนาดมาตรฐาน `320 x 180 px` อัตราส่วน 16:9
+  วางใน Android resource folder ที่โปรเจคใช้ เช่น `android/app/src/main/res/drawable/banner.png`
 
 ---
 

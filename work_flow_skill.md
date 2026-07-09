@@ -39,11 +39,12 @@ code เป็นแค่ **หนึ่งโดเมน** ไม่ใช่
 [6] งานนี้ต้องขอสิทธิ์อะไรบ้าง? → permission_skill.md  (ขอให้ครบในครั้งเดียว)
         │
 [7] ลงมือทำในขอบเขตสิทธิ์ + ตามกฎของไฟล์ที่เกี่ยว
+        ├─ ก่อนแตะไฟล์ (งานหลายขั้น) → progress_skill.md: สร้าง skill/day_dev_public/memory/PROGRESS.md
         ├─ งานใหญ่/เสี่ยง/แตะหลายไฟล์ → plan_mode_skill.md (วางแผนก่อน รออนุมัติ แล้วแก้ทีละไฟล์)
         └─ ก่อนลงมือ ถ้าเป็น plan ใหญ่ → review_skill.md (มีวิธีง่ายกว่าไหม)
         │
 [8] ตรวจงาน (review_skill.md) + ปิดงาน + ถ้าต้องรายงานคนอื่น → report_skill.md
-        └─ ถ้ามีของใหม่ → บันทึกกลับเข้า skill (ดู main_skill.md ท้ายไฟล์)
+        └─ Definition of Done: แนะนำ + อัปเดต PROGRESS + update skill + log แชต(ถ้าถูกขอ)
 ```
 
 ---
@@ -178,7 +179,10 @@ type annotation, import philosophy
 
 ## [7] ลงมือทำ
 
-- ทำในขอบเขตสิทธิ์ที่ได้ ตามกฎของไฟล์ที่เกี่ยวข้อง
+- **ก่อนแตะไฟล์ (งานหลายขั้น/แตะหลายไฟล์/น่าจะทำไม่จบรอบเดียว): สร้าง `skill/day_dev_public/memory/PROGRESS.md`**
+  ตาม [`progress_skill.md`](./progress_skill.md) — จดเป้าหมาย + checklist ของแผน ก่อนลงมือ
+  (งานสั้น 1–2 step ข้ามได้) → resume ข้าม session/agent เมื่อ token หมด/ย้าย agent
+- ทำในขอบเขตสิทธิ์ที่ได้ ตามกฎของไฟล์ที่เกี่ยวข้อง · ทำเสร็จแต่ละก้อน **อัปเดต PROGRESS** (`[ ]`→`[x]`)
 - บอก user ก่อนทำสิ่งที่แตะเครื่อง/ย้อนไม่ได้ แล้วรอ ok
 - **งานใหญ่/เสี่ยง/แตะหลายไฟล์/ยังไม่รู้สาเหตุชัด** → เข้า [`plan_mode_skill.md`](./plan_mode_skill.md)
   วางแผนเป็น checklist (ไฟล์ไหน/ฟังก์ชันไหน/ทำไม/ลำดับ) **ก่อนแตะไฟล์** → รอ user อนุมัติ → แก้ทีละไฟล์
@@ -203,6 +207,18 @@ type annotation, import philosophy
 - **ถ้าต้องรายงานให้คนไม่ใช่ dev** (หัวหน้า/PM/ทีมอื่น) → จัดรูปด้วย [`report_skill.md`](./report_skill.md)
 - ถ้าเจอแพตเทิร์น/โครงสร้าง/กฎใหม่ → บันทึกกลับเข้าไฟล์ที่เกี่ยวในโฟลเดอร์ skill
   (รายละเอียดวิธีบันทึกอยู่ท้าย [`main_skill.md`](./main_skill.md))
+- ถ้า user ขอ "อัปเดตสิ่งที่คุยในแชตลง skill / อะไรยังไม่ได้ลง" →
+  ใช้ [`conversation_log_skill.md`](./conversation_log_skill.md) คู่กับ [`skill_maintenance_skill.md`](./skill_maintenance_skill.md)
+
+### ✅ Definition of Done — จบงานจริงทุกครั้งต้องครบ
+
+1. **แนะนำ** — เสนอสิ่งที่ควรปรับ (บั๊กแฝง/tech-debt/วิธีง่ายกว่า) พร้อมจุด+เหตุผล+ผลกระทบ จัดอันดับ
+2. **จดบันทึก** — อัปเดต [`progress_skill.md`](./progress_skill.md) (`skill/day_dev_public/memory/PROGRESS.md`): ทำถึงไหน,
+   เหลืออะไร (Next), คำแนะนำที่เสนอไปแยก "ทำตามแล้ว / ยังไม่ได้ทำตาม", blocker → ให้ session/agent ถัดไปทำต่อได้
+3. **update skill** — มีกฎ/แพตเทิร์น/โดเมนใหม่ → บันทึกเข้าไฟล์ skill ที่ถูก ([`skill_maintenance_skill.md`](./skill_maintenance_skill.md))
+4. **log แชต (ถ้าถูกขอ)** — user ขอ sync สิ่งที่คุย → [`conversation_log_skill.md`](./conversation_log_skill.md)
+
+> ข้อ 1 ผูกกับข้อ 2: คำแนะนำที่เสนอต้องถูกจดใน PROGRESS แยก "ทำแล้ว/ยังไม่ทำ" เพื่อรอบหน้ารู้ว่ายังค้างอะไร
 
 ---
 
@@ -212,7 +228,7 @@ type annotation, import philosophy
 |---|---|---|
 | **คุยทั่วไป/ถามสั้น** | ทักทาย, ถามข้อเท็จจริงสั้น | ตอบเลย **ไม่เปิด skill ไม่ประกาศ** |
 | **ปรึกษา/คิดโปรเจค** | ถามกว้าง, "คิดด้วยกัน", ยังไม่ชัด | ถ้าคุยถึงโปรเจคจริง → **ground ด้วย `project_structure_skill` + อ่านโค้ดจริงก่อน** → ถก/เสนอทางเลือก **ไม่แก้ไฟล์** (ตรงกับ `plan_mode_skill`/`review_skill`) |
-| **งานจริง** | สั่งชัดตรงๆ ("แก้ X", "เพิ่ม Y") | **เปิด domain skill + บอกชื่อ skill ที่อิง 1 บรรทัด** → ทำในขอบเขต → ตรวจ → อัปเดต skill เอง |
+| **งานจริง** | สั่งชัดตรงๆ ("แก้ X", "เพิ่ม Y") | **เปิด domain skill + บอกชื่อ skill ที่อิง 1 บรรทัด** → (งานหลายขั้น: สร้าง PROGRESS) → ทำในขอบเขต → ตรวจ → **Definition of Done** (แนะนำ + PROGRESS + update skill + log) |
 
 **งานจริงที่เป็น "แก้บั๊ก/ของพัง" → มีขั้นหาสาเหตุก่อนแก้เสมอ** (อยู่ในโหมดงานจริง):
 `เปิด domain skill + ` [`debug_skill.md`](./debug_skill.md) → **หาสาเหตุ** (4 ขั้น: reproduce →

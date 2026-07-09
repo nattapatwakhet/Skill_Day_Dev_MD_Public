@@ -53,47 +53,55 @@ skill/day_dev_public/
 
 ## วิธีติดตั้งในโปรเจกต์
 
-แนะนำให้วางไว้ใน path นี้:
+1. **โหลด repo** — กด Code → Download ZIP (หรือ `git clone`) แตกไฟล์จะได้โฟลเดอร์ชื่อ `Skill_Day_Dev_MD_Public-main`
+2. **สร้างโฟลเดอร์ `skill/`** ที่ root ของโปรเจกต์ (ถ้ายังไม่มี)
+3. **ย้ายโฟลเดอร์ที่โหลดมาเข้าไปใน `skill/` แล้วเปลี่ยนชื่อ** จาก `Skill_Day_Dev_MD_Public-main` → `day_dev_public`
+   จะได้ `skill/day_dev_public/`
+4. **เอา `AGENTS.md` และ `CLAUDE.md` ไปวางที่ root ของโปรเจกต์** (หรือที่ที่ workspace ใช้รวม instruction)
+   ทั้งสองไฟล์ชี้มาที่ `skill/day_dev_public/...` อยู่แล้ว — **ไม่ต้องแก้ path** ถ้าวางตามข้อ 3
+
+ได้โครงสร้างแบบนี้:
 
 ```text
 <your-project>/
+├─ AGENTS.md            ← จาก repo (เอามาวาง root)
+├─ CLAUDE.md            ← จาก repo (เอามาวาง root)
 └─ skill/
-   └─ day_dev_public/
-      ├─ AGENTS.md
-      ├─ CLAUDE.md
+   └─ day_dev_public/   ← เปลี่ยนชื่อจาก Skill_Day_Dev_MD_Public-main
       ├─ main_skill.md
+      ├─ work_flow_skill.md
+      ├─ *_skill.md
       └─ ...
 ```
 
-จากนั้นทำอย่างใดอย่างหนึ่ง:
-
-1. ใช้ `AGENTS.md` / `CLAUDE.md` ในโฟลเดอร์นี้เป็น reference
-2. หรือ copy เนื้อหา `AGENTS.md` / `CLAUDE.md` ไปไว้ที่ root ของโปรเจกต์ แล้วให้ path ชี้มาที่ `skill/day_dev_public/main_skill.md`
-
-ถ้าคุณวาง skill ไว้ path อื่น ให้แก้ path ใน `AGENTS.md` และ `CLAUDE.md` ให้ตรงกับตำแหน่งจริง
+> - `AGENTS.md`/`CLAUDE.md` มีอยู่ในโฟลเดอร์ repo ด้วย — จะ **ย้าย** หรือ **copy** ขึ้น root ก็ได้ (ต้นฉบับที่ค้างอยู่ข้างในไม่มีผลเสีย)
+> - ถ้าวาง skill ไว้ path อื่น (ไม่ใช่ `skill/day_dev_public/`) ให้แก้ path ใน `AGENTS.md`/`CLAUDE.md` ให้ตรง
 
 ---
 
 ## Installation
 
-Recommended layout:
+1. **Download the repo** — Code → Download ZIP (or `git clone`). Unzipping gives a folder named `Skill_Day_Dev_MD_Public-main`.
+2. **Create a `skill/` folder** at your project root (if it doesn't exist yet).
+3. **Move the downloaded folder into `skill/` and rename it** from `Skill_Day_Dev_MD_Public-main` → `day_dev_public`, giving you `skill/day_dev_public/`.
+4. **Put `AGENTS.md` and `CLAUDE.md` at your project root** (or wherever your workspace loads its instructions). They already point to `skill/day_dev_public/...`, so **no path edits are needed** if you follow step 3.
+
+Resulting layout:
 
 ```text
 <your-project>/
+├─ AGENTS.md            ← from the repo (placed at root)
+├─ CLAUDE.md            ← from the repo (placed at root)
 └─ skill/
-   └─ day_dev_public/
-      ├─ AGENTS.md
-      ├─ CLAUDE.md
+   └─ day_dev_public/   ← renamed from Skill_Day_Dev_MD_Public-main
       ├─ main_skill.md
+      ├─ work_flow_skill.md
+      ├─ *_skill.md
       └─ ...
 ```
 
-Then either:
-
-1. Keep `AGENTS.md` / `CLAUDE.md` inside this folder as reference instructions
-2. Or copy their contents to your project root and keep the paths pointing to `skill/day_dev_public/main_skill.md`
-
-If you install the skill pack somewhere else, update the paths in `AGENTS.md` and `CLAUDE.md`.
+> - `AGENTS.md`/`CLAUDE.md` also ship inside the repo folder — you can **move** or **copy** them to the root (leftover originals inside do no harm).
+> - If you place the pack at a different path, update the paths in `AGENTS.md`/`CLAUDE.md` to match.
 
 ---
 

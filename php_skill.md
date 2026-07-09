@@ -28,6 +28,20 @@
 - CodeIgniter 3 → [`codeigniter3_skill.md`](./codeigniter3_skill.md)
 - CodeIgniter 4 → [`codeigniter4_skill.md`](./codeigniter4_skill.md)
 
+## PHP extension บน Docker
+
+- CI4 ต้องมี `ext-intl` (localization / `NumberFormatter` / `IntlDateFormatter`) — ถ้ารันบน Docker
+  ต้อง `docker-php-ext-install intl` (+ `libicu-dev`) ใน image ไม่ใช่แค่เปิดใน `php.ini`
+  วิธีเต็ม + เช็คหลัง build ดู [`docker_skill.md`](./docker_skill.md) หัวข้อ `ext-intl`
+
+## Scheduled notification / async send scripts
+
+- ถ้า caller ส่ง `send_at` เป็นเวลาส่งจริง ห้ามบวก lead/preparation seconds ซ้ำใน scheduled send time
+- แยก scheduled send time ออกจาก prepare time เช่น `prepareAt = sendAt - leadSeconds`
+- ถ้าไม่มี `send_at` และต้องการส่งทันที ให้ใช้ `time()` เป็น send time
+- response-before-send/async web worker ยังต้องคำนึงถึง timeout ของ web server/PHP-FPM
+- ไฟล์ start/end หรือ script คู่ขนานต้อง sync default message, scheduling, และ error handling ให้ตรงกัน
+
 ## โยง
 
 - เว็บ backend รันบน docker → [`docker_skill.md`](./docker_skill.md)

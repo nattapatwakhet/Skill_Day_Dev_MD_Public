@@ -123,6 +123,38 @@ interface InputFieldProps {
 <InputField startIcon={<FiSearch />} clearTooltip="ล้าง" />  // ✗
 ```
 
+## MUI Button Icon-Only Alignment
+
+MUI `Button` adds default margin to `.MuiButton-startIcon`, so icon-only buttons can look off-center.
+
+Rules:
+- If a reusable button supports icon-only mode, make `label` optional.
+- Use flex center for icon-only buttons.
+- Clear the default start-icon margin when there is no label.
+- Keep an explicit gap, such as `8px`, only when both icon and label are rendered.
+- `variant="contained"` has a default MUI shadow. If the design expects flat buttons, set
+  `disableElevation` and keep `boxShadow: "none"` for normal, hover, active, and focus states.
+
+## MUI form widget behaviors
+
+- **Autocomplete: เปิด dropdown ขณะมีค่าเลือกอยู่ → search ผิด (เหลือแค่ตัวที่เลือก)** — MUI ยิง
+  `onInputChange(reason="input", <label ของตัวที่เลือก>)` ตอนเปิด → handler เอา label ไป search → เหลือ option เดียว
+  แก้: เก็บ label ล่าสุดที่เลือกไว้ใน `ref` แล้วใน `onInputChange` ถ้า `inputValue === ref.current` → `return`
+  ไม่ search (โชว์ทุก option); พิมพ์ทับ/ล้าง → ค่าต่างจาก ref → search ปกติ (เชื่อ ref เสถียรกว่าเทียบ selected value)
+- **ช่องที่มีตัวนับ (maxlength `x/255`) → error ต้องเข้า `errortext` ของ input** ไม่ใช่ `<Typography>` แยกอีกบรรทัด
+  ไม่งั้นตัวนับกับ error อยู่คนละบรรทัด/ตัวนับหาย ให้ error ซ้าย + ตัวนับขวา บรรทัดเดียวกัน + กรอบแดงตอน error
+- **responsive object (sx / size) ต้องใส่ breakpoint ให้ครบ `xs`/`sm`/`md` ทุกก้อน** อย่าใส่ค้างบาง breakpoint
+
+## Approval/dialog UI patterns
+
+- Dialog action bar ควรแยกตำแหน่งชัด: ปิด/ยกเลิกฝั่งหนึ่ง, status/selection ตรงกลาง, primary save อีกฝั่ง
+- Radio status ต้องมีหัวข้อและสี/label ที่สื่อสถานะจริง และต้อง validate ว่าเลือกแล้วก่อนกดบันทึก
+- Dialog หลายรายการควรมี scroll ชั้นเดียว; หลีกเลี่ยง `DialogContent` scroll แล้ว component ลูกมี `overflowY` อีกชั้น
+- รูป/เอกสาร preview ใน data dialog ควรมี slot ขนาดคงที่ รวม placeholder ช่องว่างที่เหลือ เพื่อไม่ให้ layout กระโดด
+- Dialog ดูข้อมูลที่ต้องกว้างเต็มควรควบคุม `maxWidth` ที่ wrapper ให้ตรง ไม่ใช่ตั้ง width ด้านในอย่างเดียว
+- Dialog ที่มี form/table ใหญ่ควรตั้งขนาดที่ wrapper แบบ viewport-constrained เช่น `maxWidth="xl"`,
+  width เกือบเต็มจอแต่เหลือ margin และ `maxHeight` ประมาณ `94vh` เพื่อไม่ให้ content หลุด viewport
+
 ---
 
 ## Color และ Theme Rules
@@ -188,6 +220,35 @@ const store = useLayoutStore();
 ```
 
 - ห้ามสร้าง store ใหม่สำหรับ transient local UI state → ใช้ `useState`
+
+## Auth token / route gate / service boundary
+
+- ถ้า service, API interceptor, และ store ต้อง decode token/user data เหมือนกัน ให้ย้ายเป็น utility กลาง
+  แล้วให้ทุกจุดเรียกตัวเดียวกัน ห้าม duplicate decode logic กระจายในหลายไฟล์
+- API/file service ไม่ควร import Zustand store โดยตรงถ้า interceptor ต้องอ่าน token สดทุก request;
+  ให้ utility อ่านจาก storage/source of truth แล้ว store ใช้ utility เป็นค่าเริ่มต้นของ UI state
+- Route guard ต้องเช็ก active-status ของ user ด้วย ไม่ใช่เช็กแค่ว่ามี id/token/permission
+  เช่นมี field สถานะพนักงาน/บัญชี ต้อง allow เฉพาะค่า active ที่ระบบกำหนด
+- Startup data ที่โหลดครั้งเดียวหลังเข้า app ควรรวม count/badge/permission ที่จำเป็น และต้องไม่ยิงซ้ำจากทุก component
+
+## Badge/count contract
+
+- Badge หรือ stat ที่ควร scoped ตาม user/filter ห้ามอ่าน count รวมทั้งระบบ เช่น `total_data_status_*`
+  ถ้า backend มี count ตาม filter ให้ใช้ field แบบ `total_data_filter_*`
+- ถ้า backend ยังไม่มี count ตาม filter ให้เพิ่ม contract แยกชัดเจน แทนการเอา count รวมไปใช้กับ UI ที่เป็นของผู้ใช้คนเดียว
+- Frontend params type ต้องประกาศ control flags ที่ส่งจริง และไม่บังคับให้ interface เป็น `Record<string, unknown>`
+  ถ้า service รับ object เฉพาะ domain ให้แปลง/serialize ที่ service boundary
+- Status form ที่เพิ่ม/แก้ข้อมูล workflow ต้องส่ง status ที่ backend ต้องการครบทั้ง success/status และ approve/status;
+  อย่า rely default ฝั่ง backend ถ้า UI เป็น flow เฉพาะ
+- ถ้าใช้ service กลางที่รับ `Record<string, unknown>` → interface params ต้องมี index signature
+  `[k: string]: unknown` ไม่งั้น `tsc` ฟ้อง *"Index signature for type 'string' is missing"* (error 2345)
+
+## ตาราง select-all ทั้ง dataset (ข้ามหน้า)
+
+- **ติ๊กหัวตาราง = เลือกทุกแถวที่ *action ได้* ทั้ง dataset** ไม่ใช่แค่หน้าปัจจุบัน → ดึงด้วย `limit:"all"`
+  เฉพาะ status ที่ทำ action ได้ แล้วเก็บ id ทั้งหมด
+- **indeterminate (–)**: เทียบจำนวนที่เลือกกับจำนวนทั้งหมดที่ action ได้ (จาก count ตาม filter) ไม่ใช่จำนวนแถวในหน้า
+- **persistence**: เปลี่ยนหน้าแล้วที่เลือกไว้ต้องอยู่ครบ · **bulk** ทำกับ id ที่เลือกทั้งหมดข้ามหน้า
 
 ---
 
@@ -285,6 +346,68 @@ await fetchlist({ silent: true });
 
 > หลักคิด: ลด **งานต่อ keystroke** ก่อน (useMemo ตัด CPU ที่ render) แล้วค่อยตัด
 > **reconciliation** ของ subtree หนัก (memo + stable props)
+
+## ⚠️ ห้ามนิยาม component ซ้อนใน component (remount → input หลุด focus)
+
+อาการ: พิมพ์ในช่อง **1 ตัวอักษรแล้วเด้งออกจากช่อง ต้องคลิกใหม่** — ไม่ใช่แค่แลค แต่ input โดน
+**unmount + remount** ทุก keystroke
+
+ต้นเหตุ: นิยาม sub-component (`FieldLabel`, `Section`, `InfoRow`, ...) ไว้ **ข้างใน** component หลัก
+→ ทุก render สร้าง function identity ใหม่ → React มองเป็น **component type ใหม่** → ทำลาย subtree เก่า
+แล้ว mount ใหม่ → input ข้างในเสีย focus + state
+
+```tsx
+// ✗ ผิด — นิยามข้างใน → remount ทุก render
+const MyForm = ({ form, onFieldChange }: Props): ReactElement => {
+  const FieldLabel = ({ label }: { label: string }): ReactElement => ( ... ); // ← ระเบิด
+  return <FieldLabel label="ชื่อ" />;
+};
+
+// ✓ ถูก — นิยามระดับ module, เรียก useTheme/useTranslation ในตัวเอง
+const FieldLabel = ({ label }: { label: string }): ReactElement => { ... };
+const MyForm = ({ form, onFieldChange }: Props): ReactElement => { ... };
+```
+
+**กฎ:** ประกาศ component ทุกตัวที่ **ระดับ module เสมอ** (นอก component อื่น) — ถ้าต้องใช้ theme/t
+ให้เรียก `useTheme()`/`useTranslation()` ภายในตัว component เอง ห้ามพึ่ง closure ของ parent
+
+หา anti-pattern นี้ทั้งโปรเจค:
+```bash
+grep -rnE '^[[:space:]]+const [A-Z][A-Za-z0-9]* = \(' --include="*.tsx" src \
+  | grep -vE 'useState|useRef|useMemo|useCallback'   # PascalCase const มี indent = ซ้อนใน function
+```
+
+> ต่างจาก typing-lag ด้านบน: อันนั้น = re-render ช้า (แก้ด้วย memo/useCallback), อันนี้ = **remount**
+> ทำลาย focus/state (แก้ได้ทางเดียวคือย้ายนิยามออกนอก component) memo ช่วยไม่ได้
+
+## Admin form master data readiness
+
+ฟอร์ม admin ที่มี dropdown/master data หลายชุดห้ามเปิดให้กรอกหรือ submit ขณะข้อมูลยังไม่ครบ:
+
+- หน้า admin ที่โหลดช้าเพราะดึงตารางกับ dropdown หนักพร้อมกัน ให้โหลด list/table หลักก่อน แล้วค่อย defer
+  master/dropdown data; personnel/access-rights ไม่ควร `limit=all` ตั้งแต่ page load ถ้าใช้ search/deferred load ได้
+- แยก flag "กำลังโหลด" ออกจาก "โหลดสำเร็จครบแล้ว" เช่น `formmasterdataready`
+- ตอนเปิดเพิ่ม/แก้ไข ให้เรียก loader กลางของ form master data ก่อน แล้วค่อยเปิด form เมื่อข้อมูลครบ
+- ถ้า loader fail ให้ปิด/ไม่เปิด form และแจ้ง error แทนการปล่อย dropdown ว่าง
+- ตอน edit ต้องโหลด master data สำเร็จก่อนค่อยดึง detail/เติมค่าเดิม ไม่งั้น selected value อาจไม่มี option ให้แสดง
+- ตอน submit ต้อง guard ซ้ำ ถ้า master data ยังไม่ ready ห้ามยิง API
+
+## Bulk status actions
+
+bulk action ในตารางต้องทำ mutation จริง ไม่ใช่แค่ล้าง selection:
+
+- ถ้าปุ่ม bulk ใช้ checkbox เลือกแถว ให้ trace selected ids → toolbar/action → controller handler → service → API
+- handler ที่ยังเป็น TODO หรือแค่ clear selection คือบั๊ก แม้ UI จะเหมือน action สำเร็จแล้ว
+- action ที่เปลี่ยนสถานะหลายรายการต้องส่ง id จริงแบบ array ให้ backend (`whereIn`) และ refresh ตารางหลังสำเร็จ
+- ถ้ารายการมี auto schedule แล้ว action ต้องปิดรายการ ให้ปิด auto flag ไปด้วย ไม่งั้น backend อาจ recompute แล้วเปิดกลับ
+- checkbox ของ bulk action ควร selectable เฉพาะแถวที่ action ทำได้จริง
+
+## Upload/detail payload mapping
+
+- ฟอร์มที่ส่ง snapshot/detail fields ให้ backend ต้องส่ง field ที่ backend ใช้จริง ห้ามส่งว่างทุกครั้งถ้า UI มีข้อมูลแล้ว
+- ถ้ามี video upload ให้ append file จริงใน multipart และส่ง metadata ที่ frontend หาได้ เช่น duration แทนให้ backend เดาเอง
+- ถ้า upload สำเร็จแต่ submit/insert ล้ม ให้แยกว่า external upload ได้ id แล้วหรือยัง กับ DB insert error คืออะไร
+  เพราะอาจเกิดไฟล์ค้างใน external storage โดยไม่มี row ใน DB
 
 ## Required Checks หลังแก้ไข
 

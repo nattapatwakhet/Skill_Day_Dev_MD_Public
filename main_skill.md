@@ -14,8 +14,9 @@
 2. **จำแนกว่างานเป็นด้านไหน (domain)** — code? สร้างไฟล์ส่งมอบ? ค้นคว้า? วิเคราะห์ข้อมูล? เขียนเนื้อหา? อื่นๆ — **ระบบนี้ทำได้ทุกด้าน code เป็นแค่หนึ่งโดเมน** (งานเดียวเข้าได้หลายอย่าง)
 3. **เดินตาม work flow** — ส่งต่อไป [`work_flow_skill.md`](./work_flow_skill.md) ซึ่งจะจำแนกโดเมนแล้วพาไปไฟล์ที่เกี่ยวทีละขั้น
 4. **ทำในขอบเขต** — แก้เฉพาะที่ขอ อ่านไฟล์ล่าสุดก่อนแก้เสมอ
+   > งานหลายขั้น/แตะหลายไฟล์/น่าจะทำไม่จบรอบเดียว → **สร้าง `skill/day_dev_public/memory/PROGRESS.md` ก่อนลงมือ** (ดู [`progress_skill.md`](./progress_skill.md)) เพื่อ resume ข้าม session/agent ได้
 5. **เสนอสิ่งที่ควรปรับ** — ระหว่าง/หลังทำ ถ้าเห็นจุดที่ควรแก้/ปรับ (บั๊กแฝง, tech-debt, ซับซ้อนเกิน, เสี่ยง, วิธีที่ดีกว่า) → **บอก user แม้ไม่ได้ขอ** แต่ไม่ลงมือแก้เองนอกขอบเขต (เสนอก่อน)
-6. **ปิดงาน** — สรุปผลสั้นๆ และถ้ามีความรู้/แพตเทิร์น/โดเมนใหม่ ให้บันทึกเพิ่ม (ดูท้ายไฟล์)
+6. **ปิดงาน (Definition of Done)** — (a) สรุปผลสั้นๆ + เสนอสิ่งที่ควรปรับ · (b) อัปเดต [`progress_skill.md`](./progress_skill.md) (ทำถึงไหน/เหลืออะไร/แนะนำอะไรแล้วทำ-ยังไม่ทำ) · (c) มีความรู้/แพตเทิร์น/โดเมนใหม่ → บันทึกเข้า skill (ดูท้ายไฟล์) · (d) user ขอ sync แชต → [`conversation_log_skill.md`](./conversation_log_skill.md)
 
 > หลักการเสนอ: เสนอแบบมีหลักฐาน (ชี้จุด + เหตุผล + ผลกระทบ) จัดอันดับความสำคัญ ไม่ใช่บ่นลอยๆ — ใช้ [`review_skill.md`](./review_skill.md) เป็นเครื่องมือเวลารีวิวลึก
 
@@ -68,7 +69,10 @@ main_skill.md  (วิธีคิด + index)
           │
           ├─> [รายงานคนไม่ใช่ dev] report_skill.md   ← ตอนสรุป/ปิดงาน
           │
+          ├─> [จดความคืบหน้างาน] progress_skill.md   ← สร้างก่อนลงมือ + อัปเดตหลังทำ (resume ข้าม session/agent)
+          │
           └─> [ปรับ/เพิ่มสกิลเอง] skill_maintenance_skill.md   ← ตอนบันทึกของใหม่
+                    └─> conversation_log_skill.md   ← ตอน user ขอ sync สิ่งที่คุยในแชตลง skill
 ```
 
 ---
@@ -99,7 +103,7 @@ main_skill.md  (วิธีคิด + index)
 | [`frontend_design_skill.md`](./frontend_design_skill.md) | ออกแบบ UI ให้มีเอกลักษณ์ (ทุกแพลตฟอร์ม) |
 | [`webapp_testing_skill.md`](./webapp_testing_skill.md) | เทส web app จริงด้วย Playwright (web only) |
 | [`debug_skill.md`](./debug_skill.md) | วินัยแก้บั๊ก 4 ขั้น + บันทึก post-mortem |
-| [`docker_skill.md`](./docker_skill.md) | ทะเบียนงานเว็บที่รันบน docker (ไม่ใช่ mobile; ยังว่าง) |
+| [`docker_skill.md`](./docker_skill.md) | ทะเบียน service ที่รันบน docker + PHP ext-intl (ไม่ใช่ mobile) |
 | **— โดเมนอื่น (peer ของ code) —** | |
 | [`deliverable_skill.md`](./deliverable_skill.md) | router สร้างไฟล์ส่งมอบ/เอกสาร/อาร์ต → สกิลในระบบ |
 | [`video_skill.md`](./video_skill.md) | โดเมนงานวิดีโอ (ตัด/ทำ/แปลง) |
@@ -110,11 +114,13 @@ main_skill.md  (วิธีคิด + index)
 | [`plan_mode_skill.md`](./plan_mode_skill.md) | วางแผนก่อนลงมือ (งานใหญ่/เสี่ยง) → checklist → อนุมัติ → แก้ทีละไฟล์ (Opus คิด/Sonnet ทำ) |
 | [`review_skill.md`](./review_skill.md) | รีวิวงานทุกโดเมน + over-engineering pass |
 | [`report_skill.md`](./report_skill.md) | สรุปงานให้คนไม่ใช่ dev อ่าน (ตามช่องทาง) |
+| [`progress_skill.md`](./progress_skill.md) | ไฟล์ความจำงานที่ทำอยู่ (`skill/day_dev_public/memory/PROGRESS.md`) — สร้างก่อนลงมือ อัปเดตหลังทำ resume ข้าม session/agent |
 | **— แตะเครื่อง user (เสริม) —** | |
 | [`controlled_operation_skill.md`](./controlled_operation_skill.md) | หลักการดู/คุมหน้าจอ คุมเครื่อง user |
 | [`terminal_skill.md`](./terminal_skill.md) | วิธีรันคำสั่ง/สคริปต์บนเครื่อง user (.command + Finder) |
 | [`permission_skill.md`](./permission_skill.md) | สิทธิ์ที่ต้องขอ / สิ่งที่ทำได้-ทำไม่ได้ |
 | [`skill_maintenance_skill.md`](./skill_maintenance_skill.md) | กฎเพิ่ม/ปรับไฟล์ skill ในชุดนี้เอง |
+| [`conversation_log_skill.md`](./conversation_log_skill.md) | บันทึกสิ่งที่คุยในแชต + รายการที่ยังไม่ได้ลง skill (เริ่มเป็น log เปล่า) |
 
 ---
 
@@ -136,6 +142,8 @@ skill/day_dev_public/
 - สกิลเอกสาร/ส่งมอบใหม่ → `deliverable_skill.md`
 - วิธีคุมจอ/รันคำสั่งใหม่ → `controlled_operation_skill.md`
 - วิธีจัดการ/เพิ่มสกิลเอง → `skill_maintenance_skill.md`
+- สิ่งที่คุยในแชต / รายการที่ยังไม่ได้ลง skill → `conversation_log_skill.md`
+- ความคืบหน้างานที่ทำอยู่ (ทำถึงไหน/เหลืออะไร/แนะนำอะไรแล้ว) → `progress_skill.md` (`skill/day_dev_public/memory/PROGRESS.md`) — resume ข้าม session/agent
 - เรื่องสิทธิ์ใหม่ → `permission_skill.md`
 - ถ้าเป็นเรื่องใหม่ที่ไม่เข้าไฟล์ไหนเลย → สร้างไฟล์ใหม่ในโฟลเดอร์นี้ แล้วลิงก์กลับมาที่ index ด้านบน
 
