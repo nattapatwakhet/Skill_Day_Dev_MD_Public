@@ -9,3 +9,8 @@ __pycache__/
 .pytest_cache/
 .idea/
 .vscode/
+
+# temp โฟลเดอร์ตอน "update skill" (โหลดเวอร์ชันล่าสุดมาเทียบ) — ดู update_skill.md
+update/
+# work state ของ agent (สร้างเองตอนทำงานหลายขั้น) — ดู progress_skill.md · เอา comment ออกถ้าอยากคอมมิต
+# memory/

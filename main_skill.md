@@ -72,7 +72,8 @@ main_skill.md  (วิธีคิด + index)
           ├─> [จดความคืบหน้างาน] progress_skill.md   ← สร้างก่อนลงมือ + อัปเดตหลังทำ (resume ข้าม session/agent)
           │
           └─> [ปรับ/เพิ่มสกิลเอง] skill_maintenance_skill.md   ← ตอนบันทึกของใหม่
-                    └─> conversation_log_skill.md   ← ตอน user ขอ sync สิ่งที่คุยในแชตลง skill
+                    ├─> conversation_log_skill.md   ← ตอน user ขอ sync สิ่งที่คุยในแชตลง skill
+                    └─> update_skill.md             ← ตอน user สั่ง "update skill" (โหลดเวอร์ชันล่าสุดมาปรับใช้)
 ```
 
 ---
@@ -121,6 +122,7 @@ main_skill.md  (วิธีคิด + index)
 | [`permission_skill.md`](./permission_skill.md) | สิทธิ์ที่ต้องขอ / สิ่งที่ทำได้-ทำไม่ได้ |
 | [`skill_maintenance_skill.md`](./skill_maintenance_skill.md) | กฎเพิ่ม/ปรับไฟล์ skill ในชุดนี้เอง |
 | [`conversation_log_skill.md`](./conversation_log_skill.md) | บันทึกสิ่งที่คุยในแชต + รายการที่ยังไม่ได้ลง skill (เริ่มเป็น log เปล่า) |
+| [`update_skill.md`](./update_skill.md) | คำสั่ง "update skill" — โหลดเวอร์ชันล่าสุดจาก repo มาเทียบ เอาของใหม่มาปรับใช้ แล้วลบ temp ทิ้ง |
 
 ---
 

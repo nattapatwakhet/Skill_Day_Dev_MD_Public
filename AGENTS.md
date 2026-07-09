@@ -20,3 +20,4 @@
 > โครงสร้างโปรเจกต์จริงของ workspace ให้บันทึกใน `skill/day_dev_public/project_structure_skill.md`
 > docker/service ของ workspace ให้บันทึกใน `skill/day_dev_public/docker_skill.md`
 > ความคืบหน้างานที่ทำค้างอยู่ที่ `skill/day_dev_public/memory/PROGRESS.md` (ทะเบียนวิธีใช้ใน `skill/day_dev_public/progress_skill.md`)
+> อยากอัปเดต skill เป็นเวอร์ชันล่าสุด → user สั่ง **"update skill"** (ดู `skill/day_dev_public/update_skill.md`)
