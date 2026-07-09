@@ -183,5 +183,6 @@ grep -rn "old_filename" --include="*.dart" --include="*.ts" --include="*.tsx" . 
 ## หลังแก้ไข — ตรวจตามภาษา
 
 - Flutter → `dart format` + `dart analyze` (checklist เต็มใน `flutter_skill.md`)
-- React/TS → `npm run build` หรือ `tsc --noEmit` (checklist เต็มใน `react_type_skill.md`)
+- React/TS → ถ้ามี scripts ให้รัน `npm run lint` → `npm run typecheck` → `npm run build`;
+  ถ้ายังไม่มีให้รัน `npm run build` หรือ `tsc --noEmit` เทียบเท่า (checklist เต็มใน `react_type_skill.md`)
 - สรุปสั้นๆ: แก้อะไร, check ผ่านไหม

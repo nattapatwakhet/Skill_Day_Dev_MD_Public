@@ -43,14 +43,35 @@
 
 เมื่อ sync เนื้อหาจาก `skill/day_dev/` มาที่ `skill/day_dev_public/`:
 
+0. diff private↔public ก่อน — เทียบว่าไฟล์ไหน public บางกว่า แล้วเลือกยกเฉพาะส่วน generic
 1. คัดเฉพาะ rule/flow/หลักคิดที่ generic
-2. ลบหรือแทนที่ข้อมูลเฉพาะตัวก่อนเสมอ:
+2. ห้าม copy private → public ตรงๆ ให้ rewrite/sanitize ก่อนเสมอ
+3. ลบหรือแทนที่ข้อมูลเฉพาะตัวก่อนเสมอ:
    - path จริง เช่น `<local-user-path>/...`
    - ชื่อโปรเจค/ระบบ/บริการภายใน
    - port/service/docker จริงที่ไม่ควรเผยแพร่
    - token, secret, credential, env, key
-3. `AGENTS.md` และ `CLAUDE.md` ใน public ต้องอ้าง path ของ public เอง
-4. README public ต้องอธิบายวิธีใช้ทั้งไทยและอังกฤษ
+4. `AGENTS.md` และ `CLAUDE.md` ใน public ต้องอ้าง path ของ public เอง
+5. README public ต้องอธิบายวิธีใช้ทั้งไทยและอังกฤษ
+
+## Checklist ก่อน publish public
+
+ก่อน commit/push `skill/day_dev_public/`:
+
+1. ตรวจ path เครื่องจริง:
+   ```bash
+   rg -n --hidden "<local-user-path>|<workspace-root>|<real-user-name>" skill/day_dev_public
+   ```
+2. ตรวจ secret/token/env:
+   ```bash
+   rg -n --hidden -i "secret|token|password|credential|\\.env|api[_-]?key|private key|github_pat|sk-" skill/day_dev_public
+   ```
+3. ตรวจชื่อโปรเจค/บริการภายในที่ไม่ควรเผยแพร่
+4. ตรวจ `AGENTS.md` / `CLAUDE.md` public ว่าชี้ `skill/day_dev_public/...`
+5. ตรวจว่ามี `README.md`, `LICENSE`, `.gitignore`
+6. ตรวจลิงก์ markdown ภายในว่าไม่ชี้ไฟล์หาย
+
+ถ้า check ข้อใดเจอข้อมูล private → แก้ public ให้ generic ก่อน publish
 
 ## เช็กหลังแก้ไฟล์ skill
 

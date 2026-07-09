@@ -4,8 +4,11 @@
 [`work_flow_skill.md`](./work_flow_skill.md) [7]/[8] — ใช้ทำ **ไฟล์บันทึกความคืบหน้าของงานจริง**
 เพื่อให้ agent อื่น (Codex CLI, Claude Code/CLI, หรือ session ใหม่) **ทำงานต่อได้ทันที** เมื่อ token หมด/ย้ายแชต
 
-> ต่างจาก [`skill_maintenance_skill.md`](./skill_maintenance_skill.md) (แก้ไฟล์ skill เอง) —
+> ต่างจาก [`conversation_log_skill.md`](./conversation_log_skill.md) (log การ sync ความรู้เข้า skill)
+> และ [`skill_maintenance_skill.md`](./skill_maintenance_skill.md) (แก้ไฟล์ skill เอง) —
 > ไฟล์นี้คือ **สถานะงานที่กำลังทำ ณ ตอนนี้** (active task state) ไม่ใช่กฎถาวรของ skill
+> ถ้าต้องสรุปว่า "วันนี้/เดือนนี้ทำอะไรไปบ้าง" ให้ใช้ [`work_summary_skill.md`](./work_summary_skill.md)
+> และ `skill/day_dev_public/memory/WORK_LOG.md`
 
 ---
 
@@ -46,6 +49,12 @@
    - **คำแนะนำที่เสนอ user** แยก "ทำตามแล้ว" กับ "ยังไม่ได้ทำตาม" (ค้างรอ user ตัดสินใจ)
    - ไฟล์ที่แก้ + วิธี verify · blocker/คำถามค้าง · timestamp + ชื่อ session/agent
 4. **จบงานจริง (ทุกข้อ `[x]`):** ปิดด้วยสรุปสั้นๆ ว่าเสร็จแล้ว เหลือแค่ข้อเสนอที่ user ยังไม่รับ (ถ้ามี)
+5. **หลังปิดงาน:** append `skill/day_dev_public/memory/WORK_LOG.md` ตาม [`work_summary_skill.md`](./work_summary_skill.md)
+   เพื่อให้สรุปรายวัน/รายเดือนได้ ไม่ต้องย้อนอ่าน PROGRESS เก่า
+
+> ถ้า user ถามว่า "เหลืออะไร", "ยังไม่ได้ทำอะไร", หรือ "ยังไม่ได้ทำอะไรตามคำแนะนำ"
+> ให้ตอบจาก `PROGRESS.md` + `WORK_LOG.md` คู่กันตาม [`work_summary_skill.md`](./work_summary_skill.md)
+> และต้องรวมทั้ง Next, blocker, และคำแนะนำ `⏳ ยังไม่ได้ทำตาม`
 
 > เปิด session ใหม่/ย้าย agent → **อ่าน `skill/day_dev_public/memory/PROGRESS.md` ก่อนเป็นอันดับแรก** (ผ่าน AGENTS.md/CLAUDE.md)
 > แล้วทำต่อจาก Next/TODO — ไม่ต้องเริ่มใหม่
@@ -92,8 +101,11 @@
 
 1. **เสนอสิ่งที่ควรปรับ** (recommend) — บอก user แม้ไม่ได้ขอ พร้อมจุด+เหตุผล+ผลกระทบ จัดอันดับ
 2. **อัปเดต `skill/day_dev_public/memory/PROGRESS.md`** — done/next/คำแนะนำ(ทำแล้ว/ยังไม่ทำ)/blocker
-3. **บันทึกความรู้ใหม่เข้า skill** (ถ้ามีกฎ/แพตเทิร์นใหม่) → [`skill_maintenance_skill.md`](./skill_maintenance_skill.md)
-4. **log แชต (ถ้าถูกขอ)** — user ขอ sync สิ่งที่คุย → [`conversation_log_skill.md`](./conversation_log_skill.md)
+   โดยคำแนะนำที่ยังไม่ได้ทำตามต้องจดไว้ครบ ห้ามตัดเพราะเป็นแค่ optional/debt
+3. **append `skill/day_dev_public/memory/WORK_LOG.md`** — สรุปรายวัน/เดือน/สไลด์ ตาม [`work_summary_skill.md`](./work_summary_skill.md)
+   และหัวข้อ `เหลือ/แนะนำ` ต้องรวมงานค้าง, blocker, และคำแนะนำที่ยังไม่ได้ทำตาม
+4. **บันทึกความรู้ใหม่เข้า skill** (ถ้ามีกฎ/แพตเทิร์นใหม่) → [`skill_maintenance_skill.md`](./skill_maintenance_skill.md)
+5. **log แชต (ถ้าถูกขอ)** — user ขอ sync สิ่งที่คุย → [`conversation_log_skill.md`](./conversation_log_skill.md)
 
 > ข้อ 1 กับ 2 ผูกกัน: คำแนะนำที่เสนอ (ข้อ 1) ต้องถูกจดใน PROGRESS (ข้อ 2) แยก "ทำแล้ว/ยังไม่ทำ"
 > เพื่อรอบหน้าจะได้รู้ว่าเคยแนะอะไรไปแล้วยังไม่ได้ทำตามบ้าง

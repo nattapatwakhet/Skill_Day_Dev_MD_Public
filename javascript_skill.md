@@ -17,6 +17,8 @@
 - `const`/`let` เท่านั้น ห้าม `var`
 - `===`/`!==` เท่านั้น (strict equality)
 - async → `async/await` + try/catch ห้ามลืม handle error
+- `finally` ใช้สำหรับ cleanup เท่านั้น เช่น ปิด loading, close file, release lock, clear timer;
+  ห้าม `return`, `throw`, `break`, `continue` ใน `finally` เพราะจะทับผลลัพธ์หรือ error จาก `try`/`catch`
 - หลีกเลี่ยง global, แยกฟังก์ชันเล็กทำงานเดียว
 - ตั้งชื่อตาม convention ใน code_skill (function camelCase, class PascalCase)
 

@@ -16,7 +16,7 @@
 4. **ทำในขอบเขต** — แก้เฉพาะที่ขอ อ่านไฟล์ล่าสุดก่อนแก้เสมอ
    > งานหลายขั้น/แตะหลายไฟล์/น่าจะทำไม่จบรอบเดียว → **สร้าง `skill/day_dev_public/memory/PROGRESS.md` ก่อนลงมือ** (ดู [`progress_skill.md`](./progress_skill.md)) เพื่อ resume ข้าม session/agent ได้
 5. **เสนอสิ่งที่ควรปรับ** — ระหว่าง/หลังทำ ถ้าเห็นจุดที่ควรแก้/ปรับ (บั๊กแฝง, tech-debt, ซับซ้อนเกิน, เสี่ยง, วิธีที่ดีกว่า) → **บอก user แม้ไม่ได้ขอ** แต่ไม่ลงมือแก้เองนอกขอบเขต (เสนอก่อน)
-6. **ปิดงาน (Definition of Done)** — (a) สรุปผลสั้นๆ + เสนอสิ่งที่ควรปรับ · (b) อัปเดต [`progress_skill.md`](./progress_skill.md) (ทำถึงไหน/เหลืออะไร/แนะนำอะไรแล้วทำ-ยังไม่ทำ) · (c) มีความรู้/แพตเทิร์น/โดเมนใหม่ → บันทึกเข้า skill (ดูท้ายไฟล์) · (d) user ขอ sync แชต → [`conversation_log_skill.md`](./conversation_log_skill.md)
+6. **ปิดงาน (Definition of Done)** — (a) สรุปผลสั้นๆ + เสนอสิ่งที่ควรปรับ · (b) อัปเดต [`progress_skill.md`](./progress_skill.md) (ทำถึงไหน/เหลืออะไร/แนะนำอะไรแล้วทำ-ยังไม่ทำ) · (c) append [`work_summary_skill.md`](./work_summary_skill.md) สำหรับสรุปรายวัน/เดือน · (d) มีความรู้/แพตเทิร์น/โดเมนใหม่ → บันทึกเข้า skill (ดูท้ายไฟล์) · (e) user ขอ sync แชต → [`conversation_log_skill.md`](./conversation_log_skill.md)
 
 > หลักการเสนอ: เสนอแบบมีหลักฐาน (ชี้จุด + เหตุผล + ผลกระทบ) จัดอันดับความสำคัญ ไม่ใช่บ่นลอยๆ — ใช้ [`review_skill.md`](./review_skill.md) เป็นเครื่องมือเวลารีวิวลึก
 
@@ -70,6 +70,7 @@ main_skill.md  (วิธีคิด + index)
           ├─> [รายงานคนไม่ใช่ dev] report_skill.md   ← ตอนสรุป/ปิดงาน
           │
           ├─> [จดความคืบหน้างาน] progress_skill.md   ← สร้างก่อนลงมือ + อัปเดตหลังทำ (resume ข้าม session/agent)
+          ├─> [สรุปวันนี้/เดือนนี้] work_summary_skill.md ← ledger งานสำหรับถามย้อนหลัง/ทำสไลด์
           │
           └─> [ปรับ/เพิ่มสกิลเอง] skill_maintenance_skill.md   ← ตอนบันทึกของใหม่
                     ├─> conversation_log_skill.md   ← ตอน user ขอ sync สิ่งที่คุยในแชตลง skill
@@ -116,6 +117,7 @@ main_skill.md  (วิธีคิด + index)
 | [`review_skill.md`](./review_skill.md) | รีวิวงานทุกโดเมน + over-engineering pass |
 | [`report_skill.md`](./report_skill.md) | สรุปงานให้คนไม่ใช่ dev อ่าน (ตามช่องทาง) |
 | [`progress_skill.md`](./progress_skill.md) | ไฟล์ความจำงานที่ทำอยู่ (`skill/day_dev_public/memory/PROGRESS.md`) — สร้างก่อนลงมือ อัปเดตหลังทำ resume ข้าม session/agent |
+| [`work_summary_skill.md`](./work_summary_skill.md) | สรุปงานรายวัน/รายเดือนจาก `memory/WORK_LOG.md` สำหรับถามย้อนหลังหรือเอาไปใส่สไลด์ |
 | **— แตะเครื่อง user (เสริม) —** | |
 | [`controlled_operation_skill.md`](./controlled_operation_skill.md) | หลักการดู/คุมหน้าจอ คุมเครื่อง user |
 | [`terminal_skill.md`](./terminal_skill.md) | วิธีรันคำสั่ง/สคริปต์บนเครื่อง user (.command + Finder) |
@@ -146,6 +148,7 @@ skill/day_dev_public/
 - วิธีจัดการ/เพิ่มสกิลเอง → `skill_maintenance_skill.md`
 - สิ่งที่คุยในแชต / รายการที่ยังไม่ได้ลง skill → `conversation_log_skill.md`
 - ความคืบหน้างานที่ทำอยู่ (ทำถึงไหน/เหลืออะไร/แนะนำอะไรแล้ว) → `progress_skill.md` (`skill/day_dev_public/memory/PROGRESS.md`) — resume ข้าม session/agent
+- สรุปงานย้อนหลังรายวัน/รายเดือน/เอาไปใส่สไลด์ → `work_summary_skill.md` (`skill/day_dev_public/memory/WORK_LOG.md`)
 - เรื่องสิทธิ์ใหม่ → `permission_skill.md`
 - ถ้าเป็นเรื่องใหม่ที่ไม่เข้าไฟล์ไหนเลย → สร้างไฟล์ใหม่ในโฟลเดอร์นี้ แล้วลิงก์กลับมาที่ index ด้านบน
 

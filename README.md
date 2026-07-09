@@ -48,6 +48,8 @@ skill/day_dev_public/
 - `work_flow_skill.md` — flow การทำงานหลัก
 - `project_structure_skill.md` — template โครงสร้างโปรเจกต์ ให้ปรับตาม workspace จริง
 - `skill_maintenance_skill.md` — กฎเพิ่ม/ปรับ skill และ sync ความรู้ที่เผยแพร่ได้
+- `progress_skill.md` — วิธีจดงานค้างก่อนลงมือและอัปเดตระหว่างทำ
+- `work_summary_skill.md` — วิธีสรุปงานรายวัน/รายเดือนจาก `memory/WORK_LOG.md`
 
 ---
 
@@ -120,6 +122,11 @@ Resulting layout:
 ใน `project_structure_skill.md`) แล้วอัปเดตต่อเนื่องเมื่อเจอของใหม่
 คุณแค่ตรวจ/แก้เพิ่มถ้าอยากปรับ
 
+งานหลายขั้นควรให้ agent สร้าง/อัปเดต `skill/day_dev_public/memory/PROGRESS.md`
+ก่อนลงมือและหลังทำแต่ละก้อน พอจบงานให้ append
+`skill/day_dev_public/memory/WORK_LOG.md` เพื่อให้ถามย้อนหลังได้ว่า
+"วันนี้ทำอะไรไปบ้าง", "เดือนนี้ทำอะไรไปบ้าง", หรือ "เหลืออะไร"
+
 ---
 
 ## Usage
@@ -136,6 +143,12 @@ bootstraps it: it scans the repo (top-level folders + config files) and writes t
 structure into `project_structure_skill.md` (and services into `docker_skill.md`) itself,
 then keeps it updated as it discovers more. See the "Bootstrap อัตโนมัติ" section in
 `project_structure_skill.md`. You only review/tweak if you want to.
+
+For multi-step work, have the agent create/update
+`skill/day_dev_public/memory/PROGRESS.md` before editing and after each chunk.
+When the work is complete, append `skill/day_dev_public/memory/WORK_LOG.md`
+so later summaries can answer "what was done today", "what was done this month",
+and "what remains".
 
 ---
 

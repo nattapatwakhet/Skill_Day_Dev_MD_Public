@@ -323,6 +323,25 @@ await fetchlist({ silent: true });
   ```
 - `tsc --noEmit` จับ "Cannot find name" ได้ → รันให้ผ่านก่อนปิดงานเสมอ
 
+## React Compiler / ESLint hooks rules
+
+- `npm run lint` ต้องเป็นด่านก่อน build/deploy สำหรับ React + TypeScript เพราะมันจับปัญหาคุณภาพโค้ดที่ build
+  อาจยังสร้าง bundle ได้ เช่น unused import/variable, hooks dependency, Promise/async pattern, และรูปแบบที่ผิดมาตรฐานทีม
+- `@typescript-eslint/no-unused-vars`: ถ้า `import`, variable, callback param, หรือ `catch (error)` ไม่ถูกใช้จริง ให้ลบออก
+  หรือเปลี่ยนเป็น `catch {}` เมื่อไม่ต้องอ่าน error; อย่าคงชื่อไว้เฉยๆ เพื่อให้ผ่านตา
+- `useCallback` dependency array ต้องสะท้อนค่าที่ callback ใช้จริงเท่านั้น:
+  - ใส่ function/state/prop ที่อ่านใน callback เช่น `navigate`, `redirect`, `isExternal`
+  - ลบ dependency ที่ไม่ได้อ่านใน callback ออก เพราะทำให้ lint เตือนและ callback เปลี่ยน identity โดยไม่จำเป็น
+  - ค่าคงที่จาก `import.meta.env` ที่ไม่เปลี่ยนระหว่าง runtime ควรคำนวณเป็น module-level constant ให้ React เห็นว่าเป็นค่าคงที่จริง
+- ห้ามอ่านหรือเขียน `ref.current` ระหว่าง render เพื่อ feed JSX เช่น `anchorEl={ref.current}` หรือ cache lookup ใน render
+  ให้ใช้ state ที่ได้จาก event (`event.currentTarget`) หรือ `useMemo` จาก props/state แทน
+- ถ้าค่าเป็น derived จาก props/state อย่าเก็บเป็น state แล้ว `setState` ใน `useEffect` ทันที เช่น preview URL จาก `file`
+  ให้ derive ด้วย `useMemo` และใช้ `useEffect` เฉพาะ cleanup (`URL.revokeObjectURL`) แทน
+- ถ้าต้องจำ metadata ที่มาจาก event เช่น video metadata ให้ผูก state กับ input object (`file`) ที่โหลดจริง
+  เพื่อกัน metadata เก่าค้างหลัง prop เปลี่ยนโดยไม่ต้อง reset state ใน effect
+- หลีกเลี่ยง `false && <Component />` สำหรับ UI ที่ปิดชั่วคราว เพราะ `no-constant-binary-expression` จะ fail
+  ให้ใช้ flag ที่มีที่มา เช่น env flag (`import.meta.env.VITE_* === "true"`) และ default ปิดไว้
+
 ## ฟอร์มพิมพ์แล้วแลค/สะดุด (typing lag) — controlled form state ก้อนเดียว
 
 อาการ: พิมพ์ในช่อง text แล้วหน่วง/กระตุก เพราะทุกคีย์ → `setform((prev)=>({...prev,[k]:v}))`
@@ -411,7 +430,23 @@ bulk action ในตารางต้องทำ mutation จริง ไม
 
 ## Required Checks หลังแก้ไข
 
-- Run `npm run build` หรือ `npx tsc --noEmit` ให้ผ่าน 0 errors
+- ถ้าโปรเจกต์มี scripts ให้รันตามลำดับนี้: `npm run lint` → `npm run typecheck` → `npm run build`
+- สำหรับ Vite + React + TypeScript ควรตั้ง scripts ให้ build เรียก check ก่อนเสมอ:
+  ```json
+  {
+    "scripts": {
+      "dev": "vite",
+      "lint": "eslint .",
+      "typecheck": "tsc -b",
+      "check": "npm run lint && npm run typecheck",
+      "build": "npm run check && vite build",
+      "preview": "vite preview"
+    }
+  }
+  ```
+- ถ้าโปรเจกต์ยังไม่มี scripts เหล่านี้ ให้รันเทียบเท่าอย่างน้อย `npm run lint`, `npx tsc --noEmit` หรือ
+  `node_modules/.bin/tsc --noEmit`, แล้วค่อย `npm run build`
+- `npm run build` ที่ไม่เรียก typecheck เอง แปลได้แค่ว่า production bundle สร้างได้ ไม่ได้แปลว่า type/lint สะอาด
 - ตรวจ:
   - Variables ขาด explicit type
   - Hardcoded hex color นอก `main_constant.ts`

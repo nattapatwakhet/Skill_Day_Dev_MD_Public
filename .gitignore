@@ -12,5 +12,5 @@ __pycache__/
 
 # temp โฟลเดอร์ตอน "update skill" (โหลดเวอร์ชันล่าสุดมาเทียบ) — ดู update_skill.md
 update/
-# work state ของ agent (สร้างเองตอนทำงานหลายขั้น) — ดู progress_skill.md · เอา comment ออกถ้าอยากคอมมิต
-# memory/
+# work state/log ของ agent (สร้างเองตอนทำงานหลายขั้น) — ดู progress_skill.md / work_summary_skill.md
+memory/

@@ -13,11 +13,12 @@
 2. เดินตาม `skill/day_dev_public/work_flow_skill.md` (จำแนกโดเมน → เปิดสกิลที่เกี่ยว → ทำ → ตรวจ → เสนอสิ่งที่ควรปรับ → บันทึก)
 3. ตามกฎในไฟล์ skill ที่เกี่ยวกับงานนั้น เช่น code → `code_skill.md` → ไฟล์ภาษา/framework
 4. **งานหลายขั้น: สร้าง `skill/day_dev_public/memory/PROGRESS.md` ก่อนลงมือ แล้วอัปเดตหลังทำแต่ละก้อน** (`skill/day_dev_public/progress_skill.md`) — resume ข้าม session/agent (Codex, Claude CLI) ได้
-5. **จบงานทุกครั้ง (Definition of Done): แนะนำสิ่งที่ควรปรับ + อัปเดต PROGRESS + update skill + log แชต(ถ้าถูกขอ)**
+5. **จบงานทุกครั้ง (Definition of Done): แนะนำสิ่งที่ควรปรับ + อัปเดต PROGRESS + append WORK_LOG + update skill + log แชต(ถ้าถูกขอ)**
 6. เจอของใหม่หลังจบงาน → บันทึกกลับเข้าชุด skill ตาม `skill/day_dev_public/skill_maintenance_skill.md`
 7. ถ้า user ขอให้อ่าน/สรุป/อัปเดตสิ่งที่คุยในแชตลง skill → ใช้ `skill/day_dev_public/conversation_log_skill.md`
 
 > โครงสร้างโปรเจกต์จริงของ workspace ให้บันทึกใน `skill/day_dev_public/project_structure_skill.md`
 > docker/service ของ workspace ให้บันทึกใน `skill/day_dev_public/docker_skill.md`
 > ความคืบหน้างานที่ทำค้างอยู่ที่ `skill/day_dev_public/memory/PROGRESS.md` (ทะเบียนวิธีใช้ใน `skill/day_dev_public/progress_skill.md`)
+> สรุปงานย้อนหลังรายวัน/รายเดือนอยู่ที่ `skill/day_dev_public/memory/WORK_LOG.md` (วิธีใช้ใน `skill/day_dev_public/work_summary_skill.md`)
 > อยากอัปเดต skill เป็นเวอร์ชันล่าสุด → user สั่ง **"update skill"** (ดู `skill/day_dev_public/update_skill.md`)
