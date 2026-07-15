@@ -44,7 +44,7 @@ code เป็นแค่ **หนึ่งโดเมน** ไม่ใช่
         └─ ก่อนลงมือ ถ้าเป็น plan ใหญ่ → review_skill.md (มีวิธีง่ายกว่าไหม)
         │
 [8] ตรวจงาน (review_skill.md) + ปิดงาน + ถ้าต้องรายงานคนอื่น → report_skill.md
-        └─ Definition of Done: แนะนำ + อัปเดต PROGRESS + WORK_LOG + update skill + log แชต(ถ้าถูกขอ)
+        └─ Definition of Done: แนะนำ + PROGRESS + WORK_LOG + CHANGES(ถ้าแตะไฟล์) + update skill + log แชต(ถ้าถูกขอ)
 ```
 
 ---
@@ -209,6 +209,8 @@ type annotation, import philosophy
   (รายละเอียดวิธีบันทึกอยู่ท้าย [`main_skill.md`](./main_skill.md))
 - หลังจบงานจริงให้ append `skill/day_dev_public/memory/WORK_LOG.md` ตาม [`work_summary_skill.md`](./work_summary_skill.md)
   เพื่อให้ถามย้อนหลังได้ว่า "วันนี้/เดือนนี้ทำอะไรไปบ้าง" และเอาไปเรียบเรียงใส่สไลด์ได้
+- ถ้างานแตะไฟล์โปรเจค → append ไฟล์ที่ create/edit/delete ลง `skill/day_dev_public/memory/CHANGES.md`
+  ตาม [`deploy_skill.md`](./deploy_skill.md) (ไว้ deploy เฉพาะที่แก้; user บอก "อัปขึ้น server แล้ว" → mark deployed)
 - ถ้า user ขอ "อัปเดตสิ่งที่คุยในแชตลง skill / อะไรยังไม่ได้ลง" →
   ใช้ [`conversation_log_skill.md`](./conversation_log_skill.md) คู่กับ [`skill_maintenance_skill.md`](./skill_maintenance_skill.md)
 
@@ -219,8 +221,10 @@ type annotation, import philosophy
    เหลืออะไร (Next), คำแนะนำที่เสนอไปแยก "ทำตามแล้ว / ยังไม่ได้ทำตาม", blocker → ให้ session/agent ถัดไปทำต่อได้
 3. **จดสรุปย้อนหลัง** — append [`work_summary_skill.md`](./work_summary_skill.md) (`skill/day_dev_public/memory/WORK_LOG.md`)
    เป็น bullet สั้นสำหรับตอบ "วันนี้/เดือนนี้ทำอะไรไปบ้าง" หรือเอาไปใส่สไลด์
-4. **update skill** — มีกฎ/แพตเทิร์น/โดเมนใหม่ → บันทึกเข้าไฟล์ skill ที่ถูก ([`skill_maintenance_skill.md`](./skill_maintenance_skill.md))
-5. **log แชต (ถ้าถูกขอ)** — user ขอ sync สิ่งที่คุย → [`conversation_log_skill.md`](./conversation_log_skill.md)
+4. **จดไฟล์ที่แก้ (ถ้าแตะไฟล์โปรเจค)** — append `skill/day_dev_public/memory/CHANGES.md` ([`deploy_skill.md`](./deploy_skill.md))
+   บอก action (สร้าง/แก้/ลบ) + path → ตอนอัปขึ้น server ส่งเฉพาะที่แก้; user บอก "อัปขึ้น server แล้ว" → mark deployed
+5. **update skill** — มีกฎ/แพตเทิร์น/โดเมนใหม่ → บันทึกเข้าไฟล์ skill ที่ถูก ([`skill_maintenance_skill.md`](./skill_maintenance_skill.md))
+6. **log แชต (ถ้าถูกขอ)** — user ขอ sync สิ่งที่คุย → [`conversation_log_skill.md`](./conversation_log_skill.md)
 
 > ข้อ 1 ผูกกับข้อ 2: คำแนะนำที่เสนอต้องถูกจดใน PROGRESS แยก "ทำแล้ว/ยังไม่ทำ" เพื่อรอบหน้ารู้ว่ายังค้างอะไร
 
@@ -232,7 +236,7 @@ type annotation, import philosophy
 |---|---|---|
 | **คุยทั่วไป/ถามสั้น** | ทักทาย, ถามข้อเท็จจริงสั้น | ตอบเลย **ไม่เปิด skill ไม่ประกาศ** |
 | **ปรึกษา/คิดโปรเจค** | ถามกว้าง, "คิดด้วยกัน", ยังไม่ชัด | ถ้าคุยถึงโปรเจคจริง → **ground ด้วย `project_structure_skill` + อ่านโค้ดจริงก่อน** → ถก/เสนอทางเลือก **ไม่แก้ไฟล์** (ตรงกับ `plan_mode_skill`/`review_skill`) |
-| **งานจริง** | สั่งชัดตรงๆ ("แก้ X", "เพิ่ม Y") | **เปิด domain skill + บอกชื่อ skill ที่อิง 1 บรรทัด** → (งานหลายขั้น: สร้าง PROGRESS) → ทำในขอบเขต → ตรวจ → **Definition of Done** (แนะนำ + PROGRESS + WORK_LOG + update skill + log) |
+| **งานจริง** | สั่งชัดตรงๆ ("แก้ X", "เพิ่ม Y") | **เปิด domain skill + บอกชื่อ skill ที่อิง 1 บรรทัด** → (งานหลายขั้น: สร้าง PROGRESS) → ทำในขอบเขต → ตรวจ → **Definition of Done** (แนะนำ + PROGRESS + WORK_LOG + CHANGES + update skill + log) |
 
 **งานจริงที่เป็น "แก้บั๊ก/ของพัง" → มีขั้นหาสาเหตุก่อนแก้เสมอ** (อยู่ในโหมดงานจริง):
 `เปิด domain skill + ` [`debug_skill.md`](./debug_skill.md) → **หาสาเหตุ** (4 ขั้น: reproduce →

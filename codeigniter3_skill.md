@@ -65,6 +65,25 @@
 - ถ้าไม่มีระดับตำแหน่ง/ข้อมูลที่พิสูจน์ hierarchy ได้ ให้คืน empty ดีกว่าเดาว่าคนใน scope เดียวกันเป็นลูกน้อง
 - Query Builder ใน CI3 มี state ค้างได้: reset query ก่อน count/list query ใหม่ และ qualify column เมื่อ join หลายตาราง
 
+## Nested payload identity
+
+- temporary id ของ child record ต้อง unique ทั้ง request ไม่ใช่ unique เฉพาะใน parent เดียว
+- ถ้า controller flatten hierarchy ต้องเก็บ parent identity ไว้ใช้ remap record/media ห้าม match ด้วย child id เดี่ยว
+- reject temporary id ซ้ำที่ชี้คนละ parent ก่อน insert และทดสอบอย่างน้อย 2 parents ที่มี child/options/media ใน request เดียว
+
+## แทนที่ media ตอนแก้ไข
+
+- เมื่อแทน media เดิมด้วย source ใหม่ frontend ต้อง mark source เดิมใน delete tracking ก่อนแทน state
+- backend ที่ merge upload ใหม่กับ old ids ต้องกรอง old ids ด้วย delete ids ทุกชนิด ไม่เช่นนั้น source เก่าจะถูกเติมกลับ
+- ทดสอบ file→link, link→file, link A→B และ clear แล้ว reload
+
+## CORS authority
+
+- กำหนด CORS เพียงชั้นเดียว; ถ้า base controller ทำ allowlist แล้ว ห้าม web server/library เติม wildcard ซ้ำ
+- browser Origin มีเฉพาะ scheme + host + port ไม่มี path
+- origin ที่ตรง allowlist ให้ echo กลับและเพิ่ม `Vary: Origin`; origin ที่ไม่ตรงห้ามส่ง allow-origin header
+- OPTIONS ต้องผ่าน policy เดียวกับ request ปกติ และ methods/headers/max-age ต้องตรง client contract
+
 ## โยง
 
 - ฐานภาษา → [`php_skill.md`](./php_skill.md) · รันบน docker → [`docker_skill.md`](./docker_skill.md) · รัน/ดู log → [`terminal_skill.md`](./terminal_skill.md)

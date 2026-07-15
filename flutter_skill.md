@@ -98,6 +98,19 @@ Future loadData() async { ... }
 
 ---
 
+## Service → controller workflow
+
+1. Route/endpoint อยู่ใน constant/config กลาง; controller ไม่ประกอบ URL เอง
+2. Domain service เลือก route, parser และ HTTP options แล้วคืนผล; dialog/navigation/reactive state อยู่ controller
+3. List controller สร้าง typed filter และแยก no-data/error/paged-result/typed-list ตาม response contract ก่อน update state
+4. Form flow: validate → confirm → snapshot form → payload/FormData → loading → await service → result dialog → refresh source state
+5. Multipart key และ JSON-string field ต้องตรง backend; ให้ Dio สร้าง multipart boundary เอง
+6. กัน submit ซ้ำ, clear error ก่อน request และคืน loading state ใน `finally`
+7. หลัง `await` ต้องอ่าน context ใหม่และ guard null/mounted ก่อน dialog/navigation
+8. หลัง mutation สำเร็จให้ refresh controller/state ที่ UI อ่านจริง
+
+ใช้โค้ดเดิมเป็น baseline แต่ไม่คัดลอก `dynamic`, duplicated branches, nested try/catch, force unwrap หรือ dead code โดยอัตโนมัติ
+
 ## Login Flow
 
 - `postLogIn` → return raw result จาก MainService ไม่สร้าง fake error, return `dynamic`

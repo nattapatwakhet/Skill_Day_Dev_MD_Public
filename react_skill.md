@@ -93,6 +93,26 @@
   แล้วกรอง child ทุก id ในกลุ่มนั้น อย่าเหลือ default ที่ปล่อยให้เห็นเมื่อไม่เข้าเงื่อนไข (จะรั่ว)
 - เมนูซ่อนแล้วต้อง guard route ด้วยเสมอ เพราะพิมพ์ URL ตรงได้ (ใช้ source field เดียวกับเมนู)
 
+## Media input/player patterns
+
+- แยก external provider URL ออกจาก uploaded-file preview; `blob:` จาก `URL.createObjectURL()` ไม่ควรถูกตรวจด้วย allowlist ของ provider
+- ถ้าจำกัดลิงก์ใหม่เฉพาะ provider ที่ player ควบคุมได้ ยังต้องรองรับข้อมูลเก่าใน player และคง flow อัปโหลดไฟล์
+- cover preview บน desktop ใช้ hover; mobile/touch ใช้ IntersectionObserver + delay และกลับเป็นรูปเมื่อ ended/error
+- list preview ที่ต้องกด card ได้ควรใช้ `pointerEvents: none`; detail player จึงเปิด controls/pointer interaction
+- completion ของ media ห้ามพึ่ง React state ที่อาจยังไม่ flush ใน event `ended`; ใช้ explicit flag/ref เข้า save path
+
+## Async mutation guard
+
+- ปุ่ม POST/PUT สำคัญใช้ `useRef` เป็น synchronous in-flight lock เพราะ React state อาจยังไม่ render ก่อน click ที่สอง
+- ใช้ state ทำ loading/disable UI และ reset ref/state ใน `finally`; ห้ามปลด lock ด้วย timeout คงที่ขณะ request ยังไม่จบ
+- mutation สำคัญควร validate ก่อน confirmation; cancel ไม่ยิง API, confirm แล้ว await Promise จนจบก่อนปลด lock
+- ปุ่มปิด/ย้อนกลับที่ทำให้ form หายควร disable ระหว่าง mutation
+
+## Feature gating ตาม backend capability
+
+- feature ที่ UI มีแต่ DB/backend/player ยังไม่รองรับให้ซ่อน/gate ที่ render ก่อน
+- คง default field ใน payload ได้ถ้าจำเป็นต่อ backward compatibility; ก่อนเปิดกลับต้องมี migration, backend validation และ regression test
+
 ## ตรวจ syntax JSX ใน sandbox
 
 - ตรวจ syntax `.jsx` บน Linux sandbox ใช้ `@babel/parser`:

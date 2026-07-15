@@ -161,6 +161,12 @@ grep -rn "old_filename" --include="*.dart" --include="*.ts" --include="*.tsx" . 
 
 ---
 
+## Leading underscore
+
+- ถ้าโปรเจกต์กำหนดให้ตัวแปร/ฟังก์ชัน/method/field ห้ามขึ้นต้นด้วย `_` ให้ตั้งชื่อที่สื่อความหมายแทน
+- ข้อยกเว้นตาม framework ยังใช้ได้ เช่น private `State` class ของ Flutter
+- เวลาสแกนอย่านับ snake_case กลางคำเป็น leading underscore
+
 ## Type Annotation — หลักการร่วม
 
 ทุกภาษาต้องเขียน explicit type ทุก variable, parameter, และ return type
