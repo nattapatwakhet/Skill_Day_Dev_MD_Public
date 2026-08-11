@@ -11,7 +11,8 @@
 > ไฟล์นี้เก็บเฉพาะ **กฎ/ syntax เฉพาะ Dart + Flutter + GetX**
 >
 > ที่เกี่ยวข้อง (ของกลางทุกภาษา): **ออกแบบ UI** → [`frontend_design_skill.md`](./frontend_design_skill.md) (หลักดีไซน์สากล ใช้กับ widget ได้) ·
-> **เทส** → ใช้ `flutter test` / widget test (ดู Required Checks ท้ายไฟล์) ไม่ใช่ `webapp_testing` (อันนั้นเว็บ)
+> **เทส** → ใช้ `flutter test` / widget test (ดู Required Checks ท้ายไฟล์) ไม่ใช่ `webapp_testing` (อันนั้นเว็บ);
+> ถ้า user สั่ง "test app" หรือขอทดสอบ user journey จริงบน Android/iOS → ใช้ [`maestro_testing_skill.md`](./maestro_testing_skill.md) เพิ่ม (E2E ไม่แทน unit/widget)
 
 ---
 

@@ -428,6 +428,21 @@ bulk action ในตารางต้องทำ mutation จริง ไม
 - ถ้า upload สำเร็จแต่ submit/insert ล้ม ให้แยกว่า external upload ได้ id แล้วหรือยัง กับ DB insert error คืออะไร
   เพราะอาจเกิดไฟล์ค้างใน external storage โดยไม่มี row ใน DB
 
+## Data table คอลัมน์ล้น
+
+- `TableContainer` ใช้ `width/maxWidth: 100%` และ `overflowX: auto`
+- `<Table>` ต้องมี `minWidth` จากผลรวมความกว้างคอลัมน์ + checkbox/action; ถ้ามีแค่ `overflowX` แต่ table ยัง
+  `width: 100%` จะบีบคอลัมน์แทนการเกิด scrollbar
+- กำหนด `minWidth` ให้ header/body cell ตรงกัน และให้ default กับ column ที่ไม่ระบุ width
+- viewport กว้างกว่า `minWidth` ให้ table ขยายเต็มพื้นที่; เมื่อแคบกว่าจึงเลื่อนแนวนอน
+
+## TypeScript control-flow narrowing
+
+- หลัง guard/early return เช่น `if (status === "idle") return ...` TypeScript จะ narrow ตัวแปรในโค้ดถัดไปและตัด
+  `"idle"` ออกจาก union; ห้ามเปรียบเทียบ `status !== "idle"` ซ้ำ เพราะเงื่อนไขจริงเสมอและเกิด **TS2367**
+- ให้เขียนค่าตาม invariant หลัง guard โดยตรง หรือย้ายเงื่อนไขไว้ก่อน guard ถ้ายังต้องใช้ union ครบ
+- อย่า cast ขยาย type เพื่อปิด error เพราะจะทำให้ control flow ที่ compiler พิสูจน์ได้หายไป
+
 ## Required Checks หลังแก้ไข
 
 - ถ้าโปรเจกต์มี scripts ให้รันตามลำดับนี้: `npm run lint` → `npm run typecheck` → `npm run build`

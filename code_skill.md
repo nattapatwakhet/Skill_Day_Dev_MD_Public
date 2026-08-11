@@ -29,7 +29,7 @@ code_skill.md  (หลักการรวม — naming / scope / rename / typ
 │     flutter_skill   (Dart + Flutter + GetX; เทส = flutter test)
 │
 └─ desktop / สคริปต์  (ไม่ใช้ docker)
-      python_skill   (เช่น id_card_reader, สคริปต์ data)
+      python_skill   (เช่น hardware/desktop utility, สคริปต์ data)
 ```
 
 | กลุ่ม | ภาษา / Framework | ไฟล์ | docker |

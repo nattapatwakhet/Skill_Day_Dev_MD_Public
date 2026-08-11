@@ -21,7 +21,8 @@ code เป็นแค่ **หนึ่งโดเมน** ไม่ใช่
         │     desktop/สคริปต์: python   (ไม่ใช้ docker)
         │     ของกลาง: debug / frontend_design
         ├─ เอกสาร/ไฟล์ส่งมอบ → deliverable_skill.md (docx/สไลด์/ชีต/PDF/อาร์ต)
-        ├─ วิดีโอ           → video_skill.md
+        ├─ วิดีโอ           → video_skill.md → premiere_mcp_video_skill.md
+        ├─ สร้าง+ปล่อยโปรดักต์ → product_launch_skill.md
         ├─ ค้นคว้า          → research_skill.md
         ├─ วิเคราะห์ข้อมูล  → data_skill.md
         ├─ เขียนเนื้อหา     → writing_skill.md
@@ -89,8 +90,8 @@ type annotation, import philosophy
 
 - **เว็บ frontend** (docker): [`javascript_skill.md`](./javascript_skill.md) → [`react_skill.md`](./react_skill.md) → [`react_type_skill.md`](./react_type_skill.md)
 - **เว็บ backend** (docker): [`php_skill.md`](./php_skill.md) → [`codeigniter3_skill.md`](./codeigniter3_skill.md) / [`codeigniter4_skill.md`](./codeigniter4_skill.md) · [`python_skill.md`](./python_skill.md) — **เช็ค "เป็นงาน API ไหม?"** → [`api_skill.md`](./api_skill.md)
-- **mobile** (ไม่ใช้ docker): [`flutter_skill.md`](./flutter_skill.md)
-- **desktop / สคริปต์** (ไม่ใช้ docker): [`python_skill.md`](./python_skill.md) (เช่น id_card_reader, สคริปต์ data)
+- **mobile** (ไม่ใช้ docker): [`flutter_skill.md`](./flutter_skill.md) — สั่ง "test app"/ทดสอบ user journey จริง → [`maestro_testing_skill.md`](./maestro_testing_skill.md)
+- **desktop / สคริปต์** (ไม่ใช้ docker): [`python_skill.md`](./python_skill.md) (เช่น hardware/desktop utility, สคริปต์ data)
 
 > ลำดับอ่าน: `code_skill` (หลักรวม) → ไฟล์ภาษา (base → framework) → ลงมือ
 > ภาษาใหม่ → สร้างไฟล์ + จัดเข้าหมวดให้ถูก (frontend/backend/mobile)
@@ -118,6 +119,11 @@ type annotation, import philosophy
 ### โดเมน: วิดีโอ → `video_skill.md`
 
 งานคือ **ตัด/ทำ/แปลง/รวมวิดีโอ** → [`video_skill.md`](./video_skill.md)
+ถ้าแก้ Adobe Premiere ผ่าน MCP/GUI → [`premiere_mcp_video_skill.md`](./premiere_mcp_video_skill.md)
+
+### โดเมน: สร้าง+ปล่อยโปรดักต์ → `product_launch_skill.md`
+
+งานคือ **คิด/สร้าง/ปล่อยโปรดักต์ของตัวเอง** (แอป/ดิจิทัลโปรดักต์) เน้น ship เร็ว + distribution-first → [`product_launch_skill.md`](./product_launch_skill.md)
 
 ### โดเมนใหม่ที่ยังไม่มีไฟล์
 
@@ -195,7 +201,7 @@ type annotation, import philosophy
 ## [8] ตรวจงาน + ปิดงาน
 
 - ตรวจงานตามชนิด:
-  - Flutter → `dart format` + `dart analyze` + `flutter test` (ดู `flutter_skill.md`)
+  - Flutter → `dart format` + `dart analyze` + `flutter test` (ดู `flutter_skill.md`); ถ้าสั่ง "test app"/ทดสอบ user journey จริงบน Android/iOS → เพิ่ม [`maestro_testing_skill.md`](./maestro_testing_skill.md) (E2E ไม่แทน unit/widget)
   - React/JS/TS → `npm run build` หรือ `tsc --noEmit` + เทสหน้าเว็บจริง [`webapp_testing_skill.md`](./webapp_testing_skill.md) (Playwright)
   - PHP/CodeIgniter → เทส endpoint/PHPUnit (ดู [`api_skill.md`](./api_skill.md) / `php_skill.md`)
   - Python → `pytest`/`unittest` (ดู `python_skill.md`)

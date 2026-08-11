@@ -173,6 +173,16 @@ private function drive(): DriveLib { return $this->driveLib ??= new DriveLib(...
 
 สร้างตอนที่ต้องใช้จริง (อัป/ลบไฟล์) เท่านั้น
 
+## Access rights แบบ union หลายมิติ = ต้อง OR ไม่ใช่ AND
+
+ถ้าสิทธิ์เข้าถึง record เป็น **union ของหลายมิติ** (เช่น id ตรง / รหัสตำแหน่ง / รหัสหน่วยงาน / รหัสภูมิภาค)
+คนมีสิทธิ์ถ้า match **มิติใดมิติหนึ่ง** (OR) ไม่ใช่ต้องผ่านทุกมิติ (AND)
+
+- บั๊กจริงที่เจอ: เขียน check เป็น AND (ทุกมิติที่มี prefix ต้อง true หมด) → คนที่บางมิติ resolve ไม่ได้
+  (เช่นข้อมูลหน่วยงาน/ภูมิภาคเป็น null) จะถูกปฏิเสธเงียบ แม้มิติที่ match จริงจะ true
+- เขียนเป็น "match มิติใดมิติหนึ่ง = ผ่าน" และเก็บ record เมื่อ access list ว่าง / id อยู่ในสิทธิ์ตรงๆ / match มิติใดมิติหนึ่ง
+- ID พิเศษที่ถูกใส่ในสิทธิ์โดยตรงต้องผ่านก่อน lookup ตารางมิติ (กันเคสที่ข้อมูลมิติไม่ครบ)
+
 ## โยง
 
 - ฐานภาษา → [`php_skill.md`](./php_skill.md) · รันบน docker → [`docker_skill.md`](./docker_skill.md) · รัน/ดู log → [`terminal_skill.md`](./terminal_skill.md)

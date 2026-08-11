@@ -48,10 +48,12 @@ main_skill.md  (วิธีคิด + index)
           │        ├─> docker_skill.md         (เว็บทั้ง frontend+backend รันบน docker)
           │        │  — mobile / desktop (ไม่ใช้ docker) —
           │        ├─> flutter_skill.md        (Dart + Flutter + GetX; เทส = flutter test)
+          │        │        └─> maestro_testing_skill.md   (E2E app — Android/iOS)
           │        └─> python_skill.md         (backend ML / desktop / สคริปต์)
           │
           ├─> [เอกสาร/ไฟล์ส่งมอบ] deliverable_skill.md   ← router ไปสกิลเอกสารในระบบ
-          ├─> [วิดีโอ] video_skill.md
+          ├─> [วิดีโอ] video_skill.md → premiere_mcp_video_skill.md
+          ├─> [สร้าง+ปล่อยโปรดักต์] product_launch_skill.md   ← ship-fast + distribution-first ด้วย AI
           ├─> [ค้นคว้า] research_skill.md
           ├─> [วิเคราะห์ข้อมูล] data_skill.md
           ├─> [เขียนเนื้อหา] writing_skill.md
@@ -102,6 +104,7 @@ main_skill.md  (วิธีคิด + index)
 | [`python_skill.md`](./python_skill.md) | Python — backend ML / desktop / สคริปต์ data |
 | **— mobile —** | |
 | [`flutter_skill.md`](./flutter_skill.md) | กฎเฉพาะ Dart + Flutter + GetX (ไม่ใช้ docker) |
+| [`maestro_testing_skill.md`](./maestro_testing_skill.md) | เทส app แบบ E2E ด้วย Maestro (Android/iOS; รวม Flutter/React Native/native) |
 | **— ของกลาง code —** | |
 | [`frontend_design_skill.md`](./frontend_design_skill.md) | ออกแบบ UI ให้มีเอกลักษณ์ (ทุกแพลตฟอร์ม) |
 | [`webapp_testing_skill.md`](./webapp_testing_skill.md) | เทส web app จริงด้วย Playwright (web only) |
@@ -110,6 +113,8 @@ main_skill.md  (วิธีคิด + index)
 | **— โดเมนอื่น (peer ของ code) —** | |
 | [`deliverable_skill.md`](./deliverable_skill.md) | router สร้างไฟล์ส่งมอบ/เอกสาร/อาร์ต → สกิลในระบบ |
 | [`video_skill.md`](./video_skill.md) | โดเมนงานวิดีโอ (ตัด/ทำ/แปลง) |
+| [`premiere_mcp_video_skill.md`](./premiere_mcp_video_skill.md) | คุม Adobe Premiere ผ่าน MCP bridge (ติดตั้ง + สร้าง/แก้ timeline) |
+| [`product_launch_skill.md`](./product_launch_skill.md) | สร้าง+ปล่อยโปรดักต์เร็วด้วย AI (distribution-first, MVP, App Store) |
 | [`research_skill.md`](./research_skill.md) | โดเมนค้นคว้า/หาข้อมูล/สรุปมีอ้างอิง |
 | [`data_skill.md`](./data_skill.md) | โดเมนวิเคราะห์/จัดการ/visualize ข้อมูล |
 | [`writing_skill.md`](./writing_skill.md) | โดเมนเขียนเนื้อหา (บทความ/โพสต์/อีเมล/doc) |
@@ -142,7 +147,7 @@ skill/day_dev_public/
 - โครงสร้างโปรเจคใหม่ → เพิ่มใน `project_structure_skill.md`
 - หลักการ code ใหม่ (ข้ามภาษา) → `code_skill.md` / หลักคิดใหม่ → `karpathy_skill.md` หรือ `ponytail_skill.md`
 - กฎเฉพาะภาษา → `flutter_skill.md` / `react_type_skill.md`
-- แนวออกแบบ UI ใหม่ → `frontend_design_skill.md` / วิธีเทสใหม่ → `webapp_testing_skill.md`
+- แนวออกแบบ UI ใหม่ → `frontend_design_skill.md` / วิธีเทสเว็บ → `webapp_testing_skill.md` / วิธีเทสแอป E2E → `maestro_testing_skill.md`
 - เทคนิค debug / เคส post-mortem ใหม่ → `debug_skill.md`
 - วิธีรีวิวใหม่ → `review_skill.md` / วิธีสรุปรายงานใหม่ → `report_skill.md`
 - สกิลเอกสาร/ส่งมอบใหม่ → `deliverable_skill.md`
