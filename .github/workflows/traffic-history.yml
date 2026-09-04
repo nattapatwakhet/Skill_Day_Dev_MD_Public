@@ -1,0 +1,55 @@
+name: Save GitHub Traffic
+
+on:
+  schedule:
+    - cron: "0 1 * * *"   # ทุกวัน 08:00 เวลาไทย
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  save-traffic:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Get traffic
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+        run: |
+          DATE=$(date -u +"%Y-%m-%d")
+
+          VIEWS=$(curl -s \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/traffic/views")
+
+          CLONES=$(curl -s \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/$REPO/traffic/clones")
+
+          VIEW_COUNT=$(echo "$VIEWS" | jq '.count')
+          VIEW_UNIQUES=$(echo "$VIEWS" | jq '.uniques')
+
+          CLONE_COUNT=$(echo "$CLONES" | jq '.count')
+          CLONE_UNIQUES=$(echo "$CLONES" | jq '.uniques')
+
+          if [ ! -f traffic-history.csv ]; then
+            echo "date,views,unique_views,clones,unique_clones" > traffic-history.csv
+          fi
+
+          echo "$DATE,$VIEW_COUNT,$VIEW_UNIQUES,$CLONE_COUNT,$CLONE_UNIQUES" >> traffic-history.csv
+
+      - name: Commit traffic history
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add traffic-history.csv
+          git commit -m "Update traffic history" || exit 0
+          git push
