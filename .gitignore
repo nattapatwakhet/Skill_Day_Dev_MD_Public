@@ -13,4 +13,20 @@ __pycache__/
 # temp โฟลเดอร์ตอน "update skill" (โหลดเวอร์ชันล่าสุดมาเทียบ) — ดู update_skill.md
 update/
 # work state/log ของ agent (สร้างเองตอนทำงานหลายขั้น) — ดู progress_skill.md / work_summary_skill.md
-memory/
+# แจกเฉพาะ template ความจำ ไม่ commit ข้อมูลที่ agent เติมภายหลัง
+memory/*
+!memory/BRAIN_INDEX.md
+!memory/CHANGES.md
+!memory/DECISION_MEMORY.md
+!memory/FEEDBACK_MEMORY.md
+!memory/FRESHNESS_POLICY.md
+!memory/KNOWLEDGE_MAP.md
+!memory/MEMORY_INBOX.md
+!memory/MEMORY_SCHEMA.md
+!memory/PROGRESS.md
+!memory/RETRIEVAL_INDEX.md
+!memory/SOURCE_LEDGER.md
+!memory/USER_MEMORY.md
+!memory/WORK_LOG.md
+brain_3d/dist/
+brain_3d/public/graph-data.json

@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Day Dev Public — 3D Brain</title>
+    <style>
+      :root {
+        --panel-bg: rgba(6, 12, 22, 0.86);
+        --panel-border: rgba(120, 180, 255, 0.22);
+        --text-dim: #7fa8c9;
+        --text-bright: #eaf6ff;
+        --accent: #7fd6ff;
+      }
+
+      html, body, #app {
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #02050a;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+
+      #app { position: relative; }
+
+      /* ภาพพื้นหลังจางๆ — วางเป็น div ทับบน canvas (ไม่ใช่พึ่งความโปร่งใสของ canvas เอง เพราะ postprocessing
+         composer (bloom) มักเขียน alpha=1 ทึบเสมอ ทำให้ transparent canvas ไม่เห็นผลจริง) ใช้
+         mix-blend-mode: screen ให้ภาพผสมกับพื้นมืดแบบ "บวกแสง" เท่านั้น (ไม่ทำให้ node/เส้นมืดลง) +
+         opacity ต่ำให้จางลางๆ ตามที่ user ขอ — pointer-events none ไม่บังการคลิก/หมุนกล้อง */
+      #bg-photo {
+        position: fixed;
+        inset: 0;
+        background: radial-gradient(circle at 50% 40%, #10243d 0%, #02050a 68%);
+        opacity: 0.22;
+        mix-blend-mode: screen;
+        z-index: 1;
+        pointer-events: none;
+      }
+
+      /* ===== แถบซ้าย: เมนู/ค้นหา/ตัวกรอง ===== */
+      #left-panel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 250px;
+        background: var(--panel-bg);
+        border-right: 1px solid var(--panel-border);
+        backdrop-filter: blur(8px);
+        z-index: 10;
+        display: flex;
+        flex-direction: column;
+        padding: 18px 16px;
+        box-sizing: border-box;
+        color: var(--text-bright);
+        overflow-y: auto;
+      }
+      #left-panel h1 {
+        margin: 0 0 4px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+      #left-panel .subtitle {
+        margin: 0 0 18px;
+        font-size: 11px;
+        color: var(--text-dim);
+        line-height: 1.5;
+      }
+      #left-panel .section {
+        margin-bottom: 20px;
+      }
+      #left-panel .section-label {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-dim);
+        margin-bottom: 8px;
+      }
+      #search-input {
+        width: 100%;
+        box-sizing: border-box;
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--panel-border);
+        border-radius: 6px;
+        padding: 7px 10px;
+        color: var(--text-bright);
+        font-size: 12px;
+        outline: none;
+      }
+      #search-input::placeholder { color: #5a7a94; }
+      #search-input:focus { border-color: var(--accent); }
+
+      .toolbar-row { display: flex; gap: 8px; flex-wrap: wrap; }
+      .pill-btn {
+        background: rgba(127, 214, 255, 0.1);
+        border: 1px solid var(--panel-border);
+        color: var(--text-bright);
+        font-size: 11.5px;
+        padding: 6px 12px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: background 0.15s;
+      }
+      .pill-btn:hover { background: rgba(127, 214, 255, 0.22); }
+      .pill-btn:active { background: rgba(127, 214, 255, 0.32); }
+
+      #link-strength-slider { width: 100%; accent-color: var(--accent); margin-top: 4px; }
+
+      .group-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        padding: 5px 0;
+        cursor: pointer;
+        user-select: none;
+      }
+      .group-row .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+      .group-row .count { margin-left: auto; color: var(--text-dim); font-size: 11px; }
+      .group-row input { accent-color: var(--accent); }
+
+      #hub-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+      }
+      #hub-list li {
+        padding: 6px 8px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #cfe8ff;
+        display: flex;
+        justify-content: space-between;
+        gap: 6px;
+      }
+      #hub-list li:hover { background: rgba(120, 180, 255, 0.12); }
+      #hub-list li .n { color: var(--text-dim); font-size: 11px; flex-shrink: 0; }
+      #hub-list li .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+      #stats-box {
+        margin-top: auto;
+        padding-top: 14px;
+        border-top: 1px solid var(--panel-border);
+        font-size: 11px;
+        color: var(--text-dim);
+      }
+      #stats-box b { color: var(--text-bright); }
+
+      .view-mode-row {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 12px;
+        padding: 4px 0;
+        cursor: pointer;
+        user-select: none;
+      }
+      .view-mode-row input { accent-color: var(--accent); }
+      #view-mode-note {
+        margin-top: 6px;
+        font-size: 10.5px;
+        color: var(--text-dim);
+        line-height: 1.5;
+      }
+
+      .usage-note {
+        font-size: 10.5px;
+        color: var(--text-dim);
+        line-height: 1.5;
+        margin-bottom: 10px;
+        padding: 8px 10px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: 6px;
+        border: 1px solid var(--panel-border);
+      }
+      .usage-note.warn { color: #ffcf8f; border-color: rgba(255, 180, 90, 0.35); }
+      .usage-group { margin-bottom: 12px; }
+      .usage-group-title {
+        font-size: 10.5px;
+        color: var(--text-dim);
+        margin-bottom: 4px;
+      }
+      .usage-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        font-size: 11.5px;
+      }
+      .usage-list li {
+        padding: 4px 6px;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #cfe8ff;
+        display: flex;
+        justify-content: space-between;
+        gap: 6px;
+      }
+      .usage-list li:hover { background: rgba(120, 180, 255, 0.12); }
+      .usage-list li .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+      .usage-list li .n { color: var(--text-dim); font-size: 10.5px; flex-shrink: 0; }
+      .usage-list .empty-row { color: var(--text-dim); padding: 4px 6px; cursor: default; }
+
+      /* ===== แผงขวา: รายละเอียดไฟล์ที่เลือก ===== */
+      #right-panel {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        width: 300px;
+        max-height: calc(100% - 40px);
+        overflow-y: auto;
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-border);
+        border-radius: 10px;
+        padding: 16px 18px;
+        color: #dbeeff;
+        font-size: 13px;
+        line-height: 1.55;
+        backdrop-filter: blur(8px);
+        z-index: 10;
+      }
+      #right-panel .heading {
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+        color: var(--text-dim);
+        margin-bottom: 10px;
+      }
+      #right-panel .empty { color: var(--text-dim); font-size: 12px; }
+      #right-panel h2 {
+        margin: 0 0 6px;
+        font-size: 14px;
+        color: #9fd8ff;
+        word-break: break-word;
+      }
+      #right-panel .meta {
+        color: var(--text-dim);
+        font-size: 11px;
+        margin-bottom: 10px;
+      }
+      #right-panel .neighbor-list {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 12px;
+        color: #bfe0ff;
+      }
+
+      #legend {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        z-index: 10;
+        color: var(--text-dim);
+        font-size: 11px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        pointer-events: none;
+      }
+      #legend .row { display: flex; align-items: center; gap: 6px; }
+      #legend .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; }
+    </style>
+  </head>
+
+  <body>
+    <!-- #app คือ container ที่ ForceGraph3D เข้ายึดครองเอง (ล้างเนื้อหาข้างในทิ้งตอน init)
+         ห้ามใส่ element อื่นไว้ข้างในนี้ — overlay ทั้งหมดต้องเป็น sibling แยกออกมา -->
+    <div id="app"></div>
+    <div id="bg-photo"></div>
+
+    <div id="left-panel">
+      <h1>Day Dev Public — 3D Brain</h1>
+      <p class="subtitle">กราฟไฟล์ skill จริง · จุด = ไฟล์ .md · เส้น = ลิงก์อ้างอิงกัน</p>
+
+      <div class="section">
+        <div class="toolbar-row">
+          <button id="btn-fit" class="pill-btn" type="button">จัดให้พอดีจอ</button>
+          <button id="btn-rearrange" class="pill-btn" type="button">จัดใหม่</button>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">ค้นหาไฟล์</div>
+        <input id="search-input" type="text" placeholder="พิมพ์ชื่อไฟล์..." autocomplete="off" />
+      </div>
+
+      <div class="section">
+        <label class="view-mode-row">
+          <input id="toggle-only-linked" type="checkbox" />
+          เฉพาะไฟล์ที่มีเส้นเชื่อม (ซ่อนไฟล์โดดเดี่ยว)
+        </label>
+        <div class="section-label" style="margin-top:10px">
+          ซ่อนเส้นที่ความสำคัญ (ค่าเฉลี่ยปลายทั้งสอง) ต่ำกว่านี้
+        </div>
+        <input id="link-strength-slider" type="range" min="0" max="20" value="0" step="1" />
+        <div id="link-strength-value" class="usage-note" style="margin-top:6px">แสดงทุกเส้น</div>
+      </div>
+
+      <div class="section">
+        <div class="section-label">กลุ่ม (คลิกเพื่อซ่อน/แสดง)</div>
+        <label class="group-row" data-group="root">
+          <input type="checkbox" checked />
+          <span class="dot" style="background:#7fd6ff"></span>
+          root — skill/workflow
+          <span class="count" id="count-root"></span>
+        </label>
+        <label class="group-row" data-group="memory">
+          <input type="checkbox" checked />
+          <span class="dot" style="background:#ffb37f"></span>
+          memory — ความจำ
+          <span class="count" id="count-memory"></span>
+        </label>
+        <label class="group-row" data-group="reference">
+          <input type="checkbox" checked />
+          <span class="dot" style="background:#b98bff"></span>
+          reference — เฉพาะโปรเจกต์
+          <span class="count" id="count-reference"></span>
+        </label>
+      </div>
+
+      <div class="section">
+        <div class="section-label">โหมดแสดงผล</div>
+        <label class="view-mode-row">
+          <input type="radio" name="view-mode" value="structural" checked />
+          โครงสร้าง (ถูกลิงก์ถึงกี่ครั้ง)
+        </label>
+        <label class="view-mode-row">
+          <input type="radio" name="view-mode" value="usage" />
+          ใช้งานจริง (Claude + Codex เปิดไฟล์นี้กี่ครั้ง)
+        </label>
+        <div id="view-mode-note"></div>
+        <div id="agent-filter-section" hidden>
+          <div class="section-label" style="margin-top:10px">นับจาก agent ไหน</div>
+          <label class="view-mode-row">
+            <input type="radio" name="agent-filter" value="all" checked />
+            ทั้งหมด (Claude + Codex)
+          </label>
+          <label class="view-mode-row">
+            <input type="radio" name="agent-filter" value="claude" />
+            เฉพาะ Claude
+          </label>
+          <label class="view-mode-row">
+            <input type="radio" name="agent-filter" value="codex" />
+            เฉพาะ Codex
+          </label>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-label" id="hub-list-label">ไฟล์ที่ถูกอ้างถึงมากสุด</div>
+        <ul id="hub-list"></ul>
+      </div>
+
+      <div class="section" id="usage-report-section">
+        <div class="section-label">รายงาน routing (จริง vs โครงสร้าง)</div>
+        <div id="usage-freshness" class="usage-note"></div>
+        <div class="usage-group">
+          <div class="usage-group-title">ใช้จริงบ่อย แต่ถูกลิงก์น้อย</div>
+          <ul id="usage-underlinked" class="usage-list"></ul>
+        </div>
+        <div class="usage-group">
+          <div class="usage-group-title">ถูกลิงก์เยอะ แต่แทบไม่เคยเปิดจริง</div>
+          <ul id="usage-overlinked" class="usage-list"></ul>
+        </div>
+        <div class="usage-group">
+          <div class="usage-group-title">ไม่มีใครแตะเลย (ทั้งลิงก์และเปิดจริง)</div>
+          <ul id="usage-orphaned" class="usage-list"></ul>
+        </div>
+      </div>
+
+      <div id="stats-box"></div>
+    </div>
+
+    <div id="right-panel">
+      <div class="heading">รายละเอียด</div>
+      <div id="right-panel-content" class="empty">คลิก node เพื่อดูรายละเอียดไฟล์</div>
+    </div>
+
+    <div id="legend">
+      <div class="row"><span class="dot" style="background:#7fd6ff"></span> root — skill/workflow หลัก</div>
+      <div class="row"><span class="dot" style="background:#ffb37f"></span> memory — ความจำ/ประวัติ</div>
+      <div class="row"><span class="dot" style="background:#b98bff"></span> reference — รายละเอียดเฉพาะโปรเจกต์</div>
+    </div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>

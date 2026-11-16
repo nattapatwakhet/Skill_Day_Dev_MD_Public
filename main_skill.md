@@ -4,19 +4,23 @@
 หน้าที่ของไฟล์นี้คือ **วางวิธีคิด/ตรรกะการทำงาน** แล้ว **ส่งต่อไปไฟล์ที่ถูกต้อง**
 ไม่เก็บรายละเอียดเชิงเทคนิคเอง (รายละเอียดอยู่ในไฟล์ย่อยแต่ละตัว)
 
+> ความจำข้ามงานอยู่ที่ [`memory/BRAIN_INDEX.md`](./memory/BRAIN_INDEX.md); repository นี้แจกเฉพาะ template ไม่มีข้อมูลส่วนตัวของผู้สร้าง
+
 ---
 
 ## วิธีคิดก่อนลงมือ (logic หลัก)
 
 ก่อนทำงานทุกครั้ง คิดตามลำดับนี้:
 
-1. **เข้าใจงานก่อน** — user ขออะไร ขอบเขตแค่ไหน แตะไฟล์ไหน/เครื่อง user ไหม
-2. **จำแนกว่างานเป็นด้านไหน (domain)** — code? สร้างไฟล์ส่งมอบ? ค้นคว้า? วิเคราะห์ข้อมูล? เขียนเนื้อหา? อื่นๆ — **ระบบนี้ทำได้ทุกด้าน code เป็นแค่หนึ่งโดเมน** (งานเดียวเข้าได้หลายอย่าง)
-3. **เดินตาม work flow** — ส่งต่อไป [`work_flow_skill.md`](./work_flow_skill.md) ซึ่งจะจำแนกโดเมนแล้วพาไปไฟล์ที่เกี่ยวทีละขั้น
-4. **ทำในขอบเขต** — แก้เฉพาะที่ขอ อ่านไฟล์ล่าสุดก่อนแก้เสมอ
-   > งานหลายขั้น/แตะหลายไฟล์/น่าจะทำไม่จบรอบเดียว → **สร้าง `skill/day_dev_public/memory/PROGRESS.md` ก่อนลงมือ** (ดู [`progress_skill.md`](./progress_skill.md)) เพื่อ resume ข้าม session/agent ได้
-5. **เสนอสิ่งที่ควรปรับ** — ระหว่าง/หลังทำ ถ้าเห็นจุดที่ควรแก้/ปรับ (บั๊กแฝง, tech-debt, ซับซ้อนเกิน, เสี่ยง, วิธีที่ดีกว่า) → **บอก user แม้ไม่ได้ขอ** แต่ไม่ลงมือแก้เองนอกขอบเขต (เสนอก่อน)
-6. **ปิดงาน (Definition of Done)** — (a) สรุปผลสั้นๆ + เสนอสิ่งที่ควรปรับ · (b) อัปเดต [`progress_skill.md`](./progress_skill.md) (ทำถึงไหน/เหลืออะไร/แนะนำอะไรแล้วทำ-ยังไม่ทำ) · (c) append [`work_summary_skill.md`](./work_summary_skill.md) สำหรับสรุปรายวัน/เดือน + ถ้าแตะไฟล์โปรเจค → [`deploy_skill.md`](./deploy_skill.md) (`CHANGES.md` ไฟล์รอ deploy) · (d) มีความรู้/แพตเทิร์น/โดเมนใหม่ → บันทึกเข้า skill (ดูท้ายไฟล์) · (e) user ขอ sync แชต → [`conversation_log_skill.md`](./conversation_log_skill.md)
+1. **เข้าใจงาน** — เป้าหมาย ขอบเขต โปรเจกต์ ผลกระทบ และสิ่งที่ผู้ใช้อนุญาต
+2. **สำรวจแบบ read-only ก่อน** — อ่าน/ค้น/ตรวจสถานะและหลักฐานได้โดยยังไม่เปลี่ยนแปลง
+3. **Consultation-first สำหรับ mutation** — คำว่า “สร้าง/แก้/เพิ่ม/ลบ” บอกเป้าหมาย ยังไม่อนุมัติ implementation
+   ให้เสนอผลลัพธ์ จุดกระทบ เงื่อนไข ความเสี่ยง สิ่งจำเป็น/สิ่งแนะนำ และวิธีตรวจ แล้วรอยืนยัน
+4. **ลงมือเมื่อยืนยันแล้ว** — “ทำเลย/ทำตามนี้/ทำอัตโนมัติ” หรือการยืนยันแผนเป็น execution approval ใน scope;
+   ไม่ถามรายละเอียดเดิมซ้ำ แต่หยุดเมื่อผลลัพธ์เปลี่ยน ขยาย scope หรือเกิด destructive/external action ใหม่
+5. **เลือกโดเมนและเครื่องมือ** ตาม [`work_flow_skill.md`](./work_flow_skill.md); งานหลายขั้นใช้ `PROGRESS*.md`
+6. **Standing authorization** ใช้ได้เฉพาะงาน/เป้าหมาย/metric ที่ตกลง และทำ loop ตาม [`continuous_improvement_skill.md`](./continuous_improvement_skill.md)
+7. **ปิดงาน** — ตรวจผล, สรุปไฟล์, อัปเดต progress/work log/deploy manifest และเรียนรู้กลับผ่าน [`auto_memory_skill.md`](./auto_memory_skill.md)
 
 > หลักการเสนอ: เสนอแบบมีหลักฐาน (ชี้จุด + เหตุผล + ผลกระทบ) จัดอันดับความสำคัญ ไม่ใช่บ่นลอยๆ — ใช้ [`review_skill.md`](./review_skill.md) เป็นเครื่องมือเวลารีวิวลึก
 
@@ -60,12 +64,14 @@ main_skill.md  (วิธีคิด + index)
           │   (โดเมน peer กันหมด ผสมกันได้ เช่น code+research, video+writing — เพิ่มโดเมนใหม่ได้)
           │
           ├─> [ต้องดู/คุมจอ] controlled_operation_skill.md   ← หลักการคุมหน้าจอ/เครื่อง user
+          │       └─> [trigger โหลดทำงาน] work_mode_skill.md ← Docker + เว็บสมอง AI แบบ portable
           │
           ├─> [ต้องรันคำสั่ง/สคริปต์] terminal_skill.md   ← รันบนเครื่อง user
           │
           ├─> [ต้องขอสิทธิ์] permission_skill.md   ← สิทธิ์ทำได้/ทำไม่ได้
           │
           ├─> [งานใหญ่ วางแผนก่อน] plan_mode_skill.md   ← plan ก่อนแตะไฟล์ → อนุมัติ → แก้ทีละไฟล์
+          ├─> [ทำซ้ำอัตโนมัติ] continuous_improvement_skill.md ← metric/regression/stopping/resume
           │
           ├─> [รีวิว plan/PR/code] review_skill.md   ← ก่อนลงมือ / ตอนตรวจงาน
           │
@@ -119,16 +125,22 @@ main_skill.md  (วิธีคิด + index)
 | [`data_skill.md`](./data_skill.md) | โดเมนวิเคราะห์/จัดการ/visualize ข้อมูล |
 | [`writing_skill.md`](./writing_skill.md) | โดเมนเขียนเนื้อหา (บทความ/โพสต์/อีเมล/doc) |
 | **— ตรวจ/สื่อสาร/ดูแล —** | |
-| [`plan_mode_skill.md`](./plan_mode_skill.md) | วางแผนก่อนลงมือ (งานใหญ่/เสี่ยง) → checklist → อนุมัติ → แก้ทีละไฟล์ (Opus คิด/Sonnet ทำ) |
+| [`plan_mode_skill.md`](./plan_mode_skill.md) | วางแผนและปรึกษาก่อน mutation; แยก approval ของความต้องการออกจาก safety permission |
 | [`review_skill.md`](./review_skill.md) | รีวิวงานทุกโดเมน + over-engineering pass |
 | [`report_skill.md`](./report_skill.md) | สรุปงานให้คนไม่ใช่ dev อ่าน (ตามช่องทาง) |
-| [`progress_skill.md`](./progress_skill.md) | ไฟล์ความจำงานที่ทำอยู่ (`skill/day_dev_public/memory/PROGRESS.md`) — สร้างก่อนลงมือ อัปเดตหลังทำ resume ข้าม session/agent |
+| [`progress_skill.md`](./progress_skill.md) | งานที่กำลังทำ (`memory/PROGRESS*.md`) แยกไฟล์ตามงานและ resume ข้าม session/agent |
 | [`work_summary_skill.md`](./work_summary_skill.md) | สรุปงานรายวัน/รายเดือนจาก `memory/WORK_LOG.md` สำหรับถามย้อนหลังหรือเอาไปใส่สไลด์ |
 | [`deploy_skill.md`](./deploy_skill.md) | จดไฟล์ที่ create/edit/delete รอขึ้น server (`memory/CHANGES.md`) — deploy เฉพาะที่แก้ + mark deployed |
 | **— แตะเครื่อง user (เสริม) —** | |
 | [`controlled_operation_skill.md`](./controlled_operation_skill.md) | หลักการดู/คุมหน้าจอ คุมเครื่อง user |
 | [`terminal_skill.md`](./terminal_skill.md) | วิธีรันคำสั่ง/สคริปต์บนเครื่อง user (.command + Finder) |
 | [`permission_skill.md`](./permission_skill.md) | สิทธิ์ที่ต้องขอ / สิ่งที่ทำได้-ทำไม่ได้ |
+| [`work_mode_skill.md`](./work_mode_skill.md) | trigger “โหลดทำงาน” เปิด Docker, brain service และหน้าเว็บแบบ portable |
+| [`continuous_improvement_skill.md`](./continuous_improvement_skill.md) | loop ทำงานอัตโนมัติภายใต้ standing authorization, metric และ stopping rules |
+| [`auto_memory_skill.md`](./auto_memory_skill.md) | capture → validate → promote → retrieve → apply → feedback สำหรับความจำที่เชื่อถือได้ |
+| [`knowledge_application_skill.md`](./knowledge_application_skill.md) | วิธีเลือกและใช้ความจำโดยยึด source of truth และป้องกัน stale/conflict |
+| [`engineering_exploration_skill.md`](./engineering_exploration_skill.md) | สำรวจทางเทคนิคอย่างมีขอบเขต หลักฐาน และ rollback |
+| [`cache_busting_skill.md`](./cache_busting_skill.md) | ตรวจและแก้ปัญหา client ได้ asset เก่าหลัง deploy |
 | [`skill_maintenance_skill.md`](./skill_maintenance_skill.md) | กฎเพิ่ม/ปรับไฟล์ skill ในชุดนี้เอง |
 | [`conversation_log_skill.md`](./conversation_log_skill.md) | บันทึกสิ่งที่คุยในแชต + รายการที่ยังไม่ได้ลง skill (เริ่มเป็น log เปล่า) |
 | [`update_skill.md`](./update_skill.md) | คำสั่ง "update skill" — โหลดเวอร์ชันล่าสุดจาก repo มาเทียบ เอาของใหม่มาปรับใช้ แล้วลบ temp ทิ้ง |
@@ -154,7 +166,7 @@ skill/day_dev_public/
 - วิธีคุมจอ/รันคำสั่งใหม่ → `controlled_operation_skill.md`
 - วิธีจัดการ/เพิ่มสกิลเอง → `skill_maintenance_skill.md`
 - สิ่งที่คุยในแชต / รายการที่ยังไม่ได้ลง skill → `conversation_log_skill.md`
-- ความคืบหน้างานที่ทำอยู่ (ทำถึงไหน/เหลืออะไร/แนะนำอะไรแล้ว) → `progress_skill.md` (`skill/day_dev_public/memory/PROGRESS.md`) — resume ข้าม session/agent
+- ความคืบหน้างานที่ทำอยู่ → `progress_skill.md` (`skill/day_dev_public/memory/PROGRESS*.md`) — เลือกไฟล์ตามงานและ resume ข้าม session/agent
 - สรุปงานย้อนหลังรายวัน/รายเดือน/เอาไปใส่สไลด์ → `work_summary_skill.md` (`skill/day_dev_public/memory/WORK_LOG.md`)
 - ไฟล์ที่ create/edit/delete รอขึ้น server (deploy เฉพาะที่แก้) → `deploy_skill.md` (`skill/day_dev_public/memory/CHANGES.md`)
 - เรื่องสิทธิ์ใหม่ → `permission_skill.md`

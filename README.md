@@ -1,212 +1,94 @@
 # Day Dev Public Skill
 
-ชุดไฟล์ skill สำหรับใช้เป็น working system ให้ AI coding agent อ่านก่อนทำงานในโปรเจกต์ ชุดนี้ช่วยให้ agent ทำงานเป็นขั้นตอน: เข้าใจโจทย์ → จำแนกโดเมน → เปิด skill ที่เกี่ยว → ทำในขอบเขต → ตรวจงาน → บันทึกความรู้ใหม่กลับเข้า skill
+ชุดระบบทำงานสำหรับ AI coding agent ที่รวม workflow แบบปรึกษาก่อนทำ, memory ที่ตรวจสอบแหล่งที่มาได้, progress หลายงาน, autonomous improvement ที่มีขอบเขต และเว็บ Skill Brain 3D
 
-This is a public, reusable skill pack for AI coding agents. It gives the agent a repeatable workflow: understand the task, classify the work domain, load the relevant skill files, execute within scope, verify the result, and record reusable learnings.
+## หลักการทำงาน
 
----
+1. อ่านสถานะด้วย `scripts/list_active_progress.sh`
+2. อ่าน `main_skill.md` แล้วเดินตาม `work_flow_skill.md`
+3. สำรวจแบบ read-only เพื่อเข้าใจระบบจริง
+4. ก่อนสร้าง/แก้/เพิ่ม/ลบ ให้คุยผลลัพธ์ จุดกระทบ เงื่อนไข ความเสี่ยง และวิธีตรวจ
+5. เมื่อผู้ใช้ยืนยันด้วย “ทำเลย/ทำตามนี้/ทำอัตโนมัติ” ให้ลงมือต่อใน scope โดยไม่ถามเรื่องเดิมซ้ำ
+6. ตรวจผล บันทึก progress/work log/change manifest และจำเฉพาะความรู้ที่มีคุณภาพ
 
-## ใช้ทำอะไร
+การอนุมัติ implementation ไม่เท่ากับการอนุมัติ action ที่เสี่ยงหรือกระทบภายนอก หากต้องลบข้อมูลสำคัญ, deploy production, ส่งข้อความ, เผยแพร่ หรือขยาย scope อย่างมีนัยสำคัญ ต้องหยุดตาม `permission_skill.md`
 
-- กำหนดวิธีคิดก่อนลงมือทำงานใน workspace
-- แยกกฎตามโดเมน เช่น code, research, data, writing, deliverable, video
-- แยกกฎตาม stack เช่น Flutter, React, TypeScript, PHP, CodeIgniter, Python, Docker
-- บังคับให้ agent อ่านโครงสร้างโปรเจกต์ก่อนแก้ไฟล์
-- ช่วยให้ agent สรุป ตรวจงาน และบันทึก pattern ใหม่ไว้ใช้ครั้งหน้า
+## โหมดทำงานอัตโนมัติ
 
-## What It Does
+ผู้ใช้ให้ standing authorization แก่งานหนึ่งได้ เช่น “ทำอัตโนมัติไปเรื่อยจนดีหรือจนฉันบอกพัก” Agent ต้องกำหนด scope, metric, regression checks และ stopping rules ตาม `continuous_improvement_skill.md` แล้วทำเป็นรอบ:
 
-- Defines a consistent working process for an AI agent inside a project
-- Routes work by domain: code, research, data, writing, deliverables, video
-- Provides stack-specific rules for Flutter, React, TypeScript, PHP, CodeIgniter, Python, and Docker
-- Encourages reading project structure before editing files
-- Captures reusable project learnings back into the skill files
+`inspect → propose/approve → change → verify → record → next iteration`
 
----
+หยุดเมื่อผู้ใช้บอกพัก, budget หมด, metric ไม่ดีขึ้น, เกิด regression หรือพบ action ใหม่ที่อยู่นอก authorization
 
-## โครงสร้างไฟล์
+## ความจำ
+
+`memory/` มีเฉพาะ template สาธารณะ ไม่มีข้อมูลส่วนตัวของผู้สร้าง
+
+- `BRAIN_INDEX.md` — แผนที่ความจำ
+- `USER_MEMORY.md` — preference ที่ผู้ใช้ยืนยัน
+- `DECISION_MEMORY.md` — การตัดสินใจและเหตุผล
+- `MEMORY_INBOX.md` — candidate ที่ยังรอตรวจ
+- `SOURCE_LEDGER.md` — provenance/freshness
+- `PROGRESS*.md` — งานที่กำลังทำ แยกไฟล์ต่องาน
+- `WORK_LOG.md` — ledger งานที่เสร็จ
+- `CHANGES.md` — create/edit/delete ที่รอ deploy
+
+เพิ่ม candidate อย่างปลอดภัย:
+
+```bash
+skill/day_dev_public/scripts/capture_memory.sh preference user-confirmed \
+  "สรุปความชอบ" "conversation reference"
+```
+
+## Skill Brain 3D และ Work Mode
+
+ชุดนี้มีเว็บแสดงความสัมพันธ์ของ skill/memory และ Docker service มาตรฐานชื่อ `skill_brain_3d`:
+
+```bash
+cd skill/day_dev_public
+docker compose config --quiet
+docker compose up -d skill_brain_3d
+open http://localhost:3004
+```
+
+Compose มี mapping `3004:3004`, healthcheck และ relative mount จึงย้ายไป workspace อื่นได้ คำสั่ง trigger “โหลดทำงาน” ใช้ flow ใน `work_mode_skill.md`: ตรวจ Docker → ตรวจ/ซ่อม compose ตามสิทธิ์ → start service → รอ healthy → เปิดหน้าเว็บ
+
+## ติดตั้ง
+
+วางชุดนี้ที่ `skill/day_dev_public/` แล้วนำ `AGENTS.md` หรือ `CLAUDE.md` ไปไว้ root ของ workspace หากติดตั้ง path อื่นให้แก้ prefix ใน entry file
+
+โครงสร้างสำคัญ:
 
 ```text
 skill/day_dev_public/
-├─ AGENTS.md
-├─ CLAUDE.md
-├─ main_skill.md
-├─ work_flow_skill.md
-├─ project_structure_skill.md
-├─ code_skill.md
-├─ *_skill.md
-├─ README.md
-├─ LICENSE
-└─ .gitignore
+├── AGENTS.md
+├── CLAUDE.md
+├── main_skill.md
+├── work_flow_skill.md
+├── *_skill.md
+├── memory/
+├── scripts/
+├── brain_3d/
+└── docker-compose.yml
 ```
 
-ไฟล์หลัก:
-
-- `AGENTS.md` — entry instruction สำหรับ Codex/agents ที่อ่าน AGENTS.md
-- `CLAUDE.md` — entry instruction สำหรับ Claude-style workspace instruction
-- `main_skill.md` — จุดเริ่มต้น วิธีคิด และ index
-- `work_flow_skill.md` — flow การทำงานหลัก
-- `project_structure_skill.md` — template โครงสร้างโปรเจกต์ ให้ปรับตาม workspace จริง
-- `skill_maintenance_skill.md` — กฎเพิ่ม/ปรับ skill และ sync ความรู้ที่เผยแพร่ได้
-- `progress_skill.md` — วิธีจดงานค้างก่อนลงมือและอัปเดตระหว่างทำ
-- `work_summary_skill.md` — วิธีสรุปงานรายวัน/รายเดือนจาก `memory/WORK_LOG.md`
-
----
-
-## วิธีติดตั้งในโปรเจกต์
-
-1. **โหลด repo** — กด Code → Download ZIP (หรือ `git clone`) แตกไฟล์จะได้โฟลเดอร์ชื่อ `Skill_Day_Dev_MD_Public-main`
-2. **สร้างโฟลเดอร์ `skill/`** ที่ root ของโปรเจกต์ (ถ้ายังไม่มี)
-3. **ย้ายโฟลเดอร์ที่โหลดมาเข้าไปใน `skill/` แล้วเปลี่ยนชื่อ** จาก `Skill_Day_Dev_MD_Public-main` → `day_dev_public`
-   จะได้ `skill/day_dev_public/`
-4. **เอา `AGENTS.md` และ `CLAUDE.md` ไปวางที่ root ของโปรเจกต์** (หรือที่ที่ workspace ใช้รวม instruction)
-   ทั้งสองไฟล์ชี้มาที่ `skill/day_dev_public/...` อยู่แล้ว — **ไม่ต้องแก้ path** ถ้าวางตามข้อ 3
-
-ได้โครงสร้างแบบนี้:
-
-```text
-<your-project>/
-├─ AGENTS.md            ← จาก repo (เอามาวาง root)
-├─ CLAUDE.md            ← จาก repo (เอามาวาง root)
-└─ skill/
-   └─ day_dev_public/   ← เปลี่ยนชื่อจาก Skill_Day_Dev_MD_Public-main
-      ├─ main_skill.md
-      ├─ work_flow_skill.md
-      ├─ *_skill.md
-      └─ ...
-```
-
-> - `AGENTS.md`/`CLAUDE.md` มีอยู่ในโฟลเดอร์ repo ด้วย — จะ **ย้าย** หรือ **copy** ขึ้น root ก็ได้ (ต้นฉบับที่ค้างอยู่ข้างในไม่มีผลเสีย)
-> - ถ้าวาง skill ไว้ path อื่น (ไม่ใช่ `skill/day_dev_public/`) ให้แก้ path ใน `AGENTS.md`/`CLAUDE.md` ให้ตรง
-
----
-
-## Installation
-
-1. **Download the repo** — Code → Download ZIP (or `git clone`). Unzipping gives a folder named `Skill_Day_Dev_MD_Public-main`.
-2. **Create a `skill/` folder** at your project root (if it doesn't exist yet).
-3. **Move the downloaded folder into `skill/` and rename it** from `Skill_Day_Dev_MD_Public-main` → `day_dev_public`, giving you `skill/day_dev_public/`.
-4. **Put `AGENTS.md` and `CLAUDE.md` at your project root** (or wherever your workspace loads its instructions). They already point to `skill/day_dev_public/...`, so **no path edits are needed** if you follow step 3.
-
-Resulting layout:
-
-```text
-<your-project>/
-├─ AGENTS.md            ← from the repo (placed at root)
-├─ CLAUDE.md            ← from the repo (placed at root)
-└─ skill/
-   └─ day_dev_public/   ← renamed from Skill_Day_Dev_MD_Public-main
-      ├─ main_skill.md
-      ├─ work_flow_skill.md
-      ├─ *_skill.md
-      └─ ...
-```
-
-> - `AGENTS.md`/`CLAUDE.md` also ship inside the repo folder — you can **move** or **copy** them to the root (leftover originals inside do no harm).
-> - If you place the pack at a different path, update the paths in `AGENTS.md`/`CLAUDE.md` to match.
-
----
-
-## วิธีใช้งาน
-
-ก่อนให้ agent ทำงาน ให้ instruction ของ workspace บอกว่า:
-
-```text
-ก่อนเริ่มงานทุกครั้ง ให้อ่าน skill/day_dev_public/main_skill.md
-แล้วเดินตาม skill/day_dev_public/work_flow_skill.md
-```
-
-ครั้งแรกหลังติดตั้ง **ไม่ต้องกรอกโครงสร้างเอง** — agent จะ bootstrap ให้:
-สแกน repo (top-level folders + ไฟล์ config) แล้วเขียนโครงสร้างจริงลง
-`project_structure_skill.md` / service ลง `docker_skill.md` เอง (ดูหัวข้อ "Bootstrap อัตโนมัติ"
-ใน `project_structure_skill.md`) แล้วอัปเดตต่อเนื่องเมื่อเจอของใหม่
-คุณแค่ตรวจ/แก้เพิ่มถ้าอยากปรับ
-
-งานหลายขั้นควรให้ agent สร้าง/อัปเดต `skill/day_dev_public/memory/PROGRESS.md`
-ก่อนลงมือและหลังทำแต่ละก้อน พอจบงานให้ append
-`skill/day_dev_public/memory/WORK_LOG.md` เพื่อให้ถามย้อนหลังได้ว่า
-"วันนี้ทำอะไรไปบ้าง", "เดือนนี้ทำอะไรไปบ้าง", หรือ "เหลืออะไร"
-
----
-
-## Usage
-
-Add a workspace instruction like:
-
-```text
-Before every task, read skill/day_dev_public/main_skill.md
-and follow skill/day_dev_public/work_flow_skill.md.
-```
-
-After installation you do **not** need to fill in the structure by hand — the agent
-bootstraps it: it scans the repo (top-level folders + config files) and writes the real
-structure into `project_structure_skill.md` (and services into `docker_skill.md`) itself,
-then keeps it updated as it discovers more. See the "Bootstrap อัตโนมัติ" section in
-`project_structure_skill.md`. You only review/tweak if you want to.
-
-For multi-step work, have the agent create/update
-`skill/day_dev_public/memory/PROGRESS.md` before editing and after each chunk.
-When the work is complete, append `skill/day_dev_public/memory/WORK_LOG.md`
-so later summaries can answer "what was done today", "what was done this month",
-and "what remains".
-
----
-
-## อัปเดตเป็นเวอร์ชันล่าสุด
-
-สั่ง agent ว่า **"update skill"** — agent จะ:
-
-1. โหลด repo ล่าสุดลง `skill/day_dev_public/update/Skill_Day_Dev_MD_Public`
-2. เทียบกับของที่ใช้อยู่ แล้วเอา **เฉพาะไฟล์/กฎใหม่ที่ยังไม่มี** มาปรับใช้ (ไม่ทับของที่คุณแก้ local เช่น โครงสร้างโปรเจค, docker, log)
-3. ลบโฟลเดอร์ temp ทิ้ง แล้วสรุปว่าเพิ่มอะไรบ้าง
-
-รายละเอียดอยู่ใน `update_skill.md`
-
-## Update to the Latest Version
-
-Tell the agent **"update skill"** — it will:
-
-1. Download the latest repo into `skill/day_dev_public/update/Skill_Day_Dev_MD_Public`
-2. Diff it against your installed copy and pull in **only new files/rules you don't have yet** (without overwriting your local edits — project structure, docker, logs)
-3. Delete the temp folder and report what changed
-
-See `update_skill.md` for details.
-
----
-
-## กฎ Public-Safe
-
-ชุดนี้ตั้งใจให้เผยแพร่ได้ จึงไม่ควรมีข้อมูลเหล่านี้:
-
-- path เครื่องจริง เช่น `<local-user-path>/...`
-- ชื่อโปรเจกต์หรือระบบภายใน
-- production host, internal domain, private registry
-- token, secret, password, credential, `.env`
-- port/service จริงที่ไม่ต้องการเผยแพร่
-
-ก่อน publish แนะนำรัน:
+## ตรวจสุขภาพก่อนเผยแพร่
 
 ```bash
-rg -n --hidden -i "(secret|token|password|credential|\\.env|api[_-]?key|private|<your-real-user-name>)" .
+skill/day_dev_public/scripts/validate_public.sh
+cd skill/day_dev_public/brain_3d && npm run build
 ```
 
-## Public-Safe Rule
+Validator ตรวจไฟล์จำเป็น, consultation-first contract, privacy markers, Markdown links, index coverage และ Docker Compose syntax
 
-This pack is intended to be publishable. Do not include:
+## Public-safe policy
 
-- local machine paths such as `<local-user-path>/...`
-- internal project or system names
-- production hosts, internal domains, private registries
-- tokens, secrets, passwords, credentials, `.env`
-- real service ports or infrastructure details you do not want to publish
+ห้ามบันทึก local absolute path, อีเมล/ตัวตน, รายชื่อโปรเจกต์ภายใน, production host, credential, token, secret หรือ memory จริงของผู้ใช้ลง repository นี้ ใช้ placeholder และ template เท่านั้น ไฟล์ `.git/` เป็น metadata ของ repository และอยู่นอก content scan
 
-Before publishing, run:
+## English summary
 
-```bash
-rg -n --hidden -i "(secret|token|password|credential|\\.env|api[_-]?key|private|<your-real-user-name>)" .
-```
-
----
+Day Dev Public is a portable operating system for coding agents. It defaults to consultation before mutations, supports explicit execution approval and bounded autonomous loops, keeps provenance-aware memory, tracks concurrent work in separate progress files, and ships a Dockerized 3D skill graph at `http://localhost:3004`.
 
 ## License
 

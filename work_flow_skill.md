@@ -39,12 +39,17 @@ code เป็นแค่ **หนึ่งโดเมน** ไม่ใช่
         │
 [6] งานนี้ต้องขอสิทธิ์อะไรบ้าง? → permission_skill.md  (ขอให้ครบในครั้งเดียว)
         │
-[7] ลงมือทำในขอบเขตสิทธิ์ + ตามกฎของไฟล์ที่เกี่ยว
-        ├─ ก่อนแตะไฟล์ (งานหลายขั้น) → progress_skill.md: สร้าง skill/day_dev_public/memory/PROGRESS.md
+[7] Consultation Gate ก่อน mutation
+        ├─ สำรวจ read-only + Impact Expansion Pass
+        ├─ เสนอผลลัพธ์/จุดกระทบ/เงื่อนไข/ความเสี่ยง/วิธีตรวจ
+        └─ รอยืนยัน เว้นแต่ยืนยันแผนหรือสั่ง execution mode ชัดแล้ว
+        │
+[8] ลงมือทำในขอบเขตสิทธิ์ + ตามกฎของไฟล์ที่เกี่ยว
+        ├─ ก่อนแตะไฟล์ (งานหลายขั้น) → progress_skill.md: เลือก/สร้าง memory/PROGRESS*.md ตามงาน
         ├─ งานใหญ่/เสี่ยง/แตะหลายไฟล์ → plan_mode_skill.md (วางแผนก่อน รออนุมัติ แล้วแก้ทีละไฟล์)
         └─ ก่อนลงมือ ถ้าเป็น plan ใหญ่ → review_skill.md (มีวิธีง่ายกว่าไหม)
         │
-[8] ตรวจงาน (review_skill.md) + ปิดงาน + ถ้าต้องรายงานคนอื่น → report_skill.md
+[9] ตรวจงาน (review_skill.md) + ปิดงาน + ถ้าต้องรายงานคนอื่น → report_skill.md
         └─ Definition of Done: แนะนำ + PROGRESS + WORK_LOG + CHANGES(ถ้าแตะไฟล์) + update skill + log แชต(ถ้าถูกขอ)
 ```
 
@@ -183,22 +188,33 @@ type annotation, import philosophy
 
 ---
 
-## [7] ลงมือทำ
+## [7] Consultation Gate — คุยก่อนเปลี่ยนแปลง
 
-- **ก่อนแตะไฟล์ (งานหลายขั้น/แตะหลายไฟล์/น่าจะทำไม่จบรอบเดียว): สร้าง `skill/day_dev_public/memory/PROGRESS.md`**
+- อ่าน ค้น วิเคราะห์ log/diff/schema และรวบรวมทางเลือกแบบไม่เปลี่ยน state ได้ก่อน
+- คำขอ “สร้าง/แก้/เพิ่ม/ลบ/ตั้งค่า” เป็น goal request ยังไม่ใช่ approval ของ implementation
+- ทำ **Impact Expansion Pass** เฉพาะมิติที่เกี่ยว: behavior/state, entry points, UI, API, database, permission,
+  notification, validation, retry/rollback, idempotency, audit, compatibility, privacy/security, test และ deploy/config
+- สรุปความเข้าใจ ผลลัพธ์ จุดที่ต้องแตะ สิ่งจำเป็น/สิ่งแนะนำ ความเสี่ยง และวิธีตรวจ แล้วรอยืนยัน
+- ข้ามการรอได้เมื่อผู้ใช้ยืนยันแผนหรือสั่ง “ทำเลย/ทำตามนี้/ทำอัตโนมัติ”; standing authorization ที่บันทึกไว้
+  ใช้กับ iteration ถัดไปได้เฉพาะ scope/metric/stopping condition เดิม
+
+---
+
+## [8] ลงมือทำ
+
+- **ก่อนแตะไฟล์ (งานหลายขั้น/แตะหลายไฟล์/น่าจะทำไม่จบรอบเดียว): เลือกหรือสร้าง `skill/day_dev_public/memory/PROGRESS*.md` ที่ตรงกับงาน**
   ตาม [`progress_skill.md`](./progress_skill.md) — จดเป้าหมาย + checklist ของแผน ก่อนลงมือ
   (งานสั้น 1–2 step ข้ามได้) → resume ข้าม session/agent เมื่อ token หมด/ย้าย agent
 - ทำในขอบเขตสิทธิ์ที่ได้ ตามกฎของไฟล์ที่เกี่ยวข้อง · ทำเสร็จแต่ละก้อน **อัปเดต PROGRESS** (`[ ]`→`[x]`)
-- บอก user ก่อนทำสิ่งที่แตะเครื่อง/ย้อนไม่ได้ แล้วรอ ok
+- หลังยืนยันแล้วทำ reversible edits ในแผนเดิมโดยไม่ถามซ้ำ; หยุดเมื่อมีผลกระทบใหม่ที่เปลี่ยนผลลัพธ์หรือ scope
 - **งานใหญ่/เสี่ยง/แตะหลายไฟล์/ยังไม่รู้สาเหตุชัด** → เข้า [`plan_mode_skill.md`](./plan_mode_skill.md)
-  วางแผนเป็น checklist (ไฟล์ไหน/ฟังก์ชันไหน/ทำไม/ลำดับ) **ก่อนแตะไฟล์** → รอ user อนุมัติ → แก้ทีละไฟล์
-  (คิด/วางแผน = Opus · ลงมือ = Sonnet)
+  วางแผนเป็น checklist (ไฟล์ไหน/ฟังก์ชันไหน/ทำไม/ลำดับ) **ก่อนแตะไฟล์** → ผ่าน Consultation Gate → ทำเป็นก้อนที่ตรวจได้
 - **ถ้าเป็น plan ใหญ่/มีหลายทางเลือก** → ก่อนลงมือ รีวิว plan ด้วย [`review_skill.md`](./review_skill.md)
   (เช็คว่ามีวิธีง่ายกว่าไหม ก่อนจะเสียแรงทำ)
 
 ---
 
-## [8] ตรวจงาน + ปิดงาน
+## [9] ตรวจงาน + ปิดงาน
 
 - ตรวจงานตามชนิด:
   - Flutter → `dart format` + `dart analyze` + `flutter test` (ดู `flutter_skill.md`); ถ้าสั่ง "test app"/ทดสอบ user journey จริงบน Android/iOS → เพิ่ม [`maestro_testing_skill.md`](./maestro_testing_skill.md) (E2E ไม่แทน unit/widget)
@@ -223,7 +239,7 @@ type annotation, import philosophy
 ### ✅ Definition of Done — จบงานจริงทุกครั้งต้องครบ
 
 1. **แนะนำ** — เสนอสิ่งที่ควรปรับ (บั๊กแฝง/tech-debt/วิธีง่ายกว่า) พร้อมจุด+เหตุผล+ผลกระทบ จัดอันดับ
-2. **จดบันทึก** — อัปเดต [`progress_skill.md`](./progress_skill.md) (`skill/day_dev_public/memory/PROGRESS.md`): ทำถึงไหน,
+2. **จดบันทึก** — อัปเดต [`progress_skill.md`](./progress_skill.md) (`skill/day_dev_public/memory/PROGRESS*.md` ที่เลือก): ทำถึงไหน,
    เหลืออะไร (Next), คำแนะนำที่เสนอไปแยก "ทำตามแล้ว / ยังไม่ได้ทำตาม", blocker → ให้ session/agent ถัดไปทำต่อได้
 3. **จดสรุปย้อนหลัง** — append [`work_summary_skill.md`](./work_summary_skill.md) (`skill/day_dev_public/memory/WORK_LOG.md`)
    เป็น bullet สั้นสำหรับตอบ "วันนี้/เดือนนี้ทำอะไรไปบ้าง" หรือเอาไปใส่สไลด์
@@ -242,7 +258,8 @@ type annotation, import philosophy
 |---|---|---|
 | **คุยทั่วไป/ถามสั้น** | ทักทาย, ถามข้อเท็จจริงสั้น | ตอบเลย **ไม่เปิด skill ไม่ประกาศ** |
 | **ปรึกษา/คิดโปรเจค** | ถามกว้าง, "คิดด้วยกัน", ยังไม่ชัด | ถ้าคุยถึงโปรเจคจริง → **ground ด้วย `project_structure_skill` + อ่านโค้ดจริงก่อน** → ถก/เสนอทางเลือก **ไม่แก้ไฟล์** (ตรงกับ `plan_mode_skill`/`review_skill`) |
-| **งานจริง** | สั่งชัดตรงๆ ("แก้ X", "เพิ่ม Y") | **เปิด domain skill + บอกชื่อ skill ที่อิง 1 บรรทัด** → (งานหลายขั้น: สร้าง PROGRESS) → ทำในขอบเขต → ตรวจ → **Definition of Done** (แนะนำ + PROGRESS + WORK_LOG + CHANGES + update skill + log) |
+| **งานจริง: รอปรึกษา** | บอกเป้าหมาย mutation ("แก้ X", "เพิ่ม Y") | สำรวจ read-only + Impact Expansion Pass → เสนอแผน → รอยืนยัน |
+| **งานจริง: อนุมัติแล้ว** | ยืนยันแผน หรือสั่ง “ทำเลย/ทำตามนี้/ทำอัตโนมัติ” | ทำใน scope → ตรวจ → Definition of Done |
 
 **งานจริงที่เป็น "แก้บั๊ก/ของพัง" → มีขั้นหาสาเหตุก่อนแก้เสมอ** (อยู่ในโหมดงานจริง):
 `เปิด domain skill + ` [`debug_skill.md`](./debug_skill.md) → **หาสาเหตุ** (4 ขั้น: reproduce →
@@ -251,8 +268,7 @@ fail path → หักล้าง hypothesis → breadcrumb) → **เจอ r
 > endpoint) ก่อน** อย่าไล่แก้ปลายเหตุ (ดู `debug_skill`)
 
 กฎเสริม:
-- **ปรึกษาเป็น optional ไม่บังคับ** — สั่งตรงๆ = ลงมืองานจริงเลย ข้ามปรึกษาได้
-- **ข้อยกเว้น:** ถึงสั่งตรงๆ แต่ถ้างาน **ใหญ่/เสี่ยง/แตะหลายไฟล์/ย้อนไม่ได้** → สรุป plan ให้ดูก่อน รอ "โอเค"
-- ไหลปกติเมื่อมีปรึกษา: **ปรึกษา → วางแผน → user โอเค → งานจริง**
-- **ไม่กระโดดแก้ไฟล์เองตอนยังปรึกษา/วางแผนอยู่** — รอ "โอเค" ก่อนเสมอ
+- **ปรึกษาก่อนเป็นค่าเริ่มต้นสำหรับ mutation**; ไหลปกติคือสำรวจ → วิเคราะห์ผลกระทบ → เสนอ → ยืนยัน → ทำ
+- autonomous mode ไม่ขยายไปงานอื่น และยังหยุดก่อน destructive/external action ที่ไม่ครอบคลุม
+- **ไม่กระโดดแก้ไฟล์เองเมื่อยังไม่ผ่าน Consultation Gate**
 - งานจริงให้ **เปิดไฟล์ skill ของโดเมนนั้นจริง ไม่ทำจากความจำ** (ข้ามโดเมน = เปิดไฟล์ใหม่)

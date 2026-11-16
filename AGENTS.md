@@ -1,25 +1,19 @@
 # AGENTS.md — Day Dev Public Skill
 
-**ก่อนเริ่มงานทุกครั้งใน workspace ที่ติดตั้งชุดนี้ ให้อ่าน `skill/day_dev_public/main_skill.md` ก่อนเสมอ แล้วเดินตาม `skill/day_dev_public/work_flow_skill.md`**
+ก่อนเริ่มงานทุกครั้ง ให้หา root ของชุดนี้ แล้วทำตามลำดับ:
 
-`skill/day_dev_public/` คือชุด skill หลักของ workspace นี้ เป็นไฟล์จริงในโปรเจกต์ แก้ได้ตรงๆ และควรปรับให้ตรงกับโครงสร้างโปรเจกต์ของคุณ
+1. รัน `skill/day_dev_public/scripts/list_active_progress.sh` และอ่าน progress ที่ตรงกับงาน
+2. อ่าน `skill/day_dev_public/main_skill.md`
+3. เดินตาม `skill/day_dev_public/work_flow_skill.md` และเปิด skill เฉพาะโดเมนที่เกี่ยว
+4. งานหลายขั้นให้สร้างหรือเลือก `memory/PROGRESS*.md` แยกตามงาน และอัปเดตหลังแต่ละก้อน
+5. ปิดงานด้วยการตรวจผล อัปเดต progress, `memory/WORK_LOG.md`, `memory/CHANGES.md` เมื่อมีไฟล์เปลี่ยน และบันทึกความรู้ที่ควรใช้ซ้ำ
 
-> ถ้าวางไฟล์ชุดนี้ไว้ที่ path อื่น ให้แก้ path ในไฟล์นี้ให้ตรงกับตำแหน่งจริง
+## กฎการลงมือ
 
-## ลำดับ
+- อ่าน ค้น ตรวจ และวิเคราะห์แบบ read-only ได้ทันที
+- ค่าเริ่มต้นของการสร้าง/แก้/เพิ่ม/ลบคือ **ปรึกษาก่อนทำ**: สรุปสิ่งที่เข้าใจ วิธีทำ ผลลัพธ์ จุดกระทบ เงื่อนไข ความเสี่ยง และคำแนะนำ แล้วรอการยืนยัน
+- ถ้าผู้ใช้พูดว่า “ทำเลย”, “ทำตามนี้”, “ทำอัตโนมัติ” หรืออนุมัติแผนแล้ว ให้ลงมือในขอบเขตนั้นต่อได้ ไม่ถามซ้ำ
+- standing authorization ใช้ได้เฉพาะเป้าหมายและขอบเขตที่ตกลง หยุดเมื่อผู้ใช้บอกพัก, metric ไม่ดีขึ้น, เกิดความเสี่ยงใหม่ หรือจำเป็นต้องทำ destructive/external action ที่ยังไม่อนุมัติ
+- ห้ามใส่ข้อมูลส่วนตัว secret หรือรายละเอียดระบบจริงลง public skill
 
-0. **ถ้ามี `skill/day_dev_public/memory/PROGRESS.md` → อ่านก่อนเป็นอันดับแรก** เพื่อดูว่างานค้างทำถึงไหน/เหลืออะไร แล้วทำต่อ (ดู `skill/day_dev_public/progress_skill.md`)
-1. อ่าน `skill/day_dev_public/main_skill.md` (วิธีคิด + index ทุกไฟล์)
-2. เดินตาม `skill/day_dev_public/work_flow_skill.md` (จำแนกโดเมน → เปิดสกิลที่เกี่ยว → ทำ → ตรวจ → เสนอสิ่งที่ควรปรับ → บันทึก)
-3. ตามกฎในไฟล์ skill ที่เกี่ยวกับงานนั้น เช่น code → `code_skill.md` → ไฟล์ภาษา/framework
-4. **งานหลายขั้น: สร้าง `skill/day_dev_public/memory/PROGRESS.md` ก่อนลงมือ แล้วอัปเดตหลังทำแต่ละก้อน** (`skill/day_dev_public/progress_skill.md`) — resume ข้าม session/agent (Codex, Claude CLI) ได้
-5. **จบงานทุกครั้ง (Definition of Done): แนะนำสิ่งที่ควรปรับ + อัปเดต PROGRESS + append WORK_LOG + CHANGES(ถ้าแตะไฟล์) + update skill + log แชต(ถ้าถูกขอ)**
-6. เจอของใหม่หลังจบงาน → บันทึกกลับเข้าชุด skill ตาม `skill/day_dev_public/skill_maintenance_skill.md`
-7. ถ้า user ขอให้อ่าน/สรุป/อัปเดตสิ่งที่คุยในแชตลง skill → ใช้ `skill/day_dev_public/conversation_log_skill.md`
-
-> โครงสร้างโปรเจกต์จริงของ workspace ให้บันทึกใน `skill/day_dev_public/project_structure_skill.md`
-> docker/service ของ workspace ให้บันทึกใน `skill/day_dev_public/docker_skill.md`
-> ความคืบหน้างานที่ทำค้างอยู่ที่ `skill/day_dev_public/memory/PROGRESS.md` (ทะเบียนวิธีใช้ใน `skill/day_dev_public/progress_skill.md`)
-> สรุปงานย้อนหลังรายวัน/รายเดือนอยู่ที่ `skill/day_dev_public/memory/WORK_LOG.md` (วิธีใช้ใน `skill/day_dev_public/work_summary_skill.md`)
-> ไฟล์ที่แก้รอขึ้น server อยู่ `skill/day_dev_public/memory/CHANGES.md` (วิธีใช้ใน `skill/day_dev_public/deploy_skill.md`) — user บอก "อัปขึ้น server แล้ว" → mark deployed
-> อยากอัปเดต skill เป็นเวอร์ชันล่าสุด → user สั่ง **"update skill"** (ดู `skill/day_dev_public/update_skill.md`)
+ถ้าติดตั้งไว้ path อื่น ให้ปรับ prefix ของ path ในไฟล์นี้ให้ตรงตำแหน่งจริง

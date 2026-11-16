@@ -41,7 +41,7 @@
 
 ## กฎรับอัปเดตจาก private
 
-เมื่อ sync เนื้อหาจาก `skill/day_dev/` มาที่ `skill/day_dev_public/`:
+เมื่อ sync เนื้อหาจาก private/internal skill มาที่ชุด public:
 
 0. diff private↔public ก่อน — เทียบว่าไฟล์ไหน public บางกว่า แล้วเลือกยกเฉพาะส่วน generic
 1. คัดเฉพาะ rule/flow/หลักคิดที่ generic

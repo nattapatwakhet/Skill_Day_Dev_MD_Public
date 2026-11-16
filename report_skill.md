@@ -50,7 +50,7 @@ bullet สั้น 1 clause เรียงตามลำดับที่จ
 ถ้า user ถามว่า "วันนี้ทำอะไรบ้าง", "เดือนนี้ทำอะไรไปบ้าง", หรือบอกว่าจะเอาไปใส่สไลด์:
 
 - ใช้ [`work_summary_skill.md`](./work_summary_skill.md) เพื่อดึงข้อมูลจาก `skill/day_dev_public/memory/WORK_LOG.md`
-  และ `skill/day_dev_public/memory/PROGRESS.md`
+  และ `skill/day_dev_public/memory/PROGRESS*.md`
 - เรียบเรียงเป็นผลลัพธ์/ผลกระทบ ไม่ใช่รายชื่อไฟล์ที่แก้
 - รวมงานย่อยที่เกี่ยวกันเป็นหัวข้อใหญ่ เช่น "ยกระดับคุณภาพโค้ด React/TypeScript"
 - ใส่คำสั่งตรวจผ่านเฉพาะที่มีผลกับความน่าเชื่อถือ เช่น `npm run lint`, `npm run typecheck`, `npm run build`

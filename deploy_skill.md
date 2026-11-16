@@ -5,7 +5,7 @@
 เพื่อให้ตอนอัปโค้ดขึ้น server **ส่งเฉพาะไฟล์ที่แก้จริง** ไม่ต้องเดาว่าไฟล์ไหนบ้าง
 
 > เทียบ memory อื่น:
-> - [`progress_skill.md`](./progress_skill.md) `PROGRESS.md` = สถานะงานที่กำลังทำ (resume)
+> - [`progress_skill.md`](./progress_skill.md) `PROGRESS*.md` = สถานะงานที่กำลังทำ (resume)
 > - [`work_summary_skill.md`](./work_summary_skill.md) `WORK_LOG.md` = ไดอารี่งาน (สรุปวัน/เดือน)
 > - **ไฟล์นี้** `CHANGES.md` = "ไฟล์ไหนแก้บ้าง รอ deploy"
 

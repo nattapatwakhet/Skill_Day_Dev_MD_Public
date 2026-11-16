@@ -55,6 +55,16 @@
 
 > ห้ามเผยแพร่ค่า secret, production host, private registry token, internal DNS หรือ credential ในไฟล์นี้
 
+## Service มาตรฐานของชุดนี้: Skill Brain 3D
+
+ไฟล์ [`docker-compose.yml`](./docker-compose.yml) ต้องมี service `skill_brain_3d` และ mapping `3004:3004` เพื่อเปิดเว็บที่ `http://localhost:3004` โดย mount โฟลเดอร์ชุด skill แบบ read-only เป็นข้อมูลกราฟ
+
+- ถ้า service หรือ port หาย ให้เสนอเพิ่มก่อน; เมื่อผู้ใช้สั่ง “ทำเลย/ทำอัตโนมัติ” ให้แก้และตรวจ compose ต่อได้
+- รัน `docker compose config --quiet` ก่อน start
+- start ด้วย `docker compose up -d skill_brain_3d` แล้วรอ healthcheck/HTTP 200
+- ถ้า port 3004 ถูกใช้อยู่ ห้ามฆ่า process อื่นเอง ให้รายงาน conflict และเสนอ port ใหม่
+- ถ้า Docker daemon ยังไม่พร้อม ให้เปิด Docker Desktop ด้วยวิธีที่ OS รองรับแล้วรอแบบ bounded retry
+
 ## API smoke / secrets
 
 - เวลา smoke test endpoint ที่ต้องใช้ API key/token ห้าม query, print, หรือ echo secret จาก DB/log ออกมาเพื่อเอาไป curl

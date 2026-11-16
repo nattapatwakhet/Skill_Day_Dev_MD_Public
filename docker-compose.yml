@@ -1,0 +1,20 @@
+services:
+  skill_brain_3d:
+    image: node:22
+    working_dir: /app
+    restart: unless-stopped
+    ports:
+      - "3004:3004"
+    volumes:
+      - ./brain_3d:/app
+      - /app/node_modules
+      - ./:/skill_data:ro
+    environment:
+      SKILL_ROOT: /skill_data
+    command: sh -c "npm install --legacy-peer-deps && npm run dev -- --host 0.0.0.0 --port 3004"
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:3004').then(r=>{if(!r.ok)process.exit(1)}).catch(()=>process.exit(1))"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+      start_period: 60s
