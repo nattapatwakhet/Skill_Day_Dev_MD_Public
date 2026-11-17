@@ -1,6 +1,11 @@
-# Update Skill — โหลดเวอร์ชันล่าสุดมาปรับใช้
+# Update Skill — ตรวจ เรียบเรียง พัฒนา และซิงก์ชุดความรู้
 
 ใช้เมื่อผู้ใช้สั่ง “update skill” เท่านั้น การดึงข้อมูลและ merge เป็น mutation จึงต้องผ่าน Consultation Gate เว้นแต่คำสั่งนั้นระบุให้ทำทันทีแล้ว
+
+คำสั่งนี้ต้องทำมากกว่าดึง upstream หรือ commit: ตรวจของเดิมก่อน, อ่านเฉพาะ delta, เรียบเรียง memory/กฎ/ความรู้,
+ลดซ้ำ, ตรวจ conflict/freshness/provenance, archive ประวัติออกจาก rule, อัปเดต index/retrieval แล้วจึง validate และ publish.
+ทำ full-corpus audit เมื่อผู้ใช้ระบุ “ทุกเรื่อง/ทั้งหมด” หรือ validator/ledger ชี้ debt; รอบทั่วไป refine เฉพาะ delta
+เพื่อไม่ rewrite ไฟล์โดยไม่มีประโยชน์
 
 ## หา upstream
 
@@ -24,5 +29,14 @@ git clone --depth 1 "$upstream" "$tmp_dir/upstream"
 - ห้ามทับ `project_structure_skill.md`, service จริงใน `docker_skill.md`, `conversation_log_skill.md`, `memory/PROGRESS*.md`, `WORK_LOG.md`, `CHANGES.md` หรือ user memory
 - conflict ที่เปลี่ยน behavior ต้องเสนอให้ผู้ใช้เลือก
 - ก่อนจบให้รัน `scripts/validate_public.sh` และ build ของ `brain_3d`
+
+## Knowledge Refinement และ Git closure
+
+1. แยก fact/decision/rule/pattern/history แล้วเก็บใน source of truth ที่ถูกชนิด
+2. deduplicate ตามความหมาย ไม่ใช่ชื่อไฟล์; conflict ต้อง supersede/ถาม ไม่วางสองกฎ active ขัดกัน
+3. ตรวจ freshness ของ claim ที่เปลี่ยนได้และติด provenance/evidence ceiling
+4. public ต้อง generic และ sanitize path/project/person/credential/private data เสมอ
+5. ถ้าผู้ใช้สั่ง commit/push ให้ review secret/generated/build/cache/backup และ destructive deletion ก่อน stage,
+   commit เป็นก้อนที่ย้อนกลับได้ และรายงานสิ่งที่ยัง push ไม่ได้
 
 ลบ temporary directory หลังตรวจว่า path มาจาก `mktemp -d` เท่านั้น แล้วสรุปไฟล์ create/edit/delete และส่วนที่ตั้งใจไม่แตะ

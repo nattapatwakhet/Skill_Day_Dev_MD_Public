@@ -17,3 +17,7 @@
 - ห้ามใส่ข้อมูลส่วนตัว secret หรือรายละเอียดระบบจริงลง public skill
 
 ถ้าติดตั้งไว้ path อื่น ให้ปรับ prefix ของ path ในไฟล์นี้ให้ตรงตำแหน่งจริง
+
+คำสั่ง `update skill` ให้ใช้ `update_skill.md`: ตรวจ delta แล้วเรียบเรียง/ลดซ้ำ/ตรวจ conflict-freshness-provenance
+ของ memory, workflow rules และ knowledge ก่อน validate/commit/push; ห้ามทำให้ Git สะอาดด้วยการ commit secret,
+generated/build/cache/backup หรือ deletion ที่ provenance ไม่ชัด

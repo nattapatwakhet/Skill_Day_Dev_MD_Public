@@ -17,6 +17,8 @@
 - user ขอให้สรุป/อัปเดตสิ่งที่คุยในแชตลง skill → ใช้ [`conversation_log_skill.md`](./conversation_log_skill.md)
   เพื่อแยกว่าอะไรลง skill แล้ว อะไรยังไม่ได้ลง และอะไรไม่ควรลง
 - user สั่ง "update skill" (โหลดเวอร์ชันล่าสุดจาก repo มาปรับใช้) → ใช้ [`update_skill.md`](./update_skill.md)
+- ทุก `update skill` ต้องทำ Knowledge Refinement ด้วย: เรียบเรียง memory/กฎ/ความรู้ใน delta, ลดซ้ำ, ตรวจ conflict,
+  freshness และ provenance; คำสั่ง “ทุกเรื่อง/ทั้งหมด” จึงขยายเป็น full authored-corpus audit
 
 สำหรับชุด public: รับเฉพาะเนื้อหาที่เป็นความรู้ทั่วไปและเผยแพร่ได้เท่านั้น
 ห้ามใส่ path เครื่องจริง ชื่อโปรเจคภายใน service จริง หรือข้อมูลลับ
