@@ -2,6 +2,29 @@
 
 ชุดระบบทำงานสำหรับ AI coding agent ที่รวม workflow แบบปรึกษาก่อนทำ, memory ที่ตรวจสอบแหล่งที่มาได้, progress หลายงาน, autonomous improvement ที่มีขอบเขต และเว็บ Skill Brain 3D
 
+![Day Dev workflow](assets/day-dev-workflow.png)
+
+Day Dev เปลี่ยน agent จากผู้ช่วยที่ตอบเป็นครั้ง ๆ ให้เป็นระบบทำงานที่มีขั้นตอน ความจำ หลักฐาน การตรวจผล และวงจรเรียนรู้
+โดยแยก **Private workspace brain** ออกจาก **Public reusable skill** อย่างชัดเจน: private เก็บบริบทจริง ส่วน repository นี้
+เก็บเฉพาะ workflow/template ทั่วไปที่ผ่านการ sanitize แล้ว
+
+## ภาพรวมสถาปัตยกรรม
+
+```text
+คำขอผู้ใช้
+   ↓
+Understand → Inspect → Plan → Approve → Execute → Verify → Learn
+                                                      ├─→ Private memory/progress/log
+                                                      └─→ Sanitize → Public reusable skill
+```
+
+- `main_skill.md` เป็น router หลัก
+- `work_flow_skill.md` เป็นวงจรทำงานตั้งแต่เข้าใจงานจนเรียนรู้กลับ
+- `*_skill.md` แยกกฎตามโดเมน ไม่ยัดทุกเรื่องไว้ไฟล์เดียว
+- `memory/` เป็น template ความจำที่มี provenance/freshness/lifecycle
+- `scripts/` ตรวจโครงสร้างและช่วยจัด progress/memory
+- `brain_3d/` แสดงความสัมพันธ์ของ skill และ memory แบบ interactive
+
 ## หลักการทำงาน
 
 1. อ่านสถานะด้วย `scripts/list_active_progress.sh`
@@ -56,7 +79,12 @@ Compose มี mapping `3004:3004`, healthcheck และ relative mount จึ�
 
 ## ติดตั้ง
 
-วางชุดนี้ที่ `skill/day_dev_public/` แล้วนำ `AGENTS.md` หรือ `CLAUDE.md` ไปไว้ root ของ workspace หากติดตั้ง path อื่นให้แก้ prefix ใน entry file
+```bash
+git clone https://github.com/nattapatwakhet/Skill_Day_Dev_MD_Public.git skill/day_dev_public
+```
+
+จากนั้นนำ `AGENTS.md` หรือ `CLAUDE.md` ไปไว้ root ของ workspace หรือคัดเฉพาะคำสั่ง entry ที่เหมาะกับ agent ที่ใช้
+หากติดตั้ง path อื่นให้แก้ prefix ใน entry file
 
 โครงสร้างสำคัญ:
 
@@ -86,9 +114,27 @@ Validator ตรวจไฟล์จำเป็น, consultation-first contrac
 
 ห้ามบันทึก local absolute path, อีเมล/ตัวตน, รายชื่อโปรเจกต์ภายใน, production host, credential, token, secret หรือ memory จริงของผู้ใช้ลง repository นี้ ใช้ placeholder และ template เท่านั้น ไฟล์ `.git/` เป็น metadata ของ repository และอยู่นอก content scan
 
-## English summary
+## Private → Public sync
 
-Day Dev Public is a portable operating system for coding agents. It defaults to consultation before mutations, supports explicit execution approval and bounded autonomous loops, keeps provenance-aware memory, tracks concurrent work in separate progress files, and ships a Dockerized 3D skill graph at `http://localhost:3004`.
+1. diff private และ public เพื่อหา generic delta
+2. แยก rule/pattern ออกจากประวัติและข้อมูลเฉพาะงาน
+3. rewrite/sanitize ชื่อบุคคล path โปรเจกต์ host credential และค่าจริง
+4. ตรวจ conflict, freshness, provenance และลิงก์
+5. อัปเดต README/ภาพ/ตัวอย่างเมื่อวิธีใช้เปลี่ยน
+6. รัน validator และ build ก่อน publish
+
+Public ไม่ใช่สำเนาทั้งหมดของ private แต่เป็น “ฉบับแจกจ่าย” ที่รักษาความสามารถทั่วไปโดยไม่เผยบริบทของเจ้าของ
+
+## English overview
+
+Day Dev Public is a portable operating system for AI coding agents. It provides a structured loop—understand, inspect,
+plan, approve, execute, verify, and learn—along with provenance-aware memory, concurrent progress tracking, bounded
+autonomous improvement, validation scripts, and a Dockerized 3D skill graph.
+
+The public repository is a sanitized distribution derived from a private working brain. It contains reusable workflows,
+templates, and examples only; personal memory, internal project context, credentials, and production configuration remain
+private. Clone the repository into `skill/day_dev_public/`, place the appropriate `AGENTS.md` or `CLAUDE.md` entry file
+at your workspace root, and run `scripts/validate_public.sh` before publishing changes.
 
 ## License
 

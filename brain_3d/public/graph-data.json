@@ -1,0 +1,1967 @@
+{
+  "generatedAt": "2026-11-17T04:56:20.579Z",
+  "nodeCount": 63,
+  "linkCount": 312,
+  "nodes": [
+    {
+      "id": "AGENTS.md",
+      "name": "AGENTS.md — Day Dev Public Skill",
+      "group": "root",
+      "lineCount": 24,
+      "val": 1.12,
+      "inDegree": 0,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "CLAUDE.md",
+      "name": "CLAUDE.md — Day Dev Public Skill",
+      "group": "root",
+      "lineCount": 24,
+      "val": 1.12,
+      "inDegree": 0,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "README.md",
+      "name": "Day Dev Public Skill",
+      "group": "root",
+      "lineCount": 142,
+      "val": 1.71,
+      "inDegree": 0,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "REPOSITORIES.md",
+      "name": "Repository Map Template",
+      "group": "root",
+      "lineCount": 15,
+      "val": 1.075,
+      "inDegree": 0,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "api_skill.md",
+      "name": "API Skill — งานทำ API (ใช้ร่วมทุก backend)",
+      "group": "root",
+      "lineCount": 41,
+      "val": 10.805,
+      "inDegree": 8,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "auto_memory_skill.md",
+      "name": "Auto Memory Skill — เรียนรู้กลับเข้าระบบอย่างควบคุมได้",
+      "group": "root",
+      "lineCount": 71,
+      "val": 3.755,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "cache_busting_skill.md",
+      "name": "Cache Busting Skill — กันเบราว์เซอร์แคชของเก่าหลัง build/deploy (React + Vite)",
+      "group": "root",
+      "lineCount": 83,
+      "val": 2.615,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "code_skill.md",
+      "name": "Code Skill — หลักการเขียนโค้ดรวม (ใช้ได้ทุกภาษา)",
+      "group": "root",
+      "lineCount": 195,
+      "val": 24.775000000000002,
+      "inDegree": 19,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "codeigniter3_skill.md",
+      "name": "CodeIgniter 3 Skill — framework PHP (เว็บ backend)",
+      "group": "root",
+      "lineCount": 92,
+      "val": 8.66,
+      "inDegree": 6,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "codeigniter4_skill.md",
+      "name": "CodeIgniter 4 Skill — framework PHP (เว็บ backend)",
+      "group": "root",
+      "lineCount": 191,
+      "val": 9.155,
+      "inDegree": 6,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "coding_principles_skill.md",
+      "name": "Coding Principles — หลักคิดก่อน/ระหว่างเขียนโค้ด (hub)",
+      "group": "root",
+      "lineCount": 15,
+      "val": 13.075,
+      "inDegree": 10,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "continuous_improvement_skill.md",
+      "name": "Continuous Improvement Skill — autonomous measured loop",
+      "group": "root",
+      "lineCount": 18,
+      "val": 2.29,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "controlled_operation_skill.md",
+      "name": "Controlled Operation Skill",
+      "group": "root",
+      "lineCount": 81,
+      "val": 9.805,
+      "inDegree": 7,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "conversation_log_skill.md",
+      "name": "Conversation Log Skill — บันทึกสิ่งที่คุยในแชต",
+      "group": "root",
+      "lineCount": 41,
+      "val": 6.005,
+      "inDegree": 4,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "data_skill.md",
+      "name": "Data Skill — โดเมนวิเคราะห์/จัดการข้อมูล",
+      "group": "root",
+      "lineCount": 35,
+      "val": 5.975,
+      "inDegree": 4,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "debug_skill.md",
+      "name": "Debug Skill — วินัยการแก้บั๊ก + บันทึกหลังแก้",
+      "group": "root",
+      "lineCount": 99,
+      "val": 9.895,
+      "inDegree": 7,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "deliverable_skill.md",
+      "name": "Deliverable Skill — สร้างไฟล์ส่งมอบ / เอกสาร / อาร์ต",
+      "group": "root",
+      "lineCount": 39,
+      "val": 10.795,
+      "inDegree": 8,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "deploy_skill.md",
+      "name": "Deploy Skill — จดไฟล์ที่แก้รอขึ้น server (deploy manifest)",
+      "group": "root",
+      "lineCount": 102,
+      "val": 5.109999999999999,
+      "inDegree": 3,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "docker_skill.md",
+      "name": "Docker Skill — ทะเบียนแอป/บริการเว็บที่รันบน docker",
+      "group": "root",
+      "lineCount": 109,
+      "val": 18.345000000000002,
+      "inDegree": 14,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "engineering_exploration_skill.md",
+      "name": "Engineering Exploration — ห้ามสรุป \"ทำไม่ได้\" แค่เพราะไม่มี official API/doc",
+      "group": "root",
+      "lineCount": 104,
+      "val": 2.72,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "flutter_skill.md",
+      "name": "Flutter Skill",
+      "group": "root",
+      "lineCount": 292,
+      "val": 10.86,
+      "inDegree": 7,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "frontend_design_skill.md",
+      "name": "Frontend Design — ดีไซน์ UI ให้มีเอกลักษณ์ ไม่หน้าตา template",
+      "group": "root",
+      "lineCount": 58,
+      "val": 10.889999999999999,
+      "inDegree": 8,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "javascript_skill.md",
+      "name": "JavaScript Skill — ภาษาฐานฝั่ง frontend เว็บ",
+      "group": "root",
+      "lineCount": 50,
+      "val": 8.45,
+      "inDegree": 6,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "karpathy_skill.md",
+      "name": "Karpathy Skill — วินัยลดความผิดพลาดเวลา LLM เขียนโค้ด",
+      "group": "root",
+      "lineCount": 69,
+      "val": 7.345,
+      "inDegree": 5,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "knowledge_application_skill.md",
+      "name": "Knowledge Application Skill — นำความจำไปใช้ทำงาน",
+      "group": "root",
+      "lineCount": 99,
+      "val": 3.895,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "maestro_testing_skill.md",
+      "name": "Maestro Testing Skill — ทดสอบแอปแบบ End-to-End",
+      "group": "root",
+      "lineCount": 129,
+      "val": 5.244999999999999,
+      "inDegree": 3,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "main_skill.md",
+      "name": "Main Skill — จุดเริ่มต้น (อ่านไฟล์นี้ก่อนเสมอ)",
+      "group": "root",
+      "lineCount": 178,
+      "val": 7.89,
+      "inDegree": 5,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/BRAIN_INDEX.md",
+      "name": "BRAIN INDEX — public template",
+      "group": "memory",
+      "lineCount": 16,
+      "val": 2.2800000000000002,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/CHANGES.md",
+      "name": "CHANGES — deploy manifest",
+      "group": "memory",
+      "lineCount": 6,
+      "val": 2.23,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/DECISION_MEMORY.md",
+      "name": "DECISION MEMORY — template",
+      "group": "memory",
+      "lineCount": 7,
+      "val": 3.435,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/FEEDBACK_MEMORY.md",
+      "name": "FEEDBACK MEMORY — template",
+      "group": "memory",
+      "lineCount": 4,
+      "val": 1.02,
+      "inDegree": 0,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/FRESHNESS_POLICY.md",
+      "name": "FRESHNESS POLICY",
+      "group": "memory",
+      "lineCount": 6,
+      "val": 3.4299999999999997,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/KNOWLEDGE_MAP.md",
+      "name": "KNOWLEDGE MAP",
+      "group": "memory",
+      "lineCount": 6,
+      "val": 2.23,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/MEMORY_INBOX.md",
+      "name": "MEMORY INBOX — unverified candidates",
+      "group": "memory",
+      "lineCount": 4,
+      "val": 2.22,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/MEMORY_SCHEMA.md",
+      "name": "MEMORY SCHEMA",
+      "group": "memory",
+      "lineCount": 5,
+      "val": 2.225,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/PROGRESS.md",
+      "name": "PROGRESS — template",
+      "group": "memory",
+      "lineCount": 16,
+      "val": 1.08,
+      "inDegree": 0,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/RETRIEVAL_INDEX.md",
+      "name": "RETRIEVAL INDEX — template",
+      "group": "memory",
+      "lineCount": 8,
+      "val": 3.44,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/SOURCE_LEDGER.md",
+      "name": "SOURCE LEDGER — template",
+      "group": "memory",
+      "lineCount": 4,
+      "val": 2.22,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/USER_MEMORY.md",
+      "name": "USER MEMORY — template",
+      "group": "memory",
+      "lineCount": 8,
+      "val": 2.24,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "memory/WORK_LOG.md",
+      "name": "WORK LOG",
+      "group": "memory",
+      "lineCount": 4,
+      "val": 2.22,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "permission_skill.md",
+      "name": "Permission Skill",
+      "group": "root",
+      "lineCount": 87,
+      "val": 11.035,
+      "inDegree": 8,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "php_skill.md",
+      "name": "PHP Skill — ภาษาฐานฝั่ง backend เว็บ",
+      "group": "root",
+      "lineCount": 51,
+      "val": 9.655000000000001,
+      "inDegree": 7,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "plan_mode_skill.md",
+      "name": "Plan Mode — วางแผนก่อนลงมือ (อ่านก่อนทำงานใหญ่)",
+      "group": "root",
+      "lineCount": 107,
+      "val": 3.935,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "ponytail_skill.md",
+      "name": "Ponytail Skill — ขี้เกียจอย่างฉลาด เขียนให้น้อยที่สุด",
+      "group": "root",
+      "lineCount": 77,
+      "val": 7.385,
+      "inDegree": 5,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "premiere_mcp_video_skill.md",
+      "name": "premiere_mcp_video_skill — ตัดต่อวิดีโอใน Adobe Premiere ผ่าน MCP bridge",
+      "group": "root",
+      "lineCount": 57,
+      "val": 4.885,
+      "inDegree": 3,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "product_launch_skill.md",
+      "name": "Product Launch Skill — โดเมนสร้าง+ปล่อยโปรดักต์เร็วด้วย AI",
+      "group": "root",
+      "lineCount": 59,
+      "val": 3.695,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "progress_skill.md",
+      "name": "Progress / Handoff Skill — ไฟล์ความจำงานที่กำลังทำ",
+      "group": "root",
+      "lineCount": 127,
+      "val": 7.635,
+      "inDegree": 5,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "project_structure_skill.md",
+      "name": "Project Structure — ทะเบียนกลางของโครงสร้างโปรเจกต์",
+      "group": "root",
+      "lineCount": 144,
+      "val": 16.119999999999997,
+      "inDegree": 12,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "python_skill.md",
+      "name": "Python Skill — ภาษา Python (backend / desktop / สคริปต์)",
+      "group": "root",
+      "lineCount": 72,
+      "val": 6.16,
+      "inDegree": 4,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "react_skill.md",
+      "name": "React Skill — React (JavaScript, ไม่มี TypeScript)",
+      "group": "root",
+      "lineCount": 134,
+      "val": 10.07,
+      "inDegree": 7,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "react_type_skill.md",
+      "name": "React / TypeScript Skill",
+      "group": "root",
+      "lineCount": 474,
+      "val": 15.370000000000001,
+      "inDegree": 10,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "report_skill.md",
+      "name": "Report Skill — สรุปงาน eng ให้คนไม่ใช่ dev อ่าน",
+      "group": "root",
+      "lineCount": 70,
+      "val": 9.75,
+      "inDegree": 7,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "research_skill.md",
+      "name": "Research Skill — โดเมนค้นคว้า/หาข้อมูล",
+      "group": "root",
+      "lineCount": 35,
+      "val": 5.975,
+      "inDegree": 4,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "review_skill.md",
+      "name": "Review Skill — รีวิวงานแบบคนนอก (ทุกโดเมน)",
+      "group": "root",
+      "lineCount": 96,
+      "val": 13.48,
+      "inDegree": 10,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "skill_maintenance_skill.md",
+      "name": "Skill Maintenance — สร้าง/ปรับสกิลในชุดนี้เอง",
+      "group": "root",
+      "lineCount": 92,
+      "val": 19.46,
+      "inDegree": 15,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "terminal_skill.md",
+      "name": "Terminal Skill — ใช้ command-line / รันคำสั่ง",
+      "group": "root",
+      "lineCount": 88,
+      "val": 17.040000000000003,
+      "inDegree": 13,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "update_skill.md",
+      "name": "Update Skill — ตรวจ เรียบเรียง พัฒนา และซิงก์ชุดความรู้",
+      "group": "root",
+      "lineCount": 47,
+      "val": 3.635,
+      "inDegree": 2,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "video_skill.md",
+      "name": "Video Skill — โดเมนงานวิดีโอ",
+      "group": "root",
+      "lineCount": 57,
+      "val": 4.885,
+      "inDegree": 3,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "webapp_testing_skill.md",
+      "name": "Webapp Testing — เทส web app ด้วย Playwright",
+      "group": "root",
+      "lineCount": 57,
+      "val": 10.885,
+      "inDegree": 8,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "work_flow_skill.md",
+      "name": "Work Flow — ตรรกะการทำงาน (เดินตามทีละขั้น)",
+      "group": "root",
+      "lineCount": 275,
+      "val": 28.775,
+      "inDegree": 22,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "work_mode_skill.md",
+      "name": "Work Mode Skill — portable trigger “โหลดทำงาน”",
+      "group": "root",
+      "lineCount": 24,
+      "val": 2.3200000000000003,
+      "inDegree": 1,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "work_summary_skill.md",
+      "name": "Work Summary Skill — สรุปงานรายวัน/รายเดือนจากบันทึกงาน",
+      "group": "root",
+      "lineCount": 204,
+      "val": 8.02,
+      "inDegree": 5,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    },
+    {
+      "id": "writing_skill.md",
+      "name": "Writing Skill — โดเมนเขียนเนื้อหา",
+      "group": "root",
+      "lineCount": 35,
+      "val": 8.375,
+      "inDegree": 6,
+      "realUsageClaude": 0,
+      "realUsageCodex": 0,
+      "realUsage": 0
+    }
+  ],
+  "links": [
+    {
+      "source": "api_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "php_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "codeigniter3_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "codeigniter4_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "api_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "auto_memory_skill.md",
+      "target": "knowledge_application_skill.md"
+    },
+    {
+      "source": "auto_memory_skill.md",
+      "target": "memory/MEMORY_INBOX.md"
+    },
+    {
+      "source": "auto_memory_skill.md",
+      "target": "memory/DECISION_MEMORY.md"
+    },
+    {
+      "source": "auto_memory_skill.md",
+      "target": "memory/RETRIEVAL_INDEX.md"
+    },
+    {
+      "source": "auto_memory_skill.md",
+      "target": "memory/FRESHNESS_POLICY.md"
+    },
+    {
+      "source": "cache_busting_skill.md",
+      "target": "react_skill.md"
+    },
+    {
+      "source": "cache_busting_skill.md",
+      "target": "deploy_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "javascript_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "react_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "php_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "codeigniter3_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "codeigniter4_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "python_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "flutter_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "debug_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "code_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "codeigniter3_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "codeigniter3_skill.md",
+      "target": "php_skill.md"
+    },
+    {
+      "source": "codeigniter3_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "codeigniter3_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "codeigniter3_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "codeigniter3_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "codeigniter3_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "codeigniter4_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "codeigniter4_skill.md",
+      "target": "php_skill.md"
+    },
+    {
+      "source": "codeigniter4_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "codeigniter4_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "codeigniter4_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "codeigniter4_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "codeigniter4_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "coding_principles_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "coding_principles_skill.md",
+      "target": "karpathy_skill.md"
+    },
+    {
+      "source": "coding_principles_skill.md",
+      "target": "ponytail_skill.md"
+    },
+    {
+      "source": "coding_principles_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "controlled_operation_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "controlled_operation_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "controlled_operation_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "controlled_operation_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "conversation_log_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "conversation_log_skill.md",
+      "target": "progress_skill.md"
+    },
+    {
+      "source": "conversation_log_skill.md",
+      "target": "main_skill.md"
+    },
+    {
+      "source": "conversation_log_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "data_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "data_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "data_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "data_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "data_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "debug_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "debug_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "debug_skill.md",
+      "target": "report_skill.md"
+    },
+    {
+      "source": "debug_skill.md",
+      "target": "main_skill.md"
+    },
+    {
+      "source": "deliverable_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "deliverable_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "deliverable_skill.md",
+      "target": "report_skill.md"
+    },
+    {
+      "source": "deliverable_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "deploy_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "deploy_skill.md",
+      "target": "progress_skill.md"
+    },
+    {
+      "source": "deploy_skill.md",
+      "target": "work_summary_skill.md"
+    },
+    {
+      "source": "docker_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "docker_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "docker_skill.md",
+      "target": "controlled_operation_skill.md"
+    },
+    {
+      "source": "docker_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "engineering_exploration_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "engineering_exploration_skill.md",
+      "target": "karpathy_skill.md"
+    },
+    {
+      "source": "engineering_exploration_skill.md",
+      "target": "ponytail_skill.md"
+    },
+    {
+      "source": "engineering_exploration_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "flutter_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "flutter_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "flutter_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "flutter_skill.md",
+      "target": "maestro_testing_skill.md"
+    },
+    {
+      "source": "frontend_design_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "frontend_design_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "frontend_design_skill.md",
+      "target": "flutter_skill.md"
+    },
+    {
+      "source": "frontend_design_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "react_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "javascript_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "karpathy_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "karpathy_skill.md",
+      "target": "debug_skill.md"
+    },
+    {
+      "source": "karpathy_skill.md",
+      "target": "ponytail_skill.md"
+    },
+    {
+      "source": "karpathy_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/USER_MEMORY.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/KNOWLEDGE_MAP.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/WORK_LOG.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/CHANGES.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/SOURCE_LEDGER.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/DECISION_MEMORY.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/MEMORY_SCHEMA.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/RETRIEVAL_INDEX.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "memory/FRESHNESS_POLICY.md"
+    },
+    {
+      "source": "knowledge_application_skill.md",
+      "target": "auto_memory_skill.md"
+    },
+    {
+      "source": "maestro_testing_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "maestro_testing_skill.md",
+      "target": "flutter_skill.md"
+    },
+    {
+      "source": "maestro_testing_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "memory/BRAIN_INDEX.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "continuous_improvement_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "auto_memory_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "karpathy_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "ponytail_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "javascript_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "react_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "php_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "codeigniter3_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "codeigniter4_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "python_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "flutter_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "maestro_testing_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "debug_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "video_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "premiere_mcp_video_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "product_launch_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "research_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "data_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "writing_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "plan_mode_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "report_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "progress_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "work_summary_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "deploy_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "controlled_operation_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "work_mode_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "knowledge_application_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "engineering_exploration_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "cache_busting_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "conversation_log_skill.md"
+    },
+    {
+      "source": "main_skill.md",
+      "target": "update_skill.md"
+    },
+    {
+      "source": "permission_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "permission_skill.md",
+      "target": "controlled_operation_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "codeigniter3_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "codeigniter4_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "php_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "plan_mode_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "plan_mode_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "plan_mode_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "ponytail_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "ponytail_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "premiere_mcp_video_skill.md",
+      "target": "video_skill.md"
+    },
+    {
+      "source": "product_launch_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "product_launch_skill.md",
+      "target": "ponytail_skill.md"
+    },
+    {
+      "source": "product_launch_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "product_launch_skill.md",
+      "target": "research_skill.md"
+    },
+    {
+      "source": "product_launch_skill.md",
+      "target": "writing_skill.md"
+    },
+    {
+      "source": "product_launch_skill.md",
+      "target": "data_skill.md"
+    },
+    {
+      "source": "progress_skill.md",
+      "target": "main_skill.md"
+    },
+    {
+      "source": "progress_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "progress_skill.md",
+      "target": "conversation_log_skill.md"
+    },
+    {
+      "source": "progress_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "progress_skill.md",
+      "target": "work_summary_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "php_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "python_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "javascript_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "react_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "flutter_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "writing_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "codeigniter3_skill.md"
+    },
+    {
+      "source": "project_structure_skill.md",
+      "target": "codeigniter4_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "data_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "debug_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "karpathy_skill.md"
+    },
+    {
+      "source": "python_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "javascript_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "react_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "react_type_skill.md",
+      "target": "javascript_skill.md"
+    },
+    {
+      "source": "react_type_skill.md",
+      "target": "react_skill.md"
+    },
+    {
+      "source": "react_type_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "react_type_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "react_type_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "react_type_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "react_type_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "report_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "report_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "report_skill.md",
+      "target": "work_summary_skill.md"
+    },
+    {
+      "source": "report_skill.md",
+      "target": "debug_skill.md"
+    },
+    {
+      "source": "research_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "research_skill.md",
+      "target": "controlled_operation_skill.md"
+    },
+    {
+      "source": "research_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "research_skill.md",
+      "target": "writing_skill.md"
+    },
+    {
+      "source": "research_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "review_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "review_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "review_skill.md",
+      "target": "flutter_skill.md"
+    },
+    {
+      "source": "review_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "review_skill.md",
+      "target": "report_skill.md"
+    },
+    {
+      "source": "skill_maintenance_skill.md",
+      "target": "main_skill.md"
+    },
+    {
+      "source": "skill_maintenance_skill.md",
+      "target": "conversation_log_skill.md"
+    },
+    {
+      "source": "skill_maintenance_skill.md",
+      "target": "update_skill.md"
+    },
+    {
+      "source": "skill_maintenance_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "terminal_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "terminal_skill.md",
+      "target": "controlled_operation_skill.md"
+    },
+    {
+      "source": "terminal_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "terminal_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "premiere_mcp_video_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "writing_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "video_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "webapp_testing_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "webapp_testing_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "webapp_testing_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "webapp_testing_skill.md",
+      "target": "karpathy_skill.md"
+    },
+    {
+      "source": "webapp_testing_skill.md",
+      "target": "debug_skill.md"
+    },
+    {
+      "source": "webapp_testing_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "webapp_testing_skill.md",
+      "target": "controlled_operation_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "main_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "project_structure_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "code_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "javascript_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "react_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "react_type_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "php_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "codeigniter3_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "codeigniter4_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "python_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "api_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "flutter_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "maestro_testing_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "debug_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "docker_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "coding_principles_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "research_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "data_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "writing_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "video_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "premiere_mcp_video_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "product_launch_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "skill_maintenance_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "controlled_operation_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "terminal_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "permission_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "progress_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "plan_mode_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "review_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "webapp_testing_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "report_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "work_summary_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "deploy_skill.md"
+    },
+    {
+      "source": "work_flow_skill.md",
+      "target": "conversation_log_skill.md"
+    },
+    {
+      "source": "work_summary_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "work_summary_skill.md",
+      "target": "progress_skill.md"
+    },
+    {
+      "source": "work_summary_skill.md",
+      "target": "report_skill.md"
+    },
+    {
+      "source": "writing_skill.md",
+      "target": "work_flow_skill.md"
+    },
+    {
+      "source": "writing_skill.md",
+      "target": "report_skill.md"
+    },
+    {
+      "source": "writing_skill.md",
+      "target": "frontend_design_skill.md"
+    },
+    {
+      "source": "writing_skill.md",
+      "target": "deliverable_skill.md"
+    },
+    {
+      "source": "writing_skill.md",
+      "target": "research_skill.md"
+    },
+    {
+      "source": "writing_skill.md",
+      "target": "review_skill.md"
+    }
+  ],
+  "usage": {
+    "totalEntries": 0,
+    "spanDays": 0,
+    "since": null,
+    "until": null,
+    "minDaysRecommended": 14,
+    "byAgent": {
+      "claude": {
+        "totalEntries": 0,
+        "spanDays": 0
+      },
+      "codex": {
+        "totalEntries": 0,
+        "spanDays": 0
+      }
+    }
+  }
+}

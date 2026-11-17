@@ -38,5 +38,9 @@ git clone --depth 1 "$upstream" "$tmp_dir/upstream"
 4. public ต้อง generic และ sanitize path/project/person/credential/private data เสมอ
 5. ถ้าผู้ใช้สั่ง commit/push ให้ review secret/generated/build/cache/backup และ destructive deletion ก่อน stage,
    commit เป็นก้อนที่ย้อนกลับได้ และรายงานสิ่งที่ยัง push ไม่ได้
+6. อัปเดต README, workflow image และตัวอย่างเมื่อ flow/installation เปลี่ยน เพื่อให้ public repository ใช้งานได้ด้วยตัวเอง
+
+Public sync เป็นปลายทางของ private workflow: รับเฉพาะ generic reusable rules หลัง sanitize เท่านั้น ไม่รับ user memory,
+local path, private project knowledge, credentials, production configuration หรือ private work log
 
 ลบ temporary directory หลังตรวจว่า path มาจาก `mktemp -d` เท่านั้น แล้วสรุปไฟล์ create/edit/delete และส่วนที่ตั้งใจไม่แตะ
